@@ -53,6 +53,9 @@ export default class FilterScreen extends React.Component {
       }
 
   render() {
+    const { navigation } = this.props;
+    const universityData = navigation.getParam('universityData');
+   const saveFilteredUniversityData = navigation.getParam('saveFilteredUniversityData');
     
     return (
       <View style={{ flex: 1 }}>
@@ -91,17 +94,32 @@ export default class FilterScreen extends React.Component {
           onPress={(index) => { 
            switch(this.state.initialState){
                 case 'city': 
-                this.setState({
-                    city: this.state.initialActionSheet[index]
-              });
+                univerData = universityData.filter(
+                    univer => univer.city === this.state.initialActionSheet[index]
+                ), console.log(univerData)
+
+
                  case 'subject':
-                 this.setState({
-                    subject: this.state.initialActionSheet[index]
-              });
+                 univerData = universityData.map(
+                    univer =>
+                        univer.majorPoints.map(
+                            ({subject}) => subject)
+
+                           )
+                     console.log(univerData)
+
               case 'specialist':
-              this.setState({
-                specialist: this.state.initialActionSheet[index]
-		   });}
+              univerData = universityData.map(
+                univer =>
+                    univer.majorPoints.map(
+                        major=>
+                           major.majorName=== this.state.initialActionSheet[index]
+                    ).includes(true)
+                 && univer ).filter(
+                     univer=> univer !== false
+                 ),
+                  console.log(univerData);
+        }
               
 		  }}
 

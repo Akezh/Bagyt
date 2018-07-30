@@ -39,6 +39,10 @@ const GET_BY_SUBJECT = gql`
     majorPoints{
       id
       majorName
+      major{
+        id
+        subject
+      }
     }
   }
   allMajorPoints{
@@ -47,6 +51,7 @@ const GET_BY_SUBJECT = gql`
     kazSelPoint
     major{
       id
+      subject
     }
     majorIndex
     rusPoint

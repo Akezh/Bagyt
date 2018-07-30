@@ -20,7 +20,9 @@ const MainRoot = createStackNavigator({
 );
 
 export default class App extends React.Component {
+  
   render() {  
+    console.disableYellowBox = true;
     return ( 
       <ApolloProvider client={client}>
      <LoadingPage />
