@@ -14,45 +14,38 @@ export default class FilterScreen extends React.Component {
         city: '',
         subject:'',
         major:'',
-        initialActionSheet:this.cities,
-        initialState: ''
+        initialActionSheet:[],
+        initialState: '',
+        initialActionSheetName: '',
     }
-
-    
-    allSubject = global.data.allMajors.map(
-        major => major.subject
-        )  
-    
-     subject =   [...new Set(this.allSubject)];
-     majors = global.data.allMajors.map(
-        major => major.name
-        )   
-    
-     allCities=global.data.allUniversities.map(
-        univer => univer.city
-        ); 
-     cities =  [...new Set(this.allCities)]; 
-
      array = [{
         name: 'Город',
-        array:this.cities,
+        array: ['Cancel',...new Set(global.data.allUniversities.map(
+            univer => univer.city
+            ))],
         initialState: 'city'
     },
     {
         name: 'Предмет',
-        array: this.majors,
+        array:  ['Cancel', ...new Set(global.data.allMajors.map(
+            major => major.subject
+            )  )],
         initialState: 'subject'
     },
     {
         name: 'Специальность',
-        array: this.subject,
+        array: ['Cancel',global.data.allMajors.map(
+            major => major.name
+            )  ],
         initialState:'major'
     }]
 
 
-    showActionSheet = (arrayName, initialState) => {
+    showActionSheet = (item) => {
         this.setState({
-            initialState: initialState
+            initialActionSheet:item.array,
+            initialState: item.initialState, 
+            initialActionSheetName: item.name
         }, () =>{
             this.ActionSheet.show()
         })
@@ -72,7 +65,7 @@ export default class FilterScreen extends React.Component {
                 <TouchableOpacity
                 style={styles.opacity}
                 onPress={() => this.showActionSheet(
-                    item.array, item.initialState
+                    item
                 )}
                 >
                 <Text style={styles.text}>
@@ -89,23 +82,25 @@ export default class FilterScreen extends React.Component {
          
          <ActionSheet
           ref={o => this.ActionSheet = o}
-          title={<Text style={{color: '#000', fontSize: 18}}> Город</Text>}
-          options={this.majors}
+          title={<Text style={{color: '#000', fontSize: 18}}>
+           {this.state.initialActionSheetName}
+           </Text>}
+          options={this.state.initialActionSheet}
           cancelButtonIndex={0}
           destructiveButtonIndex={4}
           onPress={(index) => { 
            switch(this.state.initialState){
                 case 'city': 
                 this.setState({
-                    city: this.cities[index]
+                    city: this.state.initialActionSheet[index]
               });
                  case 'subject':
                  this.setState({
-                    subject: this.cities[index]
+                    subject: this.state.initialActionSheet[index]
               });
               case 'specialist':
               this.setState({
-                specialist: this.cities[index]
+                specialist: this.state.initialActionSheet[index]
 		   });}
               
 		  }}
