@@ -10,6 +10,16 @@ export default TabNavigator(
       Home: { screen: HomeRoot },
     },
     {
+      // Search: {
+      //   screen: SearchScreen,
+      //   navigationOptions: {
+      //     tabBarIcon: ({ tintColor }) => (
+      //       <Icon name="ios-analytics-outline" size={32} color={tintColor} />
+      //     ),
+      //   },
+      // }
+    },
+    {
       initialRouteName: 'Home',
       navigationOptions: ({ navigation }) => ({
         tabBarIcon: ({ focused, tintColor }) => {
