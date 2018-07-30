@@ -20,6 +20,7 @@ export default class FilterScreen extends React.Component {
     }
      array = [{
         name: 'Город',
+        iconName: 'ios-home-outline',
         array: ['Cancel',...new Set(global.data.allUniversities.map(
             univer => univer.city
             ))],
@@ -27,6 +28,7 @@ export default class FilterScreen extends React.Component {
     },
     {
         name: 'Предмет',
+        iconName: 'ios-book-outline',
         array:  ['Cancel', ...new Set(global.data.allMajors.map(
             major => major.subject
             )  )],
@@ -34,6 +36,7 @@ export default class FilterScreen extends React.Component {
     },
     {
         name: 'Специальность',
+        iconName: 'ios-people-outline',
         array: ['Cancel',global.data.allMajors.map(
             major => major.name
             )  ],
@@ -57,6 +60,7 @@ export default class FilterScreen extends React.Component {
     return (
       <View style={{ flex: 1 }}>
         <FlatList
+        style={{ flex: 1 }}
           data={this.array}
           keyExtractor={(_, index) => index}
           numColumns={1}
@@ -68,11 +72,15 @@ export default class FilterScreen extends React.Component {
                     item
                 )}
                 >
+                <View style={styles.searchView1}>
+              <View style={styles.searchView2}>
+                <Icon name={item.iconName} size={30} color={'#148EFE'}/>
                 <Text style={styles.text}>
-                  <Icon name="ios-city-outline" size={30} />    
-                  {item.name}                                           
-                   <Icon styname="ios-arrow-forward-outline" size={26} />
+                  {item.name}
                 </Text>
+              </View>
+              <Icon name="ios-arrow-forward-outline" size={26} color={'#148EFE'}/>
+            </View>
               </TouchableOpacity>
             );
           }}
@@ -112,16 +120,24 @@ export default class FilterScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  opacity: { 
-    marginTop: '2%', 
-    height: '8%', 
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'grey' 
-  },
-  text: {
-    fontSize: 24, 
-    marginLeft: '4%', 
-    color: '#148EFE'
-  }
+    opacity: {
+        height: '20%',
+        justifyContent: 'center',
+        borderBottomWidth: 0.5,
+        borderBottomColor: 'grey',
+        flex: 1
+      },
+      text: { marginLeft: 18, fontSize: 24, color: '#148EFE' },
+      searchView1: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 15,
+      },
+      searchView2: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      },
 });
 

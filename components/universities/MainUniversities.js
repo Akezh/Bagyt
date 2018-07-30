@@ -21,17 +21,21 @@ export default class MainUniversities extends React.Component {
       const universityData= this.props.universityData;
       return(
         <View style={styles.container}>
-                <View style={styles.filterView}>
-                    <TouchableOpacity
-                        style={styles.filterButton}
-                        onPress={() => this.props.toFilterScreen()}>
-                            <Text style={styles.filterText}>
-                            <Icon name="ios-menu-outline" size={24} />
-                            Все категории
-                            <Icon name="ios-arrow-forward-outline" size={26} />
-                            </Text>
-                    </TouchableOpacity>
+                <TouchableOpacity
+              style={styles.opacity}
+              onPress={() => this.props.toFilterScreen()}>
+              <View style={styles.searchView1}>
+                <View style={styles.searchView2}>
+                  <Icon name="ios-menu-outline" size={30} color={'#148EFE'} />
+                  <Text style={styles.text}>Все категории</Text>
                 </View>
+                <Icon
+                  name="ios-arrow-forward-outline"
+                  size={26}
+                  color={'#148EFE'}
+                />
+              </View>
+            </TouchableOpacity>
 
                 <ListUniversities universityData={universityData}/>
         </View>
@@ -44,21 +48,23 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  universityView: {
-    flex: 1,
-    paddingBottom: 15,
-    alignItems: 'center',
-    height: 200,
-    borderRadius: 10,
-    marginLeft: '3%',
-    marginRight: '3%',
+  opacity: {
+    height: '8%',
+    justifyContent: 'center',
+    borderBottomWidth: 0.5,
+    borderBottomColor: 'grey',
   },
-
-  touch: {
-    width: '100%',
+  text: { marginLeft: 18, fontSize: 24, color: '#148EFE' },
+  searchView1: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: '2%',
+    paddingHorizontal: 15,
+  },
+  searchView2: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   filterText: {
     fontSize: 24,
@@ -87,11 +93,6 @@ const styles = StyleSheet.create({
     height: '100%',
     backgroundColor: 'black',
     position: 'absolute',
-  },
-  text: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
   },
   titleContainer: {
     flex: 3,
