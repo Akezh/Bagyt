@@ -2,49 +2,30 @@ import React, {Component} from 'react';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
 import HomeRoot from './HomeRoot';
+import SearchScreen from './search/SearchScreen';
 import Constants from 'expo';
 
 
 export default TabNavigator(
-    {
-      Home: { screen: HomeRoot },
-    },
-    {
-      // Search: {
-      //   screen: SearchScreen,
-      //   navigationOptions: {
-      //     tabBarIcon: ({ tintColor }) => (
-      //       <Icon name="ios-analytics-outline" size={32} color={tintColor} />
-      //     ),
-      //   },
-      // }
-    },
-    {
-      initialRouteName: 'Home',
-      navigationOptions: ({ navigation }) => ({
-        tabBarIcon: ({ focused, tintColor }) => {
-          const { routeName } = navigation.state;
-          let iconName;
-          if (routeName === 'Home') {
-            iconName = `ios-home-outline${focused ? '' : '-outline'}`;
-          }
-          return <Ionicons name={iconName} size={25} color={tintColor} />;
-        },
-      }),
-      tabBarComponent: TabBarBottom,
-      tabBarPosition: 'bottom',
-      tabBarOptions: {
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-        labelStyle: {},
-        tabStyle: {
-          width: 100,
-        },
-        style: {
-          marginTop: Constants.statusBarHeight,
-        },
+  {
+    Артисты: {
+      screen: HomeRoot,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="ios-list-box-outline" size={32} color={tintColor} />
+        ),
       },
-      animationEnabled: false,
-      swipeEnabled: false,
-    }
+    },
+    Поиск: {
+      screen: SearchScreen,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="ios-analytics-outline" size={32} color={tintColor} />
+        ),
+      },
+    },
+  },
+  {
+    tabBarPosition: 'bottom',
+  }
   );
