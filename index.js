@@ -19,12 +19,15 @@ componentWillUnmount(){
 componentDidMount(){
 
   // Start counting when the page is loaded
+ 
+}
+
+setTimer = () =>{
   this.timeoutHandle = setTimeout(()=>{
     // Add your logic for the transition
    this.setState({ screen: 'IntroScreen'})
 }, 5000);
 }
-
 changeScreen = screen =>{
   this.setState({
     screen:  screen,
@@ -34,7 +37,11 @@ changeScreen = screen =>{
     return(
       <View style={{ flex: 1 }}>
       {this.state.screen === 'LoadingPage' && (
-        <LoadingPage  />
+        <LoadingPage 
+        setTimer = {
+          this.setTimer()
+        }
+        />
       )}
         {this.state.screen === 'IntroScreen' && (
         <IntroScreen  

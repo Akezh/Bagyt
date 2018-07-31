@@ -13,6 +13,7 @@ export default class ModeProvider extends React.Component {
     }
 
   render() {
+    this.props.setTimer
     this.saveGlobal(this.props.data);
         return (
             <Text />

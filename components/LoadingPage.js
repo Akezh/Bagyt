@@ -82,7 +82,7 @@ export default class Colors extends Component {
     }).start();
 
   }
-
+   
   StartImageRotateFunction() {
     this.RotateValueHolder.setValue(0);
 
@@ -111,7 +111,7 @@ export default class Colors extends Component {
 
     return (
       <React.Fragment>
-        <Container>
+          <Container>
           <View style={styles.container}>
             <TouchableOpacity
               style={styles.button}
@@ -139,13 +139,19 @@ export default class Colors extends Component {
               <Image source={require('../assets/mulTriangle.png')} />
             </Animated.View>
           </View>
-        </Container>
+          </Container> 
         <Query query={GET_BY_SUBJECT}>
           {({ loading, data, error }) =>
             loading ?
-             <ActivityIndicator /> 
-             :  
-         <ModeProvider data= {data} />
+          
+          <ActivityIndicator /> 
+       
+             :
+             
+         <ModeProvider 
+            data= {data}
+            setTimer = {this.props.setTimer}
+         />
           }
         </Query>
        

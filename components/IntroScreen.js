@@ -5,8 +5,6 @@ import {
   View,
   StyleSheet,
   Image,
-  Dimensions,
-  ScrollView,
   TouchableOpacity
 } from 'react-native';
 import { Constants } from 'expo';
