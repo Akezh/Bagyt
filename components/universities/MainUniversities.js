@@ -1,8 +1,6 @@
 import React from 'react';
-import { Button, View, Text } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
-import { StyleSheet, TextInput, Alert, FlatList, Image, TouchableOpacity, ToastAndroid } from 'react-native';
-import { Constants } from 'expo';
+import { View, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ListUniversities from './ListUniversities';
 
@@ -21,7 +19,10 @@ export default class MainUniversities extends React.Component {
 					</View>
 				</TouchableOpacity>
 
-				<ListUniversities universityData={universityData} />
+				<ListUniversities
+					universityData={universityData}
+					navigateToDetails={item => this.props.navigateToDetails(item)}
+				/>
 			</View>
 		);
 	}

@@ -38,11 +38,18 @@ const GET_BY_SUBJECT = gql`
 			webSite
 			majorPoints {
 				id
-				majorName
+				kazPoint
+				kazSelPoint
 				major {
 					id
+					name
+					index
+					description
 					subject
 				}
+				majorIndex
+				rusPoint
+				rusSelPoint
 			}
 		}
 		allMajorPoints {

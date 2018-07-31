@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Platform, Dimensions } from 'react-native';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
-import Constants from 'expo';
 
 import MainSpecialists from './specialists/MainSpecialists';
 import MainUniversities from './universities/MainUniversities';
@@ -22,6 +21,12 @@ export default class HomeScrollTab extends Component {
 			universityData: university,
 		});
 		this.props.navigation.navigate('Specialists');
+	};
+
+	navigateToDetails = item => {
+		this.props.navigation.navigate('DetailUniversities', {
+			item: item,
+		});
 	};
 
 	render() {
@@ -53,6 +58,7 @@ export default class HomeScrollTab extends Component {
 								})
 							}
 							universityData={this.state.universityData}
+							navigateToDetails={item => this.navigateToDetails(item)}
 						/>
 					</View>
 				</ScrollableTabView>

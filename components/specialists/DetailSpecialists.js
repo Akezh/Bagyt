@@ -15,6 +15,13 @@ class DetailSpecialists extends Component {
 			.map(univer => univer.majorPoints.map(major => major.majorName === this.name).includes(true) && univer)
 			.filter(univer => univer !== false),
 	};
+
+	navigateToDetails = item => {
+		this.props.navigation.navigate('DetailUniversities', {
+			item: item,
+		});
+	};
+
 	render() {
 		const specialist = this.props.navigation.getParam('specialist');
 		const logo = this.props.navigation.getParam('logo');
@@ -27,7 +34,10 @@ class DetailSpecialists extends Component {
 
 				<Text> Universities </Text>
 
-				<ListUniversities universityData={this.state.universityData} />
+				<ListUniversities
+					universityData={this.state.universityData}
+					navigateToDetails={item => this.navigateToDetails(item)}
+				/>
 			</ScrollView>
 		);
 	}
