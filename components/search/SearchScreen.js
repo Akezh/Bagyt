@@ -14,10 +14,17 @@ import {
 import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+const DismissKeyBoard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
 
 
 export default class SearchScreen extends React.Component {
-  
+  state = {
+    inputValue: '',
+  };
 
   render() {
     return (
@@ -97,7 +104,7 @@ const styles = StyleSheet.create({
   },
   opacity1: {
     marginTop: '2%',
-    height: '19%',
+    height: '14%',
     justifyContent: 'center',
     borderBottomWidth: 0.5,
     borderBottomColor: 'grey',
@@ -105,12 +112,12 @@ const styles = StyleSheet.create({
     borderTopColor: 'grey',
   },
   opacity: {
-    height: '19%',
+    height: '14%',
     justifyContent: 'center',
     borderBottomWidth: 0.5,
     borderBottomColor: 'grey',
   },
-  text: { marginLeft: 18, fontSize: 24, color: '#148EFE' },
+  text: { marginLeft: 18, fontSize: 18, color: '#148EFE' },
   searchView1: {
     flexDirection: 'row',
     justifyContent: 'space-between',

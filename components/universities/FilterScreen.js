@@ -20,6 +20,7 @@ export default class FilterScreen extends React.Component {
     }
      array = [{
         name: 'Город',
+        iconName: 'ios-home-outline',
         array: ['Cancel','All',...new Set(global.data.allUniversities.map(
             univer => univer.city
             ))],
@@ -27,6 +28,7 @@ export default class FilterScreen extends React.Component {
     },
     {
         name: 'Предмет',
+        iconName: 'ios-book-outline',
         array:  ['Cancel','All', ...new Set(global.data.allMajors.map(
             major => major.subject
             )  )],
@@ -34,6 +36,7 @@ export default class FilterScreen extends React.Component {
     },
     {
         name: 'Специальность',
+        iconName: 'ios-people-outline',
         array: ['Cancel','All'].concat(global.data.allMajors.map(
             major => major.name
             )) ,
@@ -102,40 +105,39 @@ export default class FilterScreen extends React.Component {
     let universityData = this.props.navigation.getParam('universityData');
     const { params} = this.props.navigation.state;
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <FlatList
           data={this.array}
           keyExtractor={(_, index) => index}
           numColumns={1}
           renderItem={({ item }) => {
             return (
-                <TouchableOpacity
-                style={styles.opacity}
-                onPress={() => this.showActionSheet(
-                    item
-                )}
-                >
-                <Text style={styles.text}>
-                  <Icon name="ios-arrow-forward-outline" size={30} />    
-                  {item.name}                                           
-                   <Icon styname="ios-arrow-forward-outline" size={26} />
-                </Text>
-              </TouchableOpacity>
+<TouchableOpacity
+style={styles.opacity}
+onPress={() => this.showActionSheet(
+  item
+)}>
+<View style={styles.searchView1}>
+  <View style={styles.searchView2}>
+    <Icon name={item.iconName} size={32} color={'#148EFE'}/>
+    <Text style={styles.text}>{item.name}</Text>
+  </View>
+  <Icon name="ios-arrow-forward-outline" size={26} color={'#148EFE'}/>
+</View> 
+</TouchableOpacity>
             );
           }}
         />
 
          <TouchableOpacity
-                style={styles.opacity}
+                style={{flex: 6, alignItems: 'center'}}
                 onPress={() => 
                     this.finalUniversitytydata(universityData, params)
                    // params.saveFilteredUniversityData(universityData)
                 }
                 >
-                <Text style={styles.text}>
-                  <Icon name="ios-arrow-forward-outline" size={30} />    
-                  Press me                                       
-                   <Icon styname="ios-arrow-forward-outline" size={26} />
+                <Text style={styles.text}>    
+                  Сохранить                                  
                 </Text>
               </TouchableOpacity>
        
@@ -185,9 +187,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderBottomWidth: 0.5,
         borderBottomColor: 'grey',
-        flex: 1
+        flex: 1,
       },
-      text: { marginLeft: 18, fontSize: 24, color: '#148EFE' },
+      text: { marginLeft: 18, fontSize: 18, color: '#148EFE' },
       searchView1: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -198,6 +200,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        marginVertical: '2%'
       },
 });
 
