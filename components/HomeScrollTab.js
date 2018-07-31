@@ -17,10 +17,11 @@ export default class HomeScrollTab extends Component {
     universityData: global.data.allUniversities
 }
 
-saveFilteredUniversityData=(universityData)=>{
-    this.setState({
-        universityData:universityData
-    })
+saveFilteredUniversityData=(university)=>{
+     this.setState({
+       universityData: university
+     }, () => console.log(this.state.universityData))
+     
 }
 
   render() {
@@ -51,7 +52,7 @@ saveFilteredUniversityData=(universityData)=>{
               toFilterScreen={() =>
                 this.props.navigation.navigate('FilterScreen',{
                   universityData: this.state.universityData,
-                  saveFilteredUniversityData:(universityData) =>this.saveFilteredUniversityData(universityData)
+                  saveFilteredUniversityData:(university) =>this.saveFilteredUniversityData(university)
                 })
               }
 

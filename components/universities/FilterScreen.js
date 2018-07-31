@@ -20,23 +20,23 @@ export default class FilterScreen extends React.Component {
     }
      array = [{
         name: 'Город',
-        array: ['Cancel',...new Set(global.data.allUniversities.map(
+        array: ['Cancel','All',...new Set(global.data.allUniversities.map(
             univer => univer.city
             ))],
         initialState: 'city'
     },
     {
         name: 'Предмет',
-        array:  ['Cancel', ...new Set(global.data.allMajors.map(
+        array:  ['Cancel','All', ...new Set(global.data.allMajors.map(
             major => major.subject
             )  )],
         initialState: 'subject'
     },
     {
         name: 'Специальность',
-        array: global.data.allMajors.map(
+        array: ['Cancel','All'].concat(global.data.allMajors.map(
             major => major.name
-            )  ,
+            )) ,
         initialState:'major'
     }]
 
@@ -51,12 +51,56 @@ export default class FilterScreen extends React.Component {
         })
        
       }
+    finalUniversitytydata = (universityData, params) =>{
+      
+      if(this.state.city==='All' || this.state.major==='All' ||this.state.subject==='All'){
+          universityData= global.data.allUniversities
+      }
 
+      if(this.state.city!=='' && this.state.city!=='All')  {
+          
+        universityData = universityData.filter(
+            univer => univer.city === this.state.city
+        )
+      }
+        
+        console.log('with city ',universityData)
+
+        if(this.state.major!=='' && this.state.major!=='All') {
+
+            universityData = universityData.map(
+                univer =>
+                    univer.majorPoints.map(
+                        major=>
+                           major.majorName=== this.state.major
+                    ).includes(true)
+                 && univer ).filter(
+                     univer=> univer !== false
+                 )
+        }
+        
+        console.log('with major ',universityData)
+
+        if(this.state.subject!==''&& this.state.subject!=='All') {
+
+            universityData = universityData.map(univer =>
+                    
+                univer.majorPoints.map(
+                    (majorPoint) => majorPoint.major && (
+                        (majorPoint.major.subject 
+                        ===  this.state.subject))
+                    ).includes(true) 
+                    && univer).filter(
+                        univer=> univer !== false
+                    
+            )
+        }
+        
+        params.saveFilteredUniversityData(universityData)
+    }
   render() {
-    const { navigation } = this.props;
-    const universityData = navigation.getParam('universityData');
-   const saveFilteredUniversityData = navigation.getParam('saveFilteredUniversityData');
-    
+    let universityData = this.props.navigation.getParam('universityData');
+    const { params} = this.props.navigation.state;
     return (
       <View style={{ flex: 1 }}>
         <FlatList
@@ -80,6 +124,20 @@ export default class FilterScreen extends React.Component {
             );
           }}
         />
+
+         <TouchableOpacity
+                style={styles.opacity}
+                onPress={() => 
+                    this.finalUniversitytydata(universityData, params)
+                   // params.saveFilteredUniversityData(universityData)
+                }
+                >
+                <Text style={styles.text}>
+                  <Icon name="ios-arrow-forward-outline" size={30} />    
+                  Press me                                       
+                   <Icon styname="ios-arrow-forward-outline" size={26} />
+                </Text>
+              </TouchableOpacity>
        
                 
          
@@ -92,40 +150,27 @@ export default class FilterScreen extends React.Component {
           cancelButtonIndex={0}
           destructiveButtonIndex={4}
           onPress={(index) => { 
-           switch(this.state.initialState){
-                case 'city': 
-                univerData = universityData.filter(
-                    univer => univer.city === this.state.initialActionSheet[index]
-                )
+           if(this.state.initialActionSheetName==='Город'){
                 
-                console.log(univerData)
+                this.setState({
+                    city: this.state.initialActionSheet[index]
+                }, 
+                () =>console.log(this.state.city, 'city')) 
+            }
+               else if(this.state.initialActionSheetName==='Предмет'){
+                 this.setState({
+                    subject: this.state.initialActionSheet[index]
+                },
+                () =>console.log(this.state.subject, 'subject'))
+            } 
+            else if(this.state.initialActionSheetName==='Специальность'){
+                this.setState({
+                    major: this.state.initialActionSheet[index]
+                },
+                () =>console.log(this.state.major, 'major'))
 
 
-                 case 'subject':
-                 univerData = universityData.map(univer =>
-                    univer.majorPoints.map(
-                        (majorPoint) => majorPoint.major && (
-                            majorPoint.major.subject 
-                            ===  this.state.initialActionSheet[index] 
-                            && majorPoint.major)
-                        ) && univer
-                )
-                console.log(univerData)
-
-              case 'specialist':
-              univerData = universityData.map(
-                univer =>
-                    univer.majorPoints.map(
-                        major=>
-                           major.majorName=== this.state.initialActionSheet[index]
-                    ).includes(true)
-                 && univer ).filter(
-                     univer=> univer !== false
-                 )
-                 
-                 console.log(univerData);
         }
-              
 		  }}
 
         />
@@ -139,7 +184,8 @@ const styles = StyleSheet.create({
     marginTop: '2%', 
     height: '8%', 
     borderBottomWidth: 0.5,
-    borderBottomColor: 'grey' 
+    borderBottomColor: 'grey' ,
+    flex:1
   },
   text: {
     fontSize: 24, 

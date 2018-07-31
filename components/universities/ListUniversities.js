@@ -31,7 +31,7 @@ export default class UniversityScreen extends React.Component {
               <TouchableHighlight 
               onPress = {() => this.navToDetail(item,subject.colorLogo)}
               style={styles.listButton}>
-                <Text style={styles.listText}>{item.name}</Text>
+          <Text style={styles.listText}>{item.name}</Text>
               </TouchableHighlight>
             );
           }}
