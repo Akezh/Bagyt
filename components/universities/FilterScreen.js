@@ -180,17 +180,24 @@ export default class FilterScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  opacity: { 
-    marginTop: '2%', 
-    height: '8%', 
-    borderBottomWidth: 0.5,
-    borderBottomColor: 'grey' ,
-    flex:1
-  },
-  text: {
-    fontSize: 24, 
-    marginLeft: '4%', 
-    color: '#148EFE'
-  }
+    opacity: {
+        height: '10%',
+        justifyContent: 'center',
+        borderBottomWidth: 0.5,
+        borderBottomColor: 'grey',
+        flex: 1
+      },
+      text: { marginLeft: 18, fontSize: 24, color: '#148EFE' },
+      searchView1: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 15,
+      },
+      searchView2: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      },
 });
 

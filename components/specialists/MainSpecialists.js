@@ -7,9 +7,11 @@ import {
   TouchableHighlight,
   Image,
   ImageBackground,
+  Dimensions
 } from 'react-native';
 import {Constants} from 'expo';
 
+const {width} = Dimensions.get('window');
 
 export default class SpecialistsMain extends React.Component {
   static navigationOptions = {
@@ -109,7 +111,7 @@ export default class SpecialistsMain extends React.Component {
 
 const styles = StyleSheet.create({
   content: {
-    padding:5,
+
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -130,8 +132,8 @@ const styles = StyleSheet.create({
   backImage: {
      alignItems: 'center',
     justifyContent: 'center',
-    width: 170,
-    height: 170,
+    width: width/2 - 15,
+    height: width/2 - 15,
     borderRadius: 10,
     marginHorizontal: 6,
     marginVertical: 10,

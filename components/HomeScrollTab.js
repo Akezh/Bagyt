@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Platform, Dimensions } from 'react-native';
 import ScrollableTabView, {
   DefaultTabBar,
 } from 'react-native-scrollable-tab-view';
@@ -7,6 +7,8 @@ import Constants from 'expo';
 
 import MainSpecialists from './specialists/MainSpecialists';
 import MainUniversities from './universities/MainUniversities';
+
+const {height} = Dimensions.get('window');
 
 export default class HomeScrollTab extends Component {
   static navigationOptions = {
@@ -26,11 +28,11 @@ saveFilteredUniversityData=(university)=>{
 
   render() {
     return (
-      <View style={{ marginTop: Constants.statusBarHeight, flex: 1 }}>
+      <View style={{  flex: 1, marginTop: Platform.OS === 'ios' ? (height === 812 ? 44:20) : 0 }}>
         <ScrollableTabView
           tabBarActiveTextColor="#148EFE"
           tabBarUnderlineStyle={{ backgroundColor: '#148EFE' }}
-          style={{ marginTop: '5%' }}
+         
           initialPage={1}
           renderTabBar={() => <DefaultTabBar />}>
           <View

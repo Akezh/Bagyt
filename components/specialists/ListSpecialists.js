@@ -72,20 +72,17 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     backgroundColor: 'white',
-    
   },
   listButton: {
-    borderBottomColor: '#148EFE',
-    borderBottomWidth: 1,
-    marginHorizontal: 8,
+    borderBottomColor: 'grey',
+    borderBottomWidth: 0.5,
   },
   listText: {
     color: '#148EFE',
     fontSize: 18,
-    marginHorizontal: 8,
-    marginVertical: 10,
+    marginHorizontal: '2%',
+    marginVertical: '1%',
   },
-
   text: {
     fontSize: 30,
     color: 'white',

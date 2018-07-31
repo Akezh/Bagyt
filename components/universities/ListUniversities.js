@@ -43,9 +43,9 @@ export default class UniversityScreen extends React.Component {
 
 const styles=StyleSheet.create({
     listButton: {
-        borderBottomColor: '#148EFE',
-        borderBottomWidth: 1,
-        marginHorizontal: 8,
+        borderBottomColor: 'grey',
+        borderBottomWidth: 0.5,
+        marginHorizontal: '2%',
       },
       listText: {
         color: '#148EFE',

@@ -8,7 +8,7 @@ import Constants from 'expo';
 
 export default TabNavigator(
   {
-    Артисты: {
+    Универы: {
       screen: HomeRoot,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
