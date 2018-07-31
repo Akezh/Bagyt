@@ -10,12 +10,16 @@ import {
 	TouchableHighlight,
 	TouchableOpacity,
 	ActivityIndicator,
+	Platform,
+	Dimensions,
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Container, Header, Title, Button, Icon } from 'native-base';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import ModeProvider from './ModeProvider';
+
+const { height } = Dimensions.get('window');
 
 const GET_BY_SUBJECT = gql`
 	{
@@ -161,7 +165,7 @@ const styles = StyleSheet.create({
 	},
 	box: {
 		width: '100%',
-		height: '100%',
+		height: Platform.OS === 'ios' ? (height === 812 ? '40%' : '100%') : 580,
 		position: 'absolute',
 	},
 	button: {

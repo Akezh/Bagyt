@@ -1,9 +1,20 @@
 import React from 'react';
-import { Button, View, Text } from 'react-native';
-import { StyleSheet, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import FilterScreen from '../universities/FilterScreen';
+import { View, Text } from 'react-native';
+import {
+	StyleSheet,
+	TextInput,
+	Alert,
+	FlatList,
+	Image,
+	TouchableOpacity,
+	ToastAndroid,
+	TouchableWithoutFeedback,
+	Keyboard,
+} from 'react-native';
 import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Button } from 'react-native-elements';
+import FilterScreen from '../universities/FilterScreen';
 
 const DismissKeyBoard = ({ children }) => (
 	<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>{children}</TouchableWithoutFeedback>
