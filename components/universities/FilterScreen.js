@@ -66,9 +66,6 @@ export default class FilterScreen extends React.Component {
             univer => univer.city === this.state.city
         )
       }
-        
-        console.log('with city ',universityData)
-
         if(this.state.major!=='' && this.state.major!=='All') {
 
             universityData = universityData.map(
@@ -81,8 +78,6 @@ export default class FilterScreen extends React.Component {
                      univer=> univer !== false
                  )
         }
-        
-        console.log('with major ',universityData)
 
         if(this.state.subject!==''&& this.state.subject!=='All') {
 
@@ -100,6 +95,7 @@ export default class FilterScreen extends React.Component {
         }
         
         params.saveFilteredUniversityData(universityData)
+        this.props.navigation.navigate('Specialists')
     }
   render() {
     let universityData = this.props.navigation.getParam('universityData');
@@ -133,7 +129,6 @@ onPress={() => this.showActionSheet(
                 style={{flex: 6, alignItems: 'center'}}
                 onPress={() => 
                     this.finalUniversitytydata(universityData, params)
-                   // params.saveFilteredUniversityData(universityData)
                 }
                 >
                 <Text style={styles.text}>    
@@ -156,20 +151,17 @@ onPress={() => this.showActionSheet(
                 
                 this.setState({
                     city: this.state.initialActionSheet[index]
-                }, 
-                () =>console.log(this.state.city, 'city')) 
+                }) 
             }
                else if(this.state.initialActionSheetName==='Предмет'){
                  this.setState({
                     subject: this.state.initialActionSheet[index]
-                },
-                () =>console.log(this.state.subject, 'subject'))
+                })
             } 
             else if(this.state.initialActionSheetName==='Специальность'){
                 this.setState({
                     major: this.state.initialActionSheet[index]
-                },
-                () =>console.log(this.state.major, 'major'))
+                })
 
 
         }
