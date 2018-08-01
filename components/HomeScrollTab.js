@@ -13,22 +13,6 @@ export default class HomeScrollTab extends Component {
 		header: null,
 	};
 
-	state = {
-		universityData: global.data.allUniversities,
-	};
-
-	saveFilteredUniversityData = university => {
-		this.setState({
-			universityData: university,
-		});
-		this.props.navigation.navigate('Specialists');
-	};
-
-	navigateDetailUnversity = item => {
-		this.props.navigation.navigate('DetailUniversities', {
-			item: item,
-		});
-	};
 
 	render() {
 		return (
@@ -50,16 +34,7 @@ export default class HomeScrollTab extends Component {
 					</View>
 					<View style={{ flex: 1, backgroundColor: 'white' }} tabLabel="Университеты">
 						<MainUniversities
-							toFilterScreen={() =>
-								this.props.navigation.navigate('FilterScreen', {
-									universityData: this.state.universityData,
-									saveFilteredUniversityData: university =>
-										this.saveFilteredUniversityData(university),
-									nameButton: 'Сохранить',
-								})
-							}
-							universityData={this.state.universityData}
-							navigateDetailUnversity={item => this.navigateDetailUnversity(item)}
+                         navigation={this.props.navigation}
 						/>
 					</View>
 				</ScrollableTabView>

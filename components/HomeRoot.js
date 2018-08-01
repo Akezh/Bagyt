@@ -6,6 +6,8 @@ import HomeScrollTab from './HomeScrollTab';
 import DetailUniversities from './universities/DetailUniversities';
 import ListUniversities from './universities/ListUniversities';
 import FilterScreen from './universities/FilterScreen';
+import MainUniversities from './universities/MainUniversities'
+import SearchScreen from './search/SearchScreen';
 
 export default createStackNavigator(
   {

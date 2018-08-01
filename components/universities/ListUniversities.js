@@ -16,23 +16,19 @@ export default class UniversityScreen extends React.Component {
 	renderSeparator = () => {
 		return <View style={{ width: '100%', marginLeft: '27%' }} />;
 	};
-	setAsyncUniver = async univer => {
+	setAsyncUniver = async currentUniversity => {
 		const { favouriteUnivers } = this.state;
-		console.log(this.state.favouriteUnivers);
-		//console.log
-		await this.setState(
-			{
-				favouriteUnivers: favouriteUnivers.includes(univer)
-					? favouriteUnivers.splice(favouriteUnivers.indexOf(univer), 1)
-					: [...favouriteUnivers, univer],
-			},
-			() => {
-				console.log('ok');
-				AsyncStorage.setItem('favouriteUnivers', JSON.stringify(favouriteUnivers));
-			}
-		);
+		const newFavouriteUniversIds = favouriteUnivers.includes(univer.id)
+			? favouriteUnivers.filter(univer => univer.id !== currentUniversity.id)
+			: [...favouriteUnivers, currentUniversity.id];
 
-		console.log(await AsyncStorage.getItem('favouriteUnivers'));
+		try {
+			AsyncStorage.clear();
+			// AsyncStorage.setItem('favouriteUnivers', JSON.stringify(newFavouriteUniversIds));
+			this.setState({ favouriteUnivers: newFavouriteUniversIds });
+		} catch (error) {
+			console.log('error', error);
+		}
 	};
 
 	retrieveData = async () => {
@@ -57,6 +53,7 @@ export default class UniversityScreen extends React.Component {
 	componentDidMount() {
 		this.retrieveData();
 	}
+	
 	renderItem = ({ item }) => {
 		return (
 			<TouchableOpacity style={styles.touch} onPress={() => this.props.navigateDetailUnversity(item)}>
@@ -81,10 +78,10 @@ export default class UniversityScreen extends React.Component {
 									style={{ flex: 5, alignItems: 'flex-end' }}
 									onPress={() => this.setAsyncUniver(item)}
 								>
-									{this.state.favouriteUnivers.includes(item) ? (
-										<Icon name="md-heart-outline" size={33} color={'red'} />
+									{false ? (
+										<Icon name="md-heart" size={33} color={'red'} />
 									) : (
-										<Icon name="md-heart" size={33} color={'white'} />
+										<Icon name="md-heart-outline" size={33} color={'white'} />
 									)}
 								</TouchableOpacity>
 							</View>
@@ -101,7 +98,7 @@ export default class UniversityScreen extends React.Component {
 	};
 
 	render() {
-		const universityData = this.props.universityData;
+		const { universityData } = this.props;
 		return (
 			<View style={{ flex: 1, backgroundColor: 'white' }}>
 				<FlatList
