@@ -31,18 +31,20 @@ class DetailSpecialists extends Component {
         <View
           style={{
             alignItems: "center",
-            width: "85%",
-            marginHorizontal: "10%",
-            marginTop: "2%"
+            width: "90%",
+            marginHorizontal: "5%",
+            marginTop: 25
           }}
         >
-          <Image source={logo} style={{ width: 100, height: 100 }} />
-          <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+          {/* <Image source={logo} style={{ width: 100, height: 100 }} /> */}
+          <Text
+            style={{ fontSize: 22, fontWeight: "bold", alignItems: "center" }}
+          >
             {specialist.name}
           </Text>
         </View>
 
-        <View
+        <ScrollView
           style={{
             marginTop: "5%",
             width: "90%",
@@ -51,24 +53,23 @@ class DetailSpecialists extends Component {
           }}
         >
           <Text>{specialist.description} </Text>
-        </View>
+        </ScrollView>
 
         <View
           style={{
-            backgroundColor: "grey",
-            height: 50,
-            justifyContent: "center",
-            alignItems: "center"
+            backgroundColor: "#848587",
+            height: 25,
+            justifyContent: "center"
           }}
         >
           <Text
             style={{
-              fontWeight: "bold",
+              marginLeft: "5%",
               fontSize: 18,
               color: "white"
             }}
           >
-            Universities
+            Университеты
           </Text>
         </View>
 

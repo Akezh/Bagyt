@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { createStackNavigator } from 'react-navigation';
-import ListSpecialists from './specialists/ListSpecialists';
-import DetailSpecialists from './specialists/DetailSpecialists';
-import HomeScrollTab from './HomeScrollTab';
-import DetailUniversities from './universities/DetailUniversities';
-import ListUniversities from './universities/ListUniversities';
-import FilterScreen from './universities/FilterScreen';
+import React, { Component } from "react";
+import { createStackNavigator } from "react-navigation";
+import ListSpecialists from "./specialists/ListSpecialists";
+import DetailSpecialists from "./specialists/DetailSpecialists";
+import HomeScrollTab from "./HomeScrollTab";
+import DetailUniversities from "./universities/DetailUniversities";
+import ListUniversities from "./universities/ListUniversities";
+import FilterScreen from "./universities/FilterScreen";
 
 export default createStackNavigator(
   {
@@ -13,23 +13,30 @@ export default createStackNavigator(
       screen: HomeScrollTab
     },
     ListSpecialists: {
-      screen: ListSpecialists,
+      screen: ListSpecialists
     },
     DetailSpecialists: {
       screen: DetailSpecialists,
+      navigationOptions: {
+        title: "Специальность",
+        headerTintColor: "white",
+        headerStyle: {
+          backgroundColor: "#148EFE"
+        }
+      }
     },
-    DetailUniversities:{
-        screen:DetailUniversities
+    DetailUniversities: {
+      screen: DetailUniversities
     },
-    ListUniversities:{
-        screen:ListUniversities
+    ListUniversities: {
+      screen: ListUniversities
     },
-    FilterScreen:{
-        screen: FilterScreen
+    FilterScreen: {
+      screen: FilterScreen
     }
   },
-  {headerBackTitleVisible :true,
-  mode: 'modal', 
-    headerMode: 'screen',
+  {
+    headerBackTitleVisible: true,
+    headerMode: "screen"
   }
 );

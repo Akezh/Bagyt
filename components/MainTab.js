@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { TabNavigator, TabBarBottom } from "react-navigation";
 import { Ionicons } from "@expo/vector-icons";
 import HomeRoot from "./HomeRoot";
