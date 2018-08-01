@@ -10,6 +10,7 @@ export default class UniversityScreen extends React.Component {
 
 	state = {
 		favouriteUnivers: [],
+		isTrue: true,
 	};
 
 	renderSeparator = () => {
@@ -17,12 +18,19 @@ export default class UniversityScreen extends React.Component {
 	};
 	setAsyncUniver = async univer => {
 		const { favouriteUnivers } = this.state;
-		this.setState({
-			favouriteUnivers: favouriteUnivers.includes(univer)
-				? favouriteUnivers.splice(favouriteUnivers.indexOf(univer), 1)
-				: [...favouriteUnivers, univer],
-		});
-		await AsyncStorage.setItem('favouriteUnivers', JSON.stringify(favouriteUnivers));
+		console.log(this.state.favouriteUnivers);
+		//console.log
+		await this.setState(
+			{
+				favouriteUnivers: favouriteUnivers.includes(univer)
+					? favouriteUnivers.splice(favouriteUnivers.indexOf(univer), 1)
+					: [...favouriteUnivers, univer],
+			},
+			() => {
+				console.log('ok');
+				AsyncStorage.setItem('favouriteUnivers', JSON.stringify(favouriteUnivers));
+			}
+		);
 
 		console.log(await AsyncStorage.getItem('favouriteUnivers'));
 	};
@@ -48,7 +56,6 @@ export default class UniversityScreen extends React.Component {
 
 	componentDidMount() {
 		this.retrieveData();
-		//const listOfLikes = await JSON.parse(response) || [];
 	}
 	renderItem = ({ item }) => {
 		return (
@@ -74,7 +81,11 @@ export default class UniversityScreen extends React.Component {
 									style={{ flex: 5, alignItems: 'flex-end' }}
 									onPress={() => this.setAsyncUniver(item)}
 								>
-									<Icon name="md-heart-outline" size={33} color={'white'} />
+									{this.state.favouriteUnivers.includes(item) ? (
+										<Icon name="md-heart-outline" size={33} color={'red'} />
+									) : (
+										<Icon name="md-heart" size={33} color={'white'} />
+									)}
 								</TouchableOpacity>
 							</View>
 						</View>
