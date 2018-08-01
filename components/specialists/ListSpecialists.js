@@ -5,7 +5,7 @@ import {
   StyleSheet,
   FlatList,
   ScrollView,
-  TouchableHighlight,
+  TouchableOpacity,
   Image,
   ImageBackground
 } from "react-native";
@@ -55,19 +55,38 @@ export default class ListSpecialists extends React.Component {
           numColumns={1}
           renderItem={({ item }) => {
             return (
-              <TouchableHighlight
+              <TouchableOpacity
                 onPress={() => this.navToDetail(item, subject.colorLogo)}
                 style={styles.listButton}
               >
                 <View
                   style={{
-                    marginLeft: 20,
-                    width: "80%"
+                    width: "100%",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center"
                   }}
                 >
-                  <Text style={styles.listText}>{item.name}</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      alignItems: "center"
+                    }}
+                  >
+                    <Text style={styles.listText}>{item.name}</Text>
+                  </View>
+                  <Icon
+                    name="ios-arrow-forward-outline"
+                    type="ionicon"
+                    size={26}
+                    color="grey"
+                    onPress={() =>
+                      this.props.navigation.navigate("Specialists")
+                    }
+                  />
                 </View>
-              </TouchableHighlight>
+              </TouchableOpacity>
             );
           }}
         />
@@ -82,18 +101,19 @@ const styles = StyleSheet.create({
     backgroundColor: "white"
   },
   listButton: {
-    borderWidth: 1,
-    borderColor: "#148EFE",
-    borderRadius: 20,
-    height: "20%",
+    borderBottomWidth: 0.5,
+    borderBottomColor: "grey",
+    height: "15%",
     flex: 1,
     flexDirection: "row",
-    marginVertical: "1.5%",
-    marginHorizontal: "3%"
+    paddingHorizontal: "2%",
+    paddingBottom: "3%",
+    alignItems: "center",
+    justifyContent: "center"
   },
   listText: {
     color: "grey",
-    fontSize: 18,
+    fontSize: 16,
     marginHorizontal: "2%",
     marginVertical: "1%",
     fontWeight: "bold"

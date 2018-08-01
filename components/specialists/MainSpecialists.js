@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  TouchableHighlight,
+  TouchableOpacity,
   Image,
   ImageBackground,
   Dimensions
@@ -84,7 +84,8 @@ export default class SpecialistsMain extends React.Component {
           numColumns={2}
           renderItem={({ item }) => {
             return (
-              <TouchableHighlight
+              <TouchableOpacity
+                transform="scale(0.5, 0.5)"
                 style={styles.button}
                 onPress={() => {
                   this.props.toListSpecialists(item);
@@ -98,7 +99,7 @@ export default class SpecialistsMain extends React.Component {
                   <Image source={item.logo} style={styles.logo} />
                   <Text style={styles.text}> {item.name} </Text>
                 </ImageBackground>
-              </TouchableHighlight>
+              </TouchableOpacity>
             );
           }}
         />
