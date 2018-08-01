@@ -9,7 +9,7 @@ import ListUniversities from './ListUniversities';
 export default class MainUniversities extends React.Component {
 
 state = {
-		universityData: global.data.allUniversities,
+		universityData: this.props.universityData
 	};
 
 	saveFilteredUniversityData = university => {
@@ -21,7 +21,6 @@ state = {
 	
 
 	render() {
-		console.log('I`m in MainUniversity')
 		const {universityData} = this.state;
 	    const {navigation}= this.props
 		return (

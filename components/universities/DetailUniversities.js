@@ -78,18 +78,10 @@ export default class UniversityScreen extends React.Component {
               data={specialList}
               keyExtractor={(_, index) => index}
               numColumns={1}
-              renderItem={({ item }, index) => {
-                this.setState(
-                  {
-                    showed: [
-                      ...this.state.showed,
-                      {
-                        index: index,
-                        clicked: false
-                      }
-                    ]
-                  },
+              renderItem={( item ) => {
+             
                   () => {
+                      console.log(item)
                     return (
                       <View style={{ flex: 1 }}>
                         <Text> {item.majorName}</Text>
@@ -111,7 +103,6 @@ export default class UniversityScreen extends React.Component {
                       </View>
                     );
                   }
-                );
               }}
             />
           </ScrollView>

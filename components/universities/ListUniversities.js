@@ -18,24 +18,32 @@ export default class UniversityScreen extends React.Component {
 	};
 	setAsyncUniver = async currentUniversity => {
 		const { favouriteUnivers } = this.state;
-		const newFavouriteUniversIds = favouriteUnivers.includes(univer.id)
-			? favouriteUnivers.filter(univer => univer.id !== currentUniversity.id)
+		console.log(favouriteUnivers)
+		const newFavouriteUniversIds = favouriteUnivers.includes(currentUniversity.id)
+			? favouriteUnivers.filter(univer => 
+			univer!==currentUniversity.id
+			)
 			: [...favouriteUnivers, currentUniversity.id];
 
 		try {
-			AsyncStorage.clear();
-			// AsyncStorage.setItem('favouriteUnivers', JSON.stringify(newFavouriteUniversIds));
-			this.setState({ favouriteUnivers: newFavouriteUniversIds });
+			
+			// 
+			this.setState({ favouriteUnivers: newFavouriteUniversIds },
+			()=>{
+                AsyncStorage.setItem('favouriteUnivers', JSON.stringify(newFavouriteUniversIds));
+			}
+			);
 		} catch (error) {
 			console.log('error', error);
 		}
+
+		console.log(newFavouriteUniversIds)
 	};
 
 	retrieveData = async () => {
 		try {
 			const favouriteUnivers = await AsyncStorage.getItem('favouriteUnivers');
 			if (favouriteUnivers !== null) {
-				// We have data!!
 				this.setState(
 					{
 						favouriteUnivers: JSON.parse(favouriteUnivers),
@@ -78,7 +86,7 @@ export default class UniversityScreen extends React.Component {
 									style={{ flex: 5, alignItems: 'flex-end' }}
 									onPress={() => this.setAsyncUniver(item)}
 								>
-									{false ? (
+									{this.state.favouriteUnivers.includes(item.id) ? (
 										<Icon name="md-heart" size={33} color={'red'} />
 									) : (
 										<Icon name="md-heart-outline" size={33} color={'white'} />

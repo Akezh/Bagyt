@@ -42,16 +42,17 @@ export default class SearchScreen extends React.Component {
                 this.state.checked
                   ? this.state.kazChecked
                     ? univer.kazSelPoint === inputValue
-                    : univer.rusSelPoint === inputValue
+                    : univer.rusSelPoint  === inputValue
                   : this.state.kazChecked
                     ? univer.kazPoint === inputValue
-                    : univer.rusPoint === inputValue
+                    : univer.rusPoint  === inputValue
             )
             .includes(true) && univer1
       )
       .filter(univer => univer !== false);
 
-    this.props.navigation.navigate("MainUniversities", {
+    this.props.navigation.navigate("MainUniversitiesEnter", {
+      universityData,
       navigation: this.props.navigation
     });
   };

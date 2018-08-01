@@ -34,6 +34,7 @@ export default class HomeScrollTab extends Component {
 					</View>
 					<View style={{ flex: 1, backgroundColor: 'white' }} tabLabel="Университеты">
 						<MainUniversities
+						universityData ={ global.data.allUniversities}
                          navigation={this.props.navigation}
 						/>
 					</View>

@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "react-navigation";
 import { Ionicons } from "@expo/vector-icons";
 import HomeRoot from "./HomeRoot";
-import SearchRoot from "./search/SearchRoot";
+import SearchRoot from "./SearchRoot";
 import FavouriteList from "./favourites/FavouriteList";
 import Constants from "expo";
 
