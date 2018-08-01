@@ -1,15 +1,19 @@
 import React from "react";
-import { Button, View, Text } from "react-native";
 import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  ScrollView,
+  Button,
+  View,
+  Text
 } from "react-native";
 import FilterScreen from "../universities/FilterScreen";
 import { Constants } from "expo";
 import Icon from "react-native-vector-icons/Ionicons";
+import { CheckBox } from "react-native-elements";
 
 const DismissKeyBoard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -20,44 +24,96 @@ const DismissKeyBoard = ({ children }) => (
 export default class SearchScreen extends React.Component {
   state = {
     inputValue: "",
-    universityData: global.data.allUniversities
+    universityData: global.data.allUniversities,
+    checked: false,
+    rusChecked: false,
+    kazChecked: true
   };
 
-  saveFilteredUniversityData = university => {
-    this.setState({
-      universityData: university
+  saveFilteredUniversityData = navigation => {
+    const inputValue = parseInt(this.state.inputValue);
+    let { universityData } = this.state;
+    universityData = universityData
+      .map(
+        univer1 =>
+          univer1.majorPoints
+            .map(
+              univer =>
+                this.state.checked
+                  ? this.state.kazChecked
+                    ? univer.kazSelPoint === inputValue
+                    : univer.rusSelPoint === inputValue
+                  : this.state.kazChecked
+                    ? univer.kazPoint === inputValue
+                    : univer.rusPoint === inputValue
+            )
+            .includes(true) && univer1
+      )
+      .filter(univer => univer !== false);
+
+    this.props.navigation.navigate("MainUniversities", {
+      navigation: this.props.navigation
     });
-    //	this.props.navigation.navigate('Specialists');
+  };
+
+  onPressCheckboxes = () => {
+    this.setState({
+      rusChecked: !this.state.rusChecked,
+      kazChecked: !this.state.kazChecked
+    });
   };
 
   render() {
+    const { navigation } = this.props;
+
     return (
-      <DismissKeyBoard>
-        <View style={{ flex: 1 }}>
-          <View style={{ marginTop: "50%", alignItems: "center" }}>
+      <ScrollView style={{ flex: 1 }}>
+        <View style={{ marginTop: "50%", alignItems: "center" }}>
+          <DismissKeyBoard>
             <View style={{ marginTop: "10%", marginLeft: "5%" }}>
               <Text style={{ fontSize: 24, color: "#148EFE" }}>Балл:</Text>
 
               <TextInput
                 value={this.state.inputValue}
-                onChangeText={this.handleTextChange}
+                onChangeText={inputValue => this.setState({ inputValue })}
                 style={styles.inp}
                 keyboardType="numeric"
                 placeholder="Введите балл ЕНТ"
               />
+
+              <CheckBox
+                center
+                title="Сельская квота"
+                checked={this.state.checked}
+                onPress={() => this.setState({ checked: !this.state.checked })}
+              />
+              <CheckBox
+                center
+                title="Руская Школа"
+                checked={this.state.rusChecked}
+                onPress={() => this.onPressCheckboxes()}
+              />
+              <CheckBox
+                center
+                title="Казахская Школа"
+                checked={this.state.kazChecked}
+                onPress={() => this.onPressCheckboxes()}
+              />
             </View>
-          </View>
-          <View style={{ marginTop: "6%", height: "50%" }}>
-            <FilterScreen
-              universityData={this.state.universityData}
-              saveFilteredUniversityData={university =>
-                this.saveFilteredUniversityData(university)
-              }
-              nameButton={"Поиск"}
+          </DismissKeyBoard>
+        </View>
+        <View style={{ marginTop: "6%", height: "50%" }}>
+          <View
+            style={{ marginTop: "5%", alignItems: "center", height: "15%" }}
+          >
+            <Button
+              style={{ fontSize: 30 }}
+              title="Найти"
+              onPress={() => this.saveFilteredUniversityData(navigation)}
             />
           </View>
         </View>
-      </DismissKeyBoard>
+      </ScrollView>
     );
   }
 }

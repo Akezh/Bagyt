@@ -7,11 +7,35 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ListUniversities from './ListUniversities';
 
 export default class MainUniversities extends React.Component {
+
+state = {
+		universityData: global.data.allUniversities,
+	};
+
+	saveFilteredUniversityData = university => {
+		this.setState({
+			universityData: university,
+		});
+		this.props.navigation.navigate('Specialists');
+	};
+	
+
 	render() {
-		const universityData = this.props.universityData;
+		console.log('I`m in MainUniversity')
+		const {universityData} = this.state;
+	    const {navigation}= this.props
 		return (
 			<View style={styles.container}>
-				<TouchableOpacity style={styles.opacity} onPress={() => this.props.toFilterScreen()}>
+				<TouchableOpacity style={styles.opacity} onPress={() => 
+				navigation.navigate('FilterScreen', {
+					               universityData,
+									saveFilteredUniversityData: (university) =>
+										this.saveFilteredUniversityData(university),
+									nameButton: 'Сохранить',
+								})
+				}
+				
+				>
 					<View style={styles.searchView1}>
 						<View style={styles.searchView2}>
 							<Icon name="ios-menu-outline" size={30} color={'#148EFE'} />
@@ -23,7 +47,9 @@ export default class MainUniversities extends React.Component {
 
 				<ListUniversities
 					universityData={universityData}
-					navigateDetailUnversity={item => this.props.navigateDetailUnversity(item)}
+					navigateDetailUnversity={item =>navigation.navigate('DetailUniversities', {
+			item: item,
+		})}
 				/>
 			</View>
 		);

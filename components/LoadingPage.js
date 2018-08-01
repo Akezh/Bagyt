@@ -144,7 +144,15 @@ export default class Colors extends Component {
 				</Container>
 				<Query query={GET_BY_SUBJECT}>
 					{({ loading, data, error }) =>
-						loading ? <ActivityIndicator /> : <ModeProvider data={data} setTimer={this.props.setTimer} />
+						loading ? (
+							<ActivityIndicator />
+						) : (
+							<ModeProvider
+								data={data}
+								setUniversity={this.props.setUniversity}
+								setTimer={this.props.setTimer}
+							/>
+						)
 					}
 				</Query>
 			</React.Fragment>

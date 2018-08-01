@@ -1,12 +1,12 @@
 import React from "react";
-import { TabNavigator, TabBarBottom } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation";
 import { Ionicons } from "@expo/vector-icons";
 import HomeRoot from "./HomeRoot";
-import SearchScreen from "./search/SearchScreen";
+import SearchRoot from "./search/SearchRoot";
 import FavouriteList from "./favourites/FavouriteList";
 import Constants from "expo";
 
-export default TabNavigator(
+export default createBottomTabNavigator(
   {
     Универы: {
       screen: HomeRoot,
@@ -17,7 +17,7 @@ export default TabNavigator(
       }
     },
     Поиск: {
-      screen: SearchScreen,
+      screen: SearchRoot,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <Ionicons name="ios-search-outline" size={32} color={tintColor} />
