@@ -7,33 +7,30 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import ListUniversities from './ListUniversities';
 
 export default class MainUniversities extends React.Component {
-
-state = {
-		universityData: this.props.universityData
+	state = {
+		universityData: this.props.universityData,
 	};
-
 	saveFilteredUniversityData = university => {
 		this.setState({
 			universityData: university,
 		});
 		this.props.navigation.navigate('Specialists');
 	};
-	
 
 	render() {
-		const {universityData} = this.state;
-	    const {navigation}= this.props
+		const { universityData } = this.state;
+		const { navigation } = this.props;
 		return (
 			<View style={styles.container}>
-				<TouchableOpacity style={styles.opacity} onPress={() => 
-				navigation.navigate('FilterScreen', {
-					               universityData,
-									saveFilteredUniversityData: (university) =>
-										this.saveFilteredUniversityData(university),
-									nameButton: 'Сохранить',
-								})
-				}
-				
+				<TouchableOpacity
+					style={styles.opacity}
+					onPress={() =>
+						navigation.navigate('FilterScreen', {
+							universityData,
+							saveFilteredUniversityData: university => this.saveFilteredUniversityData(university),
+							nameButton: 'Сохранить',
+						})
+					}
 				>
 					<View style={styles.searchView1}>
 						<View style={styles.searchView2}>
@@ -46,9 +43,11 @@ state = {
 
 				<ListUniversities
 					universityData={universityData}
-					navigateDetailUnversity={item =>navigation.navigate('DetailUniversities', {
-			item: item,
-		})}
+					navigateDetailUnversity={item =>
+						navigation.navigate('DetailUniversities', {
+							item: item,
+						})
+					}
 				/>
 			</View>
 		);
@@ -66,7 +65,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 0.5,
 		borderBottomColor: 'grey',
 	},
-	text: { marginLeft: 18, fontSize: 18, color: '#148EFE' },
+	text: { marginLeft: 18, fontSize: 18, color: '#b13638' },
 	searchView1: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',

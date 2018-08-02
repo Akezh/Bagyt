@@ -13,7 +13,6 @@ export default class HomeScrollTab extends Component {
 		header: null,
 	};
 
-
 	render() {
 		return (
 			<View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? (height === 812 ? 44 : 20) : 0 }}>
@@ -34,8 +33,8 @@ export default class HomeScrollTab extends Component {
 					</View>
 					<View style={{ flex: 1, backgroundColor: 'white' }} tabLabel="Университеты">
 						<MainUniversities
-						universityData ={ global.data.allUniversities}
-                         navigation={this.props.navigation}
+							universityData={global.data.allUniversities}
+							navigation={this.props.navigation}
 						/>
 					</View>
 				</ScrollableTabView>
