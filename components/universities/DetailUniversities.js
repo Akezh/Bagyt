@@ -41,6 +41,7 @@ export default class UniversityScreen extends React.Component {
     const { navigation } = this.props;
     const item = navigation.getParam("item");
     const specialList = item.majorPoints;
+
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <Image
@@ -78,10 +79,10 @@ export default class UniversityScreen extends React.Component {
               data={specialList}
               keyExtractor={(_, index) => index}
               numColumns={1}
-              renderItem={( item ) => {
+              renderItem={ item => {
              
                   () => {
-                      console.log(item)
+                   
                     return (
                       <View style={{ flex: 1 }}>
                         <Text> {item.majorName}</Text>
