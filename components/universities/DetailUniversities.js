@@ -8,7 +8,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  ToastAndroid
+  Modal
 } from "react-native";
 import { Constants } from "expo";
 import { Icon } from "react-native-elements";
@@ -22,7 +22,7 @@ export default class UniversityScreen extends React.Component {
   };
 
   state = {
-    clicked: false,
+    modalVisible: false,
     showed: [
       {
         index: "",
@@ -31,9 +31,10 @@ export default class UniversityScreen extends React.Component {
     ]
   };
 
-  showPoints = index => {
+  showPoints = () => {
+    console.log('isClicked')
     this.setState({
-      clicked: !this.state.clicked
+      modalVisible: !this.state.modalVisible
     });
   };
 
@@ -79,10 +80,8 @@ export default class UniversityScreen extends React.Component {
               data={specialList}
               keyExtractor={(_, index) => index}
               numColumns={1}
-              renderItem={ item => {
-             
-                  () => {
-                   
+              renderItem={ ({item}) => {
+             console.log(item)
                     return (
                       <View style={{ flex: 1 }}>
                         <Text> {item.majorName}</Text>
@@ -91,20 +90,30 @@ export default class UniversityScreen extends React.Component {
                           name="chevron-small-right"
                           size={40}
                           color="black"
-                          onPress={() => this.showPoints(index)}
+                          onPress={() => this.showPoints()}
                         />
+
+                        <View>
                         {this.state.clicked && (
-                          <React.Fragment>
+                          console.log('Modal'),
+                           <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+          }}>
                             <Text> kazPoint: {item.kazPoint}</Text>
                             <Text> kazSelPoint :{item.kazSelPoint} </Text>
                             <Text> rusPoint: {item.rusPoint}</Text>
                             <Text> rusSelPoint: {item.rusSelPoint}</Text>
-                          </React.Fragment>
+                          </Modal>
                         )}
+                        </View>
                       </View>
                     );
                   }
-              }}
+              }
             />
           </ScrollView>
 
