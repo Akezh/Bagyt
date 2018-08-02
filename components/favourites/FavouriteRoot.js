@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { createStackNavigator } from "react-navigation";
 import MainUniversities from "../universities/MainUniversities";
-import SearchScreen from "./SearchScreen";
+import FavouriteList from "./FavouriteList";
 
 export default createStackNavigator(
   {
-    SearchScreen: {
-      screen: SearchScreen,
+    FavouriteList: {
+      screen: FavouriteList,
       navigationOptions: {
-        title: "Поиск по баллам ЕНТ",
+        title: "Избранное",
         headerTintColor: "white",
         headerStyle: {
           backgroundColor: "#F94040"
@@ -21,7 +21,6 @@ export default createStackNavigator(
   },
   {
     headerBackTitleVisible: true,
-    mode: "modal",
     headerMode: "screen"
   }
 );

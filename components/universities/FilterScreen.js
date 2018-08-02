@@ -124,13 +124,13 @@ export default class FilterScreen extends React.Component {
               >
                 <View style={styles.searchView1}>
                   <View style={styles.searchView2}>
-                    <Icon name={item.iconName} size={32} color={"#148EFE"} />
+                    <Icon name={item.iconName} size={32} color={"#b13638"} />
                     <Text style={styles.text}>{item.name}</Text>
                   </View>
                   <Icon
                     name="ios-arrow-forward-outline"
                     size={26}
-                    color={"#148EFE"}
+                    color={"#b13638"}
                   />
                 </View>
               </TouchableOpacity>
@@ -141,10 +141,9 @@ export default class FilterScreen extends React.Component {
         <View style={{ alignItems: "center" }}>
           <Button
             title={params.nameButton}
-            titleStyle={{ color: "#148EFE" }}
             onPress={() => this.finalUniversitytydata(universityData, params)}
             buttonStyle={{
-              backgroundColor: "#148EFE",
+              backgroundColor: "#F94040",
               borderColor: "white",
               borderWidth: 1,
               borderRadius: 10,
@@ -200,7 +199,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "grey",
     flex: 1
   },
-  text: { marginLeft: 18, fontSize: 18, color: "#148EFE" },
+  text: { marginLeft: 18, fontSize: 18, color: "#b13638" },
   searchView1: {
     flexDirection: "row",
     justifyContent: "space-between",

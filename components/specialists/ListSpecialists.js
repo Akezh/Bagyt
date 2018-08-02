@@ -32,10 +32,17 @@ export default class ListSpecialists extends React.Component {
 
     return (
       <View style={styles.content}>
-        <ImageBackground
-          style={styles.backImage}
-          source={subject.backImage}
-          blur={10}
+        <View
+          style={{
+            position: "absolute",
+            backgroundColor: "transparent",
+            zIndex: 100,
+            top: 44,
+            left: 14,
+            right: 0,
+            height: 44,
+            alignItems: "flex-start"
+          }}
         >
           <Icon
             style={styles.backIcon}
@@ -45,6 +52,12 @@ export default class ListSpecialists extends React.Component {
             color="#FFFF"
             onPress={() => this.props.navigation.navigate("Specialists")}
           />
+        </View>
+        <ImageBackground
+          style={styles.backImage}
+          source={subject.backImage}
+          blur={10}
+        >
           <Image source={subject.logo} style={styles.logo} />
           <Text style={styles.text}> {subject.name} </Text>
         </ImageBackground>
@@ -126,6 +139,7 @@ const styles = StyleSheet.create({
   },
   backImage: {
     flex: 0.6,
+    paddingTop: 44,
     alignItems: "center",
     justifyContent: "center"
   },

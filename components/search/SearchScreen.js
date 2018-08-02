@@ -2,18 +2,15 @@ import React from "react";
 import {
   StyleSheet,
   TextInput,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
-  ScrollView,
-  Button,
   View,
   Text
 } from "react-native";
 import FilterScreen from "../universities/FilterScreen";
 import { Constants } from "expo";
 import Icon from "react-native-vector-icons/Ionicons";
-import { CheckBox } from "react-native-elements";
+import { CheckBox, Button } from "react-native-elements";
 
 const DismissKeyBoard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -67,65 +64,91 @@ export default class SearchScreen extends React.Component {
     const { navigation } = this.props;
 
     return (
-      <ScrollView style={{ flex: 1 }}>
-        <View style={{ marginTop: "50%", alignItems: "center" }}>
-          <DismissKeyBoard>
-            <View style={{ marginTop: "10%", marginLeft: "5%" }}>
-              <Text style={{ fontSize: 24, color: "#148EFE" }}>Балл:</Text>
-
+      <DismissKeyBoard>
+        <View style={{ flex: 1, backgroundColor: "#F94040" }}>
+          <View style={{ marginTop: "10%", alignItems: "center" }}>
+            <View
+              style={{
+                marginTop: "30%",
+                marginBottom: 50,
+                flexDirection: "row",
+                alignItems: "center",
+                backgroundColor: "#F94040"
+              }}
+            >
               <TextInput
                 value={this.state.inputValue}
                 onChangeText={inputValue => this.setState({ inputValue })}
                 style={styles.inp}
                 keyboardType="numeric"
-                placeholder="Введите балл ЕНТ"
-              />
+              >
+                <Icon name="ios-home-outline" size={20} color="#FFF" /> {"   "}
+                <Text style={{ color: "#c4c4c4" }}>Балл ЕНТ</Text>
+              </TextInput>
+            </View>
 
+            <View>
               <CheckBox
                 center
                 title="Сельская квота"
+                textStyle={{ color: "white" }}
                 checked={this.state.checked}
                 onPress={() => this.setState({ checked: !this.state.checked })}
+                containerStyle={{ backgroundColor: "#F94040", width: 200 }}
+                checkedColor={"white"}
               />
               <CheckBox
                 center
                 title="Руская Школа"
+                textStyle={{ color: "white" }}
                 checked={this.state.rusChecked}
                 onPress={() => this.onPressCheckboxes()}
+                containerStyle={{ backgroundColor: "#F94040", width: 200 }}
+                checkedColor={"white"}
               />
               <CheckBox
                 center
                 title="Казахская Школа"
+                textStyle={{ color: "white" }}
                 checked={this.state.kazChecked}
                 onPress={() => this.onPressCheckboxes()}
+                containerStyle={{ backgroundColor: "#F94040", width: 200 }}
+                checkedColor={"white"}
               />
             </View>
-          </DismissKeyBoard>
-        </View>
-        <View style={{ marginTop: "6%", height: "50%" }}>
-          <View
-            style={{ marginTop: "5%", alignItems: "center", height: "15%" }}
-          >
-            <Button
-              style={{ fontSize: 30 }}
-              title="Найти"
-              onPress={() => this.saveFilteredUniversityData(navigation)}
-            />
+          </View>
+          <View style={{ marginTop: "6%", height: "50%" }}>
+            <View
+              style={{ marginTop: "5%", alignItems: "center", height: "15%" }}
+            >
+              <Button
+                title="Найти"
+                onPress={() => this.saveFilteredUniversityData(navigation)}
+                buttonStyle={{
+                  backgroundColor: "#F94040",
+                  borderWidth: 1,
+                  borderColor: "white",
+                  borderRadius: 30,
+                  width: 150
+                }}
+              />
+            </View>
           </View>
         </View>
-      </ScrollView>
+      </DismissKeyBoard>
     );
   }
 }
 
 const styles = StyleSheet.create({
   inp: {
-    width: 170,
+    width: 200,
     height: 50,
-    marginRight: 10,
+    borderBottomWidth: 1.5,
     fontSize: 18,
-    borderBottomWidth: 2,
-    borderBottomColor: "#148EFE"
+    borderBottomColor: "white",
+    backgroundColor: "#F94040",
+    color: "#424242"
   },
   opacity1: {
     marginTop: "2%",

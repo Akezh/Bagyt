@@ -21,18 +21,37 @@ export default createStackNavigator(
         title: "Специальность",
         headerTintColor: "white",
         headerStyle: {
-          backgroundColor: "#148EFE"
+          backgroundColor: "#F94040"
         }
       }
     },
     DetailUniversities: {
-      screen: DetailUniversities
+      screen: DetailUniversities,
+      navigationOptions: {
+        title: "Университет",
+        headerTintColor: "white",
+        headerStyle: {
+          backgroundColor: "#F94040"
+        }
+      }
     },
     ListUniversities: {
-      screen: ListUniversities
+      screen: ListUniversities,
+      navigationOptions: {
+        headerStyle: {
+          backgroundColor: "#F94040"
+        }
+      }
     },
     FilterScreen: {
-      screen: FilterScreen
+      screen: FilterScreen,
+      navigationOptions: {
+        title: "Фильтр",
+        headerTintColor: "white",
+        headerStyle: {
+          backgroundColor: "#F94040"
+        }
+      }
     }
   },
   {

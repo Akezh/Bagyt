@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "react-navigation";
 import { Ionicons } from "@expo/vector-icons";
 import HomeRoot from "./HomeRoot";
 import SearchRoot from "./search/SearchRoot";
-import FavouriteList from "./favourites/FavouriteList";
+import FavouriteRoot from "./favourites/FavouriteRoot";
 import Constants from "expo";
 
 export default createBottomTabNavigator(
@@ -25,7 +25,7 @@ export default createBottomTabNavigator(
       }
     },
     Избранное: {
-      screen: FavouriteList,
+      screen: FavouriteRoot,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <Ionicons name="ios-star-outline" size={32} color={tintColor} />
@@ -34,6 +34,20 @@ export default createBottomTabNavigator(
     }
   },
   {
-    tabBarPosition: "bottom"
+    tabBarPosition: "bottom",
+    tabBarOptions: {
+      style: {
+        paddingTop: 5,
+        height: 50,
+        backgroundColor: "#F94040"
+      },
+      activeTintColor: "white",
+      inactiveTintColor: "#b13638",
+      labelStyle: {
+        fontSize: 12,
+        backgroundColor: "transparent"
+      }
+    },
+    animationEnabled: true
   }
 );

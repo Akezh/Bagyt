@@ -36,7 +36,6 @@ class DetailSpecialists extends Component {
             marginTop: 25
           }}
         >
-          {/* <Image source={logo} style={{ width: 100, height: 100 }} /> */}
           <Text
             style={{ fontSize: 22, fontWeight: "bold", alignItems: "center" }}
           >

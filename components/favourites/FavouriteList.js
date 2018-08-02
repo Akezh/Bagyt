@@ -12,14 +12,11 @@ import {
 import { Constants } from "expo";
 import Icon from "react-native-vector-icons/Ionicons";
 import { Button } from "react-native-elements";
+import { getStatusBarHeight } from "../../node_modules/react-native-iphone-x-helper";
 
 export default class FavouriteList extends React.Component {
   render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text style={{ fontSize: 24, color: "#148EFE" }}>Избранное:</Text>
-      </View>
-    );
+    return <View style={{ flex: 1, alignItems: "center", marginTop: 44 }} />;
   }
 }
 

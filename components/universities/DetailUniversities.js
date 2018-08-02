@@ -11,16 +11,12 @@ import {
   ToastAndroid
 } from "react-native";
 import { Constants } from "expo";
-import { Icon } from "react-native-elements";
+import Icon from "react-native-vector-icons/Ionicons";
 import ScrollableTabView, {
   DefaultTabBar
 } from "react-native-scrollable-tab-view";
 
 export default class UniversityScreen extends React.Component {
-  static navigationOptions = {
-    title: "Университет"
-  };
-
   state = {
     clicked: false,
     showed: [
@@ -42,7 +38,12 @@ export default class UniversityScreen extends React.Component {
     const item = navigation.getParam("item");
     const specialList = item.majorPoints;
     return (
-      <View style={{ flex: 1, backgroundColor: "white" }}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "white"
+        }}
+      >
         <Image
           style={{
             width: "100%",
@@ -53,15 +54,41 @@ export default class UniversityScreen extends React.Component {
               "https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg"
           }}
         />
-        <Text style={{ fontSize: 22, marginTop: "2%" }}>{item.name}</Text>
+        <Text style={{ fontSize: 22, marginTop: "2%", marginHorizontal: "2%" }}>
+          {item.name}
+        </Text>
         <ScrollableTabView
-          tabBarActiveTextColor="#148EFE"
-          tabBarUnderlineStyle={{ backgroundColor: "#148EFE" }}
-          style={{ marginTop: "3%" }}
+          tabBarActiveTextColor="#F94040"
+          tabBarUnderlineStyle={{ backgroundColor: "#F94040" }}
+          tabBarBackgroundColor={"white"}
+          style={{
+            marginTop: "3%"
+          }}
           initialPage={1}
           renderTabBar={() => <DefaultTabBar />}
         >
           <ScrollView tabLabel="Описание">
+            <View style={styles.searchView1}>
+              <View style={styles.searchView2}>
+                <Text style={styles.text}>Количество студентов</Text>
+              </View>
+              <Text style={styles.text}> 16,000</Text>
+            </View>
+
+            <View style={styles.searchView0}>
+              <View style={styles.searchView2}>
+                <Text style={styles.text}>Характеристика</Text>
+              </View>
+              <Text style={styles.text}>959</Text>
+            </View>
+
+            <View style={styles.searchView1}>
+              <View style={styles.searchView2}>
+                <Text style={styles.text}>Характеристика</Text>
+              </View>
+              <Text style={styles.text}>830</Text>
+            </View>
+
             <View
               style={{
                 marginTop: "5%",
@@ -69,7 +96,9 @@ export default class UniversityScreen extends React.Component {
                 marginRight: "5%"
               }}
             >
-              <Text style={{ fontSize: 16 }}>{item.description}</Text>
+              <Text style={{ fontSize: 14, color: "grey" }}>
+                {item.description}
+              </Text>
             </View>
           </ScrollView>
 
@@ -117,20 +146,28 @@ export default class UniversityScreen extends React.Component {
           </ScrollView>
 
           <ScrollView tabLabel="Контакты">
-            <View style={{ marginTop: "5%", marginLeft: "5%" }}>
-              <Text style={{ fontSize: 18 }}>
-                <Icon name="ios-information-circle-outline" size={26} />
-                {item.webSite}
-              </Text>
-              <Text style={{ fontSize: 18 }}>
-                <Icon name="ios-call-outline" size={26} /> {item.phone}
-              </Text>
-              <Text style={{ fontSize: 18 }}>
-                <Icon name="ios-mail-open-outline" size={26} /> {item.email}
-              </Text>
-              <Text style={{ fontSize: 18 }}>
-                <Icon name="ios-home-outline" size={26} /> {item.address}
-              </Text>
+            <View style={styles.searchView1}>
+              <Icon
+                name="ios-information-circle-outline"
+                size={30}
+                color={"black"}
+              />
+              <Text style={styles.text2}>{item.webSite}</Text>
+            </View>
+
+            <View style={styles.searchView0}>
+              <Icon name="ios-call-outline" size={30} color={"black"} />
+              <Text style={styles.text2}> {item.phone}</Text>
+            </View>
+
+            <View style={styles.searchView1}>
+              <Icon name="ios-mail-open-outline" size={30} color={"black"} />
+              <Text style={styles.text2}> {item.email}</Text>
+            </View>
+
+            <View style={styles.searchView0}>
+              <Icon name="ios-home-outline" size={30} color={"black"} />
+              <Text style={styles.text2}>{item.address}</Text>
             </View>
 
             <View>
@@ -144,3 +181,37 @@ export default class UniversityScreen extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  searchView1: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: "5%",
+    borderBottomWidth: 0.5,
+    height: 50
+  },
+  searchView0: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: "5%",
+    borderBottomWidth: 0.5,
+    height: 50
+  },
+  searchView2: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: "2%"
+  },
+  text: {
+    fontSize: 16,
+    color: "black"
+  },
+  text2: {
+    fontSize: 16,
+    color: "black",
+    marginLeft: 30
+  }
+});
