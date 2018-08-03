@@ -8,7 +8,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  ToastAndroid
+  Modal
 } from "react-native";
 import { Constants } from "expo";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -18,18 +18,12 @@ import ScrollableTabView, {
 
 export default class UniversityScreen extends React.Component {
   state = {
-    clicked: false,
-    showed: [
-      {
-        index: "",
-        clicked: false
-      }
-    ]
+    modalVisible: false
   };
 
-  showPoints = index => {
+  showPoints = () => {
     this.setState({
-      clicked: !this.state.clicked
+      modalVisible: !this.state.modalVisible
     });
   };
 
@@ -37,6 +31,7 @@ export default class UniversityScreen extends React.Component {
     const { navigation } = this.props;
     const item = navigation.getParam("item");
     const specialList = item.majorPoints;
+
     return (
       <View
         style={{
@@ -105,41 +100,31 @@ export default class UniversityScreen extends React.Component {
           <ScrollView tabLabel="Специальности">
             <FlatList
               data={specialList}
+              extraData={this.state.modalVisible}
               keyExtractor={(_, index) => index}
               numColumns={1}
-              renderItem={({ item }, index) => {
-                this.setState(
-                  {
-                    showed: [
-                      ...this.state.showed,
-                      {
-                        index: index,
-                        clicked: false
-                      }
-                    ]
-                  },
-                  () => {
-                    return (
-                      <View style={{ flex: 1 }}>
-                        <Text> {item.majorName}</Text>
-                        <Icon
-                          type="entypo"
-                          name="chevron-small-right"
-                          size={40}
-                          color="black"
-                          onPress={() => this.showPoints(index)}
-                        />
-                        {this.state.clicked && (
-                          <React.Fragment>
-                            <Text> kazPoint: {item.kazPoint}</Text>
-                            <Text> kazSelPoint :{item.kazSelPoint} </Text>
-                            <Text> rusPoint: {item.rusPoint}</Text>
-                            <Text> rusSelPoint: {item.rusSelPoint}</Text>
-                          </React.Fragment>
-                        )}
-                      </View>
-                    );
-                  }
+              renderItem={({ item }) => {
+                console.log(item);
+                return (
+                  <View style={{ flex: 1 }}>
+                    <Text> {item.majorName}</Text>
+                    <Icon
+                      name="ios-arrow-forward-outline"
+                      type="ionicon"
+                      size={26}
+                      color="black"
+                      onPress={() => this.showPoints()}
+                    />
+
+                    {this.state.modalVisible && (
+                      <React.Fragment>
+                        <Text> kazPoint: {item.kazPoint}</Text>
+                        <Text> kazSelPoint :{item.kazSelPoint} </Text>
+                        <Text> rusPoint: {item.rusPoint}</Text>
+                        <Text> rusSelPoint: {item.rusSelPoint}</Text>
+                      </React.Fragment>
+                    )}
+                  </View>
                 );
               }}
             />
@@ -171,8 +156,14 @@ export default class UniversityScreen extends React.Component {
             </View>
 
             <View>
-              <TouchableOpacity style={{ marginTop: "20%", marginLeft: "70%" }}>
-                <Icon name="ios-call-outline" size={60} color={"green"} />
+              <TouchableOpacity
+                style={{
+                  marginTop: 20,
+                  marginRight: 20,
+                  alignItems: "flex-end"
+                }}
+              >
+                <Icon name="ios-call-outline" size={50} color={"green"} />
               </TouchableOpacity>
             </View>
           </ScrollView>

@@ -5,7 +5,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   View,
-  Text
+  Text,
+  ScrollView
 } from "react-native";
 import FilterScreen from "../universities/FilterScreen";
 import { Constants } from "expo";
@@ -20,7 +21,7 @@ const DismissKeyBoard = ({ children }) => (
 
 export default class SearchScreen extends React.Component {
   state = {
-    inputValue: "",
+    inputValue: "104",
     universityData: global.data.allUniversities,
     checked: false,
     rusChecked: false,
@@ -48,7 +49,8 @@ export default class SearchScreen extends React.Component {
       )
       .filter(univer => univer !== false);
 
-    this.props.navigation.navigate("MainUniversities", {
+    this.props.navigation.navigate("MainUniversitiesEnter", {
+      universityData,
       navigation: this.props.navigation
     });
   };
@@ -65,76 +67,81 @@ export default class SearchScreen extends React.Component {
 
     return (
       <DismissKeyBoard>
-        <View style={{ flex: 1, backgroundColor: "#F94040" }}>
-          <View style={{ marginTop: "10%", alignItems: "center" }}>
-            <View
-              style={{
-                marginTop: "30%",
-                marginBottom: 50,
-                flexDirection: "row",
-                alignItems: "center",
-                backgroundColor: "#F94040"
-              }}
-            >
-              <TextInput
-                value={this.state.inputValue}
-                onChangeText={inputValue => this.setState({ inputValue })}
-                style={styles.inp}
-                keyboardType="numeric"
-              >
-                <Icon name="ios-home-outline" size={20} color="#FFF" /> {"   "}
-                <Text style={{ color: "#c4c4c4" }}>Балл ЕНТ</Text>
-              </TextInput>
-            </View>
-
-            <View>
-              <CheckBox
-                center
-                title="Сельская квота"
-                textStyle={{ color: "white" }}
-                checked={this.state.checked}
-                onPress={() => this.setState({ checked: !this.state.checked })}
-                containerStyle={{ backgroundColor: "#F94040", width: 200 }}
-                checkedColor={"white"}
-              />
-              <CheckBox
-                center
-                title="Руская Школа"
-                textStyle={{ color: "white" }}
-                checked={this.state.rusChecked}
-                onPress={() => this.onPressCheckboxes()}
-                containerStyle={{ backgroundColor: "#F94040", width: 200 }}
-                checkedColor={"white"}
-              />
-              <CheckBox
-                center
-                title="Казахская Школа"
-                textStyle={{ color: "white" }}
-                checked={this.state.kazChecked}
-                onPress={() => this.onPressCheckboxes()}
-                containerStyle={{ backgroundColor: "#F94040", width: 200 }}
-                checkedColor={"white"}
-              />
-            </View>
-          </View>
-          <View style={{ marginTop: "6%", height: "50%" }}>
-            <View
-              style={{ marginTop: "5%", alignItems: "center", height: "15%" }}
-            >
-              <Button
-                title="Найти"
-                onPress={() => this.saveFilteredUniversityData(navigation)}
-                buttonStyle={{
-                  backgroundColor: "#F94040",
-                  borderWidth: 1,
-                  borderColor: "white",
-                  borderRadius: 30,
-                  width: 150
+        <ScrollView style={{ backgroundColor: "#F94040" }}>
+          <View style={{ flex: 1 }}>
+            <View style={{ marginTop: "10%", alignItems: "center" }}>
+              <View
+                style={{
+                  marginTop: "30%",
+                  marginBottom: 50,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  backgroundColor: "#F94040"
                 }}
-              />
+              >
+                <TextInput
+                  value={this.state.inputValue}
+                  onChangeText={inputValue => this.setState({ inputValue })}
+                  style={styles.inp}
+                  keyboardType="numeric"
+                >
+                  <Icon name="ios-home-outline" size={20} color="#FFF" />{" "}
+                  {"   "}
+                  <Text style={{ color: "#c4c4c4" }}>Балл ЕНТ</Text>
+                </TextInput>
+              </View>
+
+              <View>
+                <CheckBox
+                  center
+                  title="Сельская квота"
+                  textStyle={{ color: "#F94040" }}
+                  checked={this.state.checked}
+                  onPress={() =>
+                    this.setState({ checked: !this.state.checked })
+                  }
+                  containerStyle={{ backgroundColor: "white", width: 200 }}
+                  checkedColor={"#F94040"}
+                />
+                <CheckBox
+                  center
+                  title="Руская Школа"
+                  textStyle={{ color: "#F94040" }}
+                  checked={this.state.rusChecked}
+                  onPress={() => this.onPressCheckboxes()}
+                  containerStyle={{ backgroundColor: "white", width: 200 }}
+                  checkedColor={"#F94040"}
+                />
+                <CheckBox
+                  center
+                  title="Казахская Школа"
+                  textStyle={{ color: "#F94040" }}
+                  checked={this.state.kazChecked}
+                  onPress={() => this.onPressCheckboxes()}
+                  containerStyle={{ backgroundColor: "white", width: 200 }}
+                  checkedColor={"#F94040"}
+                />
+              </View>
+            </View>
+            <View style={{ marginTop: "6%", height: "50%" }}>
+              <View
+                style={{ marginTop: "5%", alignItems: "center", height: "15%" }}
+              >
+                <Button
+                  title="Найти"
+                  onPress={() => this.saveFilteredUniversityData(navigation)}
+                  buttonStyle={{
+                    backgroundColor: "#F94040",
+                    borderWidth: 1,
+                    borderColor: "white",
+                    borderRadius: 30,
+                    width: 150
+                  }}
+                />
+              </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </DismissKeyBoard>
     );
   }

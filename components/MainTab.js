@@ -1,10 +1,12 @@
 import React from "react";
 import { createBottomTabNavigator } from "react-navigation";
 import { Ionicons } from "@expo/vector-icons";
-import HomeRoot from "./HomeRoot";
-import SearchRoot from "./search/SearchRoot";
-import FavouriteRoot from "./favourites/FavouriteRoot";
 import Constants from "expo";
+
+import HomeRoot from "./HomeRoot";
+import SearchRoot from "./SearchRoot";
+import FavouriteRoot from "./favourites/FavouriteRoot";
+import TestRoot from "./test/TestRoot";
 
 export default createBottomTabNavigator(
   {
@@ -31,13 +33,21 @@ export default createBottomTabNavigator(
           <Ionicons name="ios-star-outline" size={32} color={tintColor} />
         )
       }
+    },
+    Тесты: {
+      screen: TestRoot,
+      navigationOptions: {
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="ios-paper-outline" size={32} color={tintColor} />
+        )
+      }
     }
   },
   {
     tabBarPosition: "bottom",
     tabBarOptions: {
       style: {
-        paddingTop: 5,
+        paddingTop: 2,
         height: 50,
         backgroundColor: "#F94040"
       },

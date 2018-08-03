@@ -24,9 +24,8 @@ export default class HomeScrollTab extends Component {
         }}
       >
         <ScrollableTabView
-          tabBarActiveTextColor="white"
-          tabBarUnderlineStyle={{ backgroundColor: "white" }}
-          tabBarBackgroundColor={"#F94040"}
+          tabBarActiveTextColor="#b13638"
+          tabBarUnderlineStyle={{ backgroundColor: "#b13638" }}
           initialPage={1}
           renderTabBar={() => <DefaultTabBar />}
         >
@@ -46,7 +45,10 @@ export default class HomeScrollTab extends Component {
             style={{ flex: 1, backgroundColor: "white" }}
             tabLabel="Университеты"
           >
-            <MainUniversities navigation={this.props.navigation} />
+            <MainUniversities
+              universityData={global.data.allUniversities}
+              navigation={this.props.navigation}
+            />
           </View>
         </ScrollableTabView>
       </View>
