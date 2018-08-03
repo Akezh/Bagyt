@@ -18,26 +18,21 @@ export default class UniversityScreen extends React.Component {
 	};
 	setAsyncUniver = async currentUniversity => {
 		const { favouriteUnivers } = this.state;
-		console.log(favouriteUnivers)
+		console.log(favouriteUnivers);
 		const newFavouriteUniversIds = favouriteUnivers.includes(currentUniversity.id)
-			? favouriteUnivers.filter(univer => 
-			univer!==currentUniversity.id
-			)
+			? favouriteUnivers.filter(univer => univer !== currentUniversity.id)
 			: [...favouriteUnivers, currentUniversity.id];
 
 		try {
-			
-			// 
-			this.setState({ favouriteUnivers: newFavouriteUniversIds },
-			()=>{
-                AsyncStorage.setItem('favouriteUnivers', JSON.stringify(newFavouriteUniversIds));
-			}
-			);
+			//
+			this.setState({ favouriteUnivers: newFavouriteUniversIds }, () => {
+				AsyncStorage.setItem('favouriteUnivers', JSON.stringify(newFavouriteUniversIds));
+			});
 		} catch (error) {
 			console.log('error', error);
 		}
 
-		console.log(newFavouriteUniversIds)
+		console.log(newFavouriteUniversIds);
 	};
 
 	retrieveData = async () => {
@@ -61,7 +56,7 @@ export default class UniversityScreen extends React.Component {
 	componentDidMount() {
 		this.retrieveData();
 	}
-	
+
 	renderItem = ({ item }) => {
 		return (
 			<TouchableOpacity style={styles.touch} onPress={() => this.props.navigateDetailUnversity(item)}>
@@ -133,11 +128,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 0.5,
 		borderBottomColor: 'grey',
 	},
-	text1: { fontSize: 20, fontWeight: 'bold', color: 'white' },
 	searchView1: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
 		paddingHorizontal: 15,
 	},
 	searchView2: {

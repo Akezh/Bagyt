@@ -7,26 +7,38 @@ import { Button } from 'react-native-elements';
 import ListUniversities from '../universities/ListUniversities';
 
 export default class FavouriteList extends React.Component {
+	state = {
+		favouriteUnivers: [],
+	};
 
-   try {
-    const favouriteUnivers = await AsyncStorage.getItem('favouriteUnivers');
-    if (favouriteUnivers !== null) {
-      this.setState(
-        {
-          favouriteUnivers: JSON.parse(favouriteUnivers),
-        },
-        () => {
-          console.log(favouriteUnivers);
-        }
-      );
-    }
-  } catch (error) {
-    // Error retrieving data
-  }
+	navigateDetailUnversity = item => {
+		this.props.navigation.navigate('DetailUniversities', {
+			item: item,
+		});
+	};
+
+	componentDidMount() {
+		try {
+			const favouriteUnivers = AsyncStorage.getItem('favouriteUnivers');
+			if (favouriteUnivers !== null) {
+				this.setState(
+					{
+						favouriteUnivers: JSON.parse(favouriteUnivers),
+					},
+					() => {
+						console.log(favouriteUnivers);
+					}
+				);
+			}
+		} catch (error) {
+			// Error retrieving data
+		}
+	}
+
 	render() {
 		return;
 		<ListUniversities
-			universityData={universityData}
+			universityData={this.state.universityData}
 			navigateDetailUnversity={item => this.navigateDetailUnversity(item)}
 		/>;
 	}

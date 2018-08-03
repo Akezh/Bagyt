@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
-import MainUniversities from '../universities/MainUniversities';
+import DetailUniversities from '../universities/DetailUniversities';
 import FavouriteList from './FavouriteList';
 
 export default createStackNavigator(
