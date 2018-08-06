@@ -1,79 +1,166 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import {
-	StyleSheet,
-	TextInput,
-	Alert,
-	FlatList,
-	Image,
-	TouchableOpacity,
-	ToastAndroid,
-	TouchableWithoutFeedback,
-	Keyboard,
-} from 'react-native';
+import { StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard, View, Text, ScrollView } from 'react-native';
+import FilterScreen from '../universities/FilterScreen';
 import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Button } from 'react-native-elements';
-import FilterScreen from '../universities/FilterScreen';
+import { CheckBox, Button } from 'react-native-elements';
 
 const DismissKeyBoard = ({ children }) => (
 	<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>{children}</TouchableWithoutFeedback>
 );
 
 export default class SearchScreen extends React.Component {
+	static navigationOptions = {
+		header: null,
+	};
+
 	state = {
 		inputValue: '',
 		universityData: global.data.allUniversities,
+		checked: false,
+		rusChecked: false,
+		kazChecked: true,
+		buttonBack: '#FFFF',
+		disabled: true,
 	};
 
-	saveFilteredUniversityData = university => {
+	onChange = inputValue => {
 		this.setState({
-			universityData: university,
+			inputValue,
 		});
-		//	this.props.navigation.navigate('Specialists');
+
+		if (parseInt(this.state.inputValue) > 0 && parseInt(this.state.inputValue) < 141) {
+			this.setState({
+				buttonBack: '#F94040',
+				disabled: false,
+			});
+		}
+	};
+
+	saveFilteredUniversityData = navigation => {
+		const inputValue = parseInt(this.state.inputValue);
+		let { universityData } = this.state;
+		universityData = universityData
+			.map(
+				univer1 =>
+					univer1.majorPoints
+						.map(
+							univer =>
+								this.state.checked
+									? this.state.kazChecked
+										? univer.kazSelPoint === inputValue
+										: univer.rusSelPoint === inputValue
+									: this.state.kazChecked
+										? univer.kazPoint === inputValue
+										: univer.rusPoint === inputValue
+						)
+						.includes(true) && univer1
+			)
+			.filter(univer => univer !== false);
+
+		this.props.navigation.navigate('MainUniversitiesEnter', {
+			universityData,
+			navigation: this.props.navigation,
+		});
+	};
+
+	onPressCheckboxes = () => {
+		this.setState({
+			rusChecked: !this.state.rusChecked,
+			kazChecked: !this.state.kazChecked,
+		});
 	};
 
 	render() {
-		return (
-			<View style={{ flex: 1 }}>
-				<View style={{ marginTop: '50%', alignItems: 'center' }}>
-					<DismissKeyBoard>
-						<View style={{ marginTop: '10%', marginLeft: '5%' }}>
-							<Text style={{ fontSize: 24, color: '#148EFE' }}>Балл:</Text>
+		const { navigation } = this.props;
 
-							<TextInput
-								value={this.state.inputValue}
-								onChangeText={this.handleTextChange}
-								style={styles.inp}
-								keyboardType="numeric"
-								placeholder="Введите балл ЕНТ"
-							/>
+		return (
+			<DismissKeyBoard>
+				<ScrollView style={{ backgroundColor: '#F94040' }}>
+					<View style={{ flex: 1 }}>
+						<View style={{ marginTop: '10%', alignItems: 'center' }}>
+							<View
+								style={{
+									marginTop: '30%',
+									marginBottom: 50,
+									flexDirection: 'row',
+									alignItems: 'center',
+									backgroundColor: '#F94040',
+								}}
+							>
+								<Icon name="ios-home-outline" size={20} color="#FFF" />
+								<TextInput
+									value={this.state.inputValue}
+									onChangeText={inputValue => this.onChange(inputValue)}
+									style={styles.inp}
+									keyboardType="numeric"
+									title={'Балл ЕНТ'}
+								/>
+							</View>
+
+							<View>
+								<CheckBox
+									center
+									title="Сельская квота"
+									textStyle={{ color: '#F94040' }}
+									checked={this.state.checked}
+									onPress={() => this.setState({ checked: !this.state.checked })}
+									containerStyle={{ backgroundColor: 'white', width: 200 }}
+									checkedColor={'#F94040'}
+								/>
+								<CheckBox
+									center
+									title="Руская Школа"
+									textStyle={{ color: '#F94040' }}
+									checked={this.state.rusChecked}
+									onPress={() => this.onPressCheckboxes()}
+									containerStyle={{ backgroundColor: 'white', width: 200 }}
+									checkedColor={'#F94040'}
+								/>
+								<CheckBox
+									center
+									title="Казахская Школа"
+									textStyle={{ color: '#F94040' }}
+									checked={this.state.kazChecked}
+									onPress={() => this.onPressCheckboxes()}
+									containerStyle={{ backgroundColor: 'white', width: 200 }}
+									checkedColor={'#F94040'}
+								/>
+							</View>
 						</View>
-					</DismissKeyBoard>
-				</View>
-				<View style={{ marginTop: '6%', height: '50%' }}>
-					<FilterScreen
-						universityData={this.state.universityData}
-						saveFilteredUniversityData={university => this.saveFilteredUniversityData(university)}
-						nameButton={'Поиск'}
-					/>
-					<View style={{ marginTop: '5%', alignItems: 'center', height: '15%' }}>
-						<Button style={{ fontSize: 30 }} title="Найти" />
+						<View style={{ marginTop: '6%', height: '50%' }}>
+							<View style={{ marginTop: '5%', alignItems: 'center', height: '15%' }}>
+								<Button
+									title="Найти"
+									onPress={() => this.saveFilteredUniversityData(navigation)}
+									disabled={this.state.disabled}
+									buttonStyle={{
+										backgroundColor: this.state.buttonBack,
+										borderWidth: 1,
+										borderColor: 'white',
+										borderRadius: 30,
+										width: 150,
+									}}
+								/>
+							</View>
+						</View>
 					</View>
-				</View>
-			</View>
+				</ScrollView>
+			</DismissKeyBoard>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
 	inp: {
-		width: 170,
+		width: 200,
 		height: 50,
-		marginRight: 10,
+		borderBottomWidth: 1.5,
 		fontSize: 18,
-		borderBottomWidth: 2,
-		borderBottomColor: '#148EFE',
+		borderBottomColor: 'white',
+		backgroundColor: '#F94040',
+		color: '#FFFF',
+		paddingLeft: 20,
 	},
 	opacity1: {
 		marginTop: '2%',

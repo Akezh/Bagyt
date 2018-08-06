@@ -1,27 +1,55 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Button, View, Text } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
+import { StyleSheet, TextInput, Alert, FlatList, Image, TouchableOpacity, ToastAndroid } from 'react-native';
+import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ListUniversities from './ListUniversities';
+import { ModeProvider, ModeContext } from '../DataSave';
 
 export default class MainUniversities extends React.Component {
+	state = {
+		universityData: this.props.universityData,
+	};
+	saveFilteredUniversityData = university => {
+		this.setState({
+			universityData: university,
+		});
+		this.props.navigation.navigate('Specialists');
+	};
+
 	render() {
-		const universityData = this.props.universityData;
+		const { universityData } = this.state;
+		const { navigation } = this.props;
 		return (
 			<View style={styles.container}>
-				<TouchableOpacity style={styles.opacity} onPress={() => this.props.toFilterScreen()}>
+				<TouchableOpacity
+					style={styles.opacity}
+					onPress={() =>
+						navigation.navigate('FilterScreen', {
+							universityData,
+							saveFilteredUniversityData: university => this.saveFilteredUniversityData(university),
+							nameButton: 'Сохранить',
+						})
+					}
+				>
 					<View style={styles.searchView1}>
 						<View style={styles.searchView2}>
-							<Icon name="ios-menu-outline" size={30} color={'#148EFE'} />
+							<Icon name="ios-menu-outline" size={30} color={'#b13638'} />
 							<Text style={styles.text}>Все категории</Text>
 						</View>
-						<Icon name="ios-arrow-forward-outline" size={26} color={'#148EFE'} />
+						<Icon name="ios-arrow-forward-outline" size={26} color={'#b13638'} />
 					</View>
 				</TouchableOpacity>
 
 				<ListUniversities
 					universityData={universityData}
-					navigateToDetails={item => this.props.navigateToDetails(item)}
+					navigateDetailUnversity={item =>
+						navigation.navigate('DetailUniversities', {
+							item: item,
+						})
+					}
+					retrieveData={() => console.log('ok')}
 				/>
 			</View>
 		);
@@ -39,7 +67,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 0.5,
 		borderBottomColor: 'grey',
 	},
-	text: { marginLeft: 18, fontSize: 24, color: '#148EFE' },
+	text: { marginLeft: 18, fontSize: 18, color: '#b13638' },
 	searchView1: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',

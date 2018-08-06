@@ -7,7 +7,6 @@ class DetailSpecialists extends Component {
 	static navigationOptions = {
 		title: 'Специальность',
 	};
-
 	name = this.props.navigation.getParam('specialist').name;
 
 	state = {
@@ -16,27 +15,61 @@ class DetailSpecialists extends Component {
 			.filter(univer => univer !== false),
 	};
 
-	navigateToDetails = item => {
+	navigateDetailUnversity = item => {
 		this.props.navigation.navigate('DetailUniversities', {
 			item: item,
 		});
 	};
-
 	render() {
 		const specialist = this.props.navigation.getParam('specialist');
 		const logo = this.props.navigation.getParam('logo');
 
 		return (
-			<ScrollView>
-				<Image source={logo} />
-				<Text>{specialist.name} </Text>
-				<Text>{specialist.description} </Text>
+			<ScrollView style={{ backgroundColor: 'white' }}>
+				<View
+					style={{
+						alignItems: 'center',
+						width: '90%',
+						marginHorizontal: '5%',
+						marginTop: 25,
+					}}
+				>
+					<Text style={{ fontSize: 22, fontWeight: 'bold', alignItems: 'center' }}>{specialist.name}</Text>
+				</View>
 
-				<Text> Universities </Text>
+				<ScrollView
+					style={{
+						marginTop: '5%',
+						width: '90%',
+						marginHorizontal: '5%',
+						marginBottom: '5%',
+					}}
+				>
+					<Text>{specialist.description} </Text>
+				</ScrollView>
+
+				<View
+					style={{
+						backgroundColor: '#848587',
+						height: 25,
+						justifyContent: 'center',
+					}}
+				>
+					<Text
+						style={{
+							marginLeft: '5%',
+							fontSize: 18,
+							color: 'white',
+						}}
+					>
+						Университеты
+					</Text>
+				</View>
 
 				<ListUniversities
 					universityData={this.state.universityData}
-					navigateToDetails={item => this.navigateToDetails(item)}
+					navigateDetailUnversity={item => this.navigateDetailUnversity(item)}
+					retrieveData={() => console.log('ok')}
 				/>
 			</ScrollView>
 		);

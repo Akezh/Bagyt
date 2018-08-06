@@ -1,64 +1,83 @@
 import React from 'react';
-import { Image, View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Image, View, Text, StyleSheet, FlatList, TouchableOpacity, AsyncStorage } from 'react-native';
 
-import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import ItemUniversity from './ItemUniversity';
+import FavouriteProvider, { ModeContext } from '../favourites/FavouriteList';
 
 export default class UniversityScreen extends React.Component {
 	static navigationOptions = {
 		title: 'Университет',
 	};
 
+	state = {
+		favouriteUnivers: [],
+		isTrue: true,
+	};
+
 	renderSeparator = () => {
 		return <View style={{ width: '100%', marginLeft: '27%' }} />;
 	};
 
-	renderItem = ({ item }) => {
-		return (
-			<TouchableOpacity style={styles.touch} onPress={item => this.props.navigateToDetails(item)}>
-				<View style={styles.container}>
-					<View style={styles.background} />
-					<Image
-						style={styles.image}
-						source={{
-							uri: 'https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg',
-						}}
-					/>
-					<View style={styles.textContainer}>
-						<View style={styles.titleContainer}>
-							<View style={{ flex: 1, flexDirection: 'row' }}>
-								<View style={{ flex: 5 }}>
-									<Text numberOfLines={2} style={styles.text2}>
-										<Icon name="ios-pin-outline" size={25} color={'white'} />
-										{item.city}
-									</Text>
-								</View>
-								<View style={{ flex: 5, alignItems: 'flex-end' }}>
-									<Icon name="md-heart-outline" size={40} color={'white'} />
-								</View>
-							</View>
-						</View>
-						<View style={styles.synopsisContainer}>
-							<Text numberOfLines={2} style={styles.text2}>
-								{item.name}
-							</Text>
-						</View>
-					</View>
-				</View>
-			</TouchableOpacity>
-		);
+	setAsyncUniver = async (currentUniversity, retrieveData) => {
+		const { favouriteUnivers } = this.state;
+
+		const newFavouriteUniversIds = favouriteUnivers.includes(currentUniversity.id)
+			? favouriteUnivers.filter(univer => univer !== currentUniversity.id)
+			: [...favouriteUnivers, currentUniversity.id];
+
+		try {
+			retrieveData();
+			this.setState({ favouriteUnivers: newFavouriteUniversIds }, () => {
+				AsyncStorage.setItem('favouriteUnivers', JSON.stringify(newFavouriteUniversIds));
+			});
+		} catch (error) {
+			console.log('error', error);
+		}
 	};
 
+	retrieveData = async () => {
+		try {
+			const favouriteUnivers = await AsyncStorage.getItem('favouriteUnivers');
+			if (favouriteUnivers !== null) {
+				this.setState(
+					{
+						favouriteUnivers: JSON.parse(favouriteUnivers),
+					},
+					() => {
+						console.log(favouriteUnivers);
+					}
+				);
+			}
+		} catch (error) {
+			console.log('Error retrieving data', error);
+		}
+		this.props.setTimer();
+	};
+	componentDidMount() {
+		this.retrieveData();
+	}
 	render() {
-		const universityData = this.props.universityData;
+		const { universityData } = this.props;
+
 		return (
 			<View style={{ flex: 1, backgroundColor: 'white' }}>
 				<FlatList
 					data={universityData}
+					extraData={[this.state.favouriteUnivers]}
 					keyExtractor={(_, index) => index}
 					ItemSeparatorComponent={this.renderSeparator}
-					renderItem={this.renderItem}
+					renderItem={({ item }) => {
+						return (
+							<ItemUniversity
+								item={item}
+								setAsyncUniver={item => this.setAsyncUniver(item, this.props.retrieveData)}
+								favouriteUnivers={this.state.favouriteUnivers}
+								navigateDetailUnversity={this.props.navigateDetailUnversity}
+							/>
+						);
+					}}
+				/>
 				/>
 			</View>
 		);
@@ -78,11 +97,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 0.5,
 		borderBottomColor: 'grey',
 	},
-	text: { marginLeft: 18, fontSize: 24, color: '#148EFE' },
 	searchView1: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
 		paddingHorizontal: 15,
 	},
 	searchView2: {
@@ -114,8 +129,7 @@ const styles = StyleSheet.create({
 	},
 	text2: {
 		color: 'white',
-		fontWeight: 'bold',
-		fontSize: 18,
+		fontSize: 16,
 	},
 	titleContainer: {
 		flex: 3,

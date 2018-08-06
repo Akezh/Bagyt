@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Platform, Dimensions } from 'react-native';
+import { View, Platform, Dimensions, Text } from 'react-native';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import Constants from 'expo';
 
 import MainSpecialists from './specialists/MainSpecialists';
 import MainUniversities from './universities/MainUniversities';
@@ -12,29 +13,17 @@ export default class HomeScrollTab extends Component {
 		header: null,
 	};
 
-	state = {
-		universityData: global.data.allUniversities,
-	};
-
-	saveFilteredUniversityData = university => {
-		this.setState({
-			universityData: university,
-		});
-		this.props.navigation.navigate('Specialists');
-	};
-
-	navigateToDetails = item => {
-		this.props.navigation.navigate('DetailUniversities', {
-			item: item,
-		});
-	};
-
 	render() {
 		return (
-			<View style={{ flex: 1, marginTop: Platform.OS === 'ios' ? (height === 812 ? 44 : 20) : 0 }}>
+			<View
+				style={{
+					flex: 1,
+					marginTop: Platform.OS === 'ios' ? (height === 812 ? 44 : 20) : 0,
+				}}
+			>
 				<ScrollableTabView
-					tabBarActiveTextColor="#148EFE"
-					tabBarUnderlineStyle={{ backgroundColor: '#148EFE' }}
+					tabBarActiveTextColor="#b13638"
+					tabBarUnderlineStyle={{ backgroundColor: '#b13638' }}
 					initialPage={1}
 					renderTabBar={() => <DefaultTabBar />}
 				>
@@ -49,16 +38,8 @@ export default class HomeScrollTab extends Component {
 					</View>
 					<View style={{ flex: 1, backgroundColor: 'white' }} tabLabel="Университеты">
 						<MainUniversities
-							toFilterScreen={() =>
-								this.props.navigation.navigate('FilterScreen', {
-									universityData: this.state.universityData,
-									saveFilteredUniversityData: university =>
-										this.saveFilteredUniversityData(university),
-									nameButton: 'Сохранить',
-								})
-							}
-							universityData={this.state.universityData}
-							navigateToDetails={item => this.navigateToDetails(item)}
+							universityData={global.data.allUniversities}
+							navigation={this.props.navigation}
 						/>
 					</View>
 				</ScrollableTabView>
