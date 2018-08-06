@@ -21,7 +21,7 @@ export default class NavigatorClass extends React.Component {
 	setTimer = () => {
 		this.timeoutHandle = setTimeout(() => {
 			this.setState({ screen: AsyncStorage.getItem('IntroOpened') ? 'MainTab' : 'IntroScreen' });
-		}, 1000);
+		}, 5000);
 	};
 
 	changeScreen = screen => {

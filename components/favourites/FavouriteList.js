@@ -30,19 +30,13 @@ export default class FavouriteList extends React.Component {
 					parsedIds.map(storageId => storageId === univer.id && univer)
 				);
 				favouriteUnivers = _.flatten(favouriteUnivers).filter(univer => univer !== false);
-				this.setState(
-					{
-						favouriteUnivers: favouriteUnivers,
-					},
-					() => {
-						console.log(favouriteUnivers);
-					}
-				);
+				this.setState({
+					favouriteUnivers: favouriteUnivers,
+				});
 			}
 		} catch (error) {
 			console.log('Error retrieving data', error);
 		}
-		console.log('I`m in Favouritess');
 	};
 	componentDidMount() {
 		this.retrieveData();
