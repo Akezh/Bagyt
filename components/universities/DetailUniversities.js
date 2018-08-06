@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, View, Text, ScrollView } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import { StyleSheet, TextInput, Alert, FlatList, Image, TouchableOpacity } from 'react-native';
-import { Constants } from 'expo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import ShowPointsItem from './ShowPointsItem.js';
@@ -62,7 +61,7 @@ export default class UniversityScreen extends React.Component {
 							<Text style={styles.text}> 16,000</Text>
 						</View>
 
-						<View style={styles.searchView0}>
+						{/* <View style={styles.searchView0}>
 							<View style={styles.searchView2}>
 								<Text style={styles.text}>Характеристика</Text>
 							</View>
@@ -74,7 +73,7 @@ export default class UniversityScreen extends React.Component {
 								<Text style={styles.text}>Характеристика</Text>
 							</View>
 							<Text style={styles.text}>830</Text>
-						</View>
+						</View> */}
 
 						<View
 							style={{

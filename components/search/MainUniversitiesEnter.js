@@ -17,10 +17,19 @@ export default class MainUniversitiesEnter extends React.Component {
 					marginBottom: 5,
 					marginTop: 5,
 				}}
+				onPress={() =>
+					this.props.navigation.navigate('DetailUniversities', {
+						item: item,
+					})
+				}
 			>
 				<Image
 					style={{ width: 100, height: 70, borderRadius: 10 }}
-					source={{ uri: 'https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg' }}
+					source={{
+						uri: item.photo
+							? item.photo
+							: 'https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg',
+					}}
 				/>
 
 				<View style={{ flex: 1, justifyContent: 'center' }}>
