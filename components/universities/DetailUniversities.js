@@ -9,7 +9,6 @@ import {
   Image,
   TouchableOpacity
 } from "react-native";
-import { Constants } from "expo";
 import Icon from "react-native-vector-icons/Ionicons";
 import ScrollableTabView, {
   DefaultTabBar
@@ -49,11 +48,12 @@ export default class UniversityScreen extends React.Component {
             height: 150
           }}
           source={{
-            uri:
-              "https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg"
+            uri: item.photo
+              ? item.photo
+              : "http://www.turan-edu.kz/wp-content/uploads/2017/06/94191.jpg"
           }}
         />
-        <Text style={{ fontSize: 22, marginTop: "2%", marginHorizontal: "2%" }}>
+        <Text style={{ fontSize: 19, marginTop: "2%", marginHorizontal: "2%" }}>
           {item.name}
         </Text>
         <ScrollableTabView
@@ -63,6 +63,7 @@ export default class UniversityScreen extends React.Component {
           style={{
             marginTop: "3%"
           }}
+          tabBarTextStyle={{ fontSize: 13 }}
           initialPage={1}
           renderTabBar={() => <DefaultTabBar />}
         >
@@ -74,19 +75,19 @@ export default class UniversityScreen extends React.Component {
               <Text style={styles.text}> 16,000</Text>
             </View>
 
-            <View style={styles.searchView0}>
-              <View style={styles.searchView2}>
-                <Text style={styles.text}>Характеристика</Text>
-              </View>
-              <Text style={styles.text}>959</Text>
-            </View>
+            {/* <View style={styles.searchView0}>
+							<View style={styles.searchView2}>
+								<Text style={styles.text}>Характеристика</Text>
+							</View>
+							<Text style={styles.text}>959</Text>
+						</View>
 
-            <View style={styles.searchView1}>
-              <View style={styles.searchView2}>
-                <Text style={styles.text}>Характеристика</Text>
-              </View>
-              <Text style={styles.text}>830</Text>
-            </View>
+						<View style={styles.searchView1}>
+							<View style={styles.searchView2}>
+								<Text style={styles.text}>Характеристика</Text>
+							</View>
+							<Text style={styles.text}>830</Text>
+						</View> */}
 
             <View
               style={{
@@ -101,7 +102,7 @@ export default class UniversityScreen extends React.Component {
             </View>
           </ScrollView>
 
-          <ScrollView tabLabel="Специальности">
+          <ScrollView tabLabel="Специальности" style={{ fontSize: 30 }}>
             <FlatList
               data={specialList}
               extraData={this.state.modalVisible}
@@ -112,35 +113,42 @@ export default class UniversityScreen extends React.Component {
           </ScrollView>
 
           <ScrollView tabLabel="Контакты">
-            <View style={styles.searchView1}>
-              <Icon
-                name="ios-information-circle-outline"
-                size={30}
-                color={"black"}
-              />
-              <Text style={styles.text2}>{item.webSite}</Text>
-            </View>
+            {item.webSite && (
+              <View style={styles.searchView1}>
+                <Icon
+                  name="ios-information-circle-outline"
+                  size={30}
+                  color={"black"}
+                />
+                <Text style={styles.text2}>{item.webSite}</Text>
+              </View>
+            )}
 
-            <View style={styles.searchView0}>
-              <Icon name="ios-call-outline" size={30} color={"black"} />
-              <Text style={styles.text2}> {item.phone}</Text>
-            </View>
+            {item.phone && (
+              <View style={styles.searchView0}>
+                <Icon name="ios-call-outline" size={30} color={"black"} />
+                <Text style={styles.text2}> {item.phone}</Text>
+              </View>
+            )}
 
-            <View style={styles.searchView1}>
-              <Icon name="ios-mail-open-outline" size={30} color={"black"} />
-              <Text style={styles.text2}> {item.email}</Text>
-            </View>
+            {item.email && (
+              <View style={styles.searchView1}>
+                <Icon name="ios-mail-open-outline" size={30} color={"black"} />
+                <Text style={styles.text2}> {item.email}</Text>
+              </View>
+            )}
+            {item.address && (
+              <View style={styles.searchView0}>
+                <Icon name="ios-home-outline" size={30} color={"black"} />
+                <Text style={styles.text2}>{item.address}</Text>
+              </View>
+            )}
 
-            <View style={styles.searchView0}>
-              <Icon name="ios-home-outline" size={30} color={"black"} />
-              <Text style={styles.text2}>{item.address}</Text>
-            </View>
-
-            <View>
-              <TouchableOpacity style={{ marginTop: "20%", marginLeft: "70%" }}>
-                <Icon name="ios-call-outline" size={60} color={"green"} />
-              </TouchableOpacity>
-            </View>
+            {/*<View>
+							<TouchableOpacity style={{ marginTop: '20%', marginLeft: '70%' }}>
+								<Icon name="ios-call-outline" size={60} color={'green'} />
+							</TouchableOpacity>
+						</View>*/}
           </ScrollView>
         </ScrollableTabView>;
       </View>

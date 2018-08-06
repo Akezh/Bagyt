@@ -1,24 +1,20 @@
 import React from "react";
-import { Button, View, Text } from "react-native";
-import { createStackNavigator } from "react-navigation";
-import {
-  StyleSheet,
-  TextInput,
-  Alert,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  ToastAndroid
-} from "react-native";
+import { View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Constants } from "expo";
+import SearchInput, { createFilter } from "react-native-search-filter";
 import Icon from "react-native-vector-icons/Ionicons";
 import ListUniversities from "./ListUniversities";
-import { ModeProvider, ModeContext } from "../DataSave";
 
 export default class MainUniversities extends React.Component {
   state = {
-    universityData: this.props.universityData
+    universityData: this.props.universityData,
+    searchTerm: ""
   };
+
+  searchUpdated(term) {
+    this.setState({ searchTerm: term });
+  }
   saveFilteredUniversityData = university => {
     this.setState({
       universityData: university
@@ -28,35 +24,46 @@ export default class MainUniversities extends React.Component {
 
   render() {
     const { universityData } = this.state;
+    const filteredEmails = universityData.filter(
+      createFilter(this.state.searchTerm, "name")
+    );
     const { navigation } = this.props;
+
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.opacity}
-          onPress={() =>
-            navigation.navigate("FilterScreen", {
-              universityData,
-              saveFilteredUniversityData: university =>
-                this.saveFilteredUniversityData(university),
-              nameButton: "Сохранить"
-            })
-          }
-        >
-          <View style={styles.searchView1}>
-            <View style={styles.searchView2}>
-              <Icon name="ios-menu-outline" size={30} color={"#b13638"} />
-              <Text style={styles.text}>Все категории</Text>
-            </View>
+        <View style={styles.header}>
+          <View style={styles.searchView}>
             <Icon
-              name="ios-arrow-forward-outline"
-              size={26}
-              color={"#b13638"}
+              name="ios-search"
+              style={{ margin: 5 }}
+              size={15}
+              color={"grey"}
+            />
+            <SearchInput
+              onChangeText={term => {
+                this.searchUpdated(term);
+              }}
+              inputViewStyles={styles.searchItem}
+              placeholder="Найти"
             />
           </View>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("FilterScreen", {
+                universityData,
+                saveFilteredUniversityData: university =>
+                  this.saveFilteredUniversityData(university),
+                nameButton: "Сохранить"
+              })
+            }
+            style={{ justifyContent: "flex-end" }}
+          >
+            <Icon name="ios-funnel" size={26} color={"#b13638"} />
+          </TouchableOpacity>
+        </View>
 
         <ListUniversities
-          universityData={universityData}
+          universityData={filteredEmails}
           navigateDetailUnversity={item =>
             navigation.navigate("DetailUniversities", {
               item: item
@@ -74,23 +81,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white"
   },
-  opacity: {
-    height: "8%",
-    justifyContent: "center",
+  searchItem: {
+    width: "85%"
+  },
+  text: {
+    marginLeft: 18,
+    fontSize: 18,
+    color: "#b13638"
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 5,
+    width: "100%"
+  },
+  searchView: {
+    flexDirection: "row",
+    padding: 5,
+    alignItems: "center",
+
     borderBottomWidth: 0.5,
     borderBottomColor: "grey"
-  },
-  text: { marginLeft: 18, fontSize: 18, color: "#b13638" },
-  searchView1: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 15
-  },
-  searchView2: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
   },
   filterText: {
     fontSize: 24,
@@ -103,9 +114,7 @@ const styles = StyleSheet.create({
   },
   filterView: {
     width: "100%",
-    height: "8%",
-    borderBottomWidth: 0.5,
-    borderBottomColor: "grey"
+    height: "8%"
   },
   image: {
     width: "100%",

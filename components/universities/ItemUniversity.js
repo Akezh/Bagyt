@@ -16,15 +16,15 @@ export default class UniversityScreen extends React.Component {
 						source={{
 							uri: item.photo
 								? item.photo
-								: 'https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg',
+								: 'http://www.turan-edu.kz/wp-content/uploads/2017/06/94191.jpg',
 						}}
 					/>
 					<View style={styles.textContainer}>
 						<View style={styles.titleContainer}>
 							<View style={{ flex: 1, flexDirection: 'row' }}>
-								<View style={{ flex: 5 }}>
+								<View style={{ flex: 5, flexDirection: 'row', padding: 5 }}>
+									<Icon name="ios-pin-outline" size={25} color={'white'} />
 									<Text numberOfLines={2} style={styles.text1}>
-										<Icon name="ios-pin-outline" size={25} color={'white'} />
 										{item.city}
 									</Text>
 								</View>
@@ -97,6 +97,13 @@ const styles = StyleSheet.create({
 	text2: {
 		color: 'white',
 		fontSize: 16,
+		fontWeight: 'bold',
+	},
+	text1: {
+		color: 'white',
+		fontSize: 13,
+		margin: 5,
+		fontWeight: 'bold',
 	},
 	titleContainer: {
 		flex: 3,
