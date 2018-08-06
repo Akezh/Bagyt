@@ -31,7 +31,7 @@ export default class MainUniversities extends React.Component {
 			<View style={styles.container}>
 				<View style={styles.header}>
 					<View style={styles.searchView}>
-						<Icon name="ios-search" style={{ margin: 20 }} size={15} color={'grey'} />
+						<Icon name="ios-search" style={{ margin: 5 }} size={15} color={'grey'} />
 						<SearchInput
 							onChangeText={term => {
 								this.searchUpdated(term);
@@ -39,7 +39,6 @@ export default class MainUniversities extends React.Component {
 							inputViewStyles={styles.searchItem}
 							placeholder="Найти"
 						/>
-						<Icon name="ios-funnel" size={26} color={'#b13638'} />
 					</View>
 					<TouchableOpacity
 						onPress={() =>
@@ -50,7 +49,9 @@ export default class MainUniversities extends React.Component {
 							})
 						}
 						style={{ justifyContent: 'flex-end' }}
-					/>
+					>
+						<Icon name="ios-funnel" size={26} color={'#b13638'} />
+					</TouchableOpacity>
 				</View>
 
 				<ListUniversities
@@ -73,8 +74,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 	},
 	searchItem: {
-		flex: 8,
-		height: 30,
+		width: '85%',
 	},
 	text: {
 		marginLeft: 18,
@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
 	header: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		paddingHorizontal: 15,
+		paddingHorizontal: 5,
+		width: '100%',
 	},
 	searchView: {
 		flexDirection: 'row',

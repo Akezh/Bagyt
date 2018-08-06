@@ -26,9 +26,7 @@ export default class MainUniversitiesEnter extends React.Component {
 				<Image
 					style={{ width: 100, height: 70, borderRadius: 10 }}
 					source={{
-						uri: item.photo
-							? item.photo
-							: 'https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg',
+						uri: item.photo ? item.photo : 'http://www.turan-edu.kz/wp-content/uploads/2017/06/94191.jpg',
 					}}
 				/>
 

@@ -37,6 +37,7 @@
     "react-native-search-filter": "^0.1.4",
     "react-native-swipeable-view-stack": "^1.0.4",
     "react-native-swiper": "^1.5.13",
+    "react-native-table-component": "^1.1.8",
     "react-navigation": "^2.9.0"
   }
 }
