@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Platform, Dimensions } from "react-native";
+import { View, Platform, Dimensions, Text } from "react-native";
 import ScrollableTabView, {
   DefaultTabBar
 } from "react-native-scrollable-tab-view";

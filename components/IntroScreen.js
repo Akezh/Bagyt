@@ -5,43 +5,26 @@ import {
   View,
   StyleSheet,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from "react-native";
 import { Constants } from "expo";
 import Swiper from "react-native-swiper";
 
 export default class IntroScreen extends React.Component {
+  componentDidMount() {
+    try {
+      AsyncStorage.setItem("IntroOpened", true);
+    } catch (error) {
+      console.log("Error retrieving data", error);
+    }
+  }
+
   render() {
     return (
       <Swiper
-        dot={
-          <View
-            style={{
-              backgroundColor: "rgba(0,0,0,.2)",
-              width: 8,
-              height: 8,
-              borderRadius: 4,
-              marginLeft: 3,
-              marginRight: 3,
-              marginTop: 3,
-              marginBottom: 3
-            }}
-          />
-        }
-        activeDot={
-          <View
-            style={{
-              backgroundColor: "#F94040",
-              width: 8,
-              height: 8,
-              borderRadius: 4,
-              marginLeft: 3,
-              marginRight: 3,
-              marginTop: 3,
-              marginBottom: 3
-            }}
-          />
-        }
+        dot={<View style={styles.dot} />}
+        activeDot={<View style={styles.activeDot} />}
       >
         <View style={styles.container}>
           <View style={styles.circle}>
@@ -95,9 +78,29 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: "#FFFF"
   },
+  activeDot: {
+    backgroundColor: "#F94040",
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3
+  },
   circleImage: {
     width: "50%",
     height: "50%"
+  },
+  dot: {
+    backgroundColor: "rgba(0,0,0,.2)",
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3
   },
   circle: {
     width: 235,

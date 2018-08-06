@@ -11,56 +11,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import MainUniversities from "../universities/MainUniversities";
 
 export default class MainUniversitiesEnter extends React.Component {
-  state = {
-    dataSource: [
-      {
-        name: "MUIT University",
-        city: "Almaty",
-        photo:
-          "https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg",
-        phone: "8 (7172) 756 886"
-      },
-      {
-        name: "Nazarbayev University",
-        city: "Astana",
-        photo:
-          "https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg",
-        phone: "8 (7222) 321 886"
-      },
-
-      {
-        name: "Shakarim University",
-        city: "Semey",
-        photo:
-          "https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg",
-        phone: "8 (7112) 654 886"
-      },
-
-      {
-        name: "Taraz University",
-        city: "Taraz",
-        photo:
-          "https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg",
-        phone: "8 (7172) 221 886"
-      },
-
-      {
-        name: "KBTU University",
-        city: "Almaty",
-        photo:
-          "https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg",
-        phone: "8 (7172) 654 886"
-      },
-
-      {
-        name: "SDU University",
-        city: "Almaty",
-        photo:
-          "https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg",
-        phone: "8 (7172) 654 886"
-      }
-    ]
-  };
+  state = {};
 
   renderItem = ({ item }) => {
     return (
@@ -76,7 +27,10 @@ export default class MainUniversitiesEnter extends React.Component {
       >
         <Image
           style={{ width: 100, height: 70, borderRadius: 10 }}
-          source={{ uri: item.photo }}
+          source={{
+            uri:
+              "https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg"
+          }}
         />
 
         <View style={{ flex: 1, justifyContent: "center" }}>
@@ -126,7 +80,7 @@ export default class MainUniversitiesEnter extends React.Component {
         <FlatList
           renderItem={this.renderItem}
           keyExtractor={(_, index) => index}
-          data={this.state.dataSource}
+          data={universityData}
           ItemSeparatorComponent={this.renderSeparator}
         />
       </ScrollView>

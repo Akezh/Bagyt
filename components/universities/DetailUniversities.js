@@ -7,14 +7,14 @@ import {
   Alert,
   FlatList,
   Image,
-  TouchableOpacity,
-  Modal
+  TouchableOpacity
 } from "react-native";
 import { Constants } from "expo";
 import Icon from "react-native-vector-icons/Ionicons";
 import ScrollableTabView, {
   DefaultTabBar
 } from "react-native-scrollable-tab-view";
+import ShowPointsItem from "./ShowPointsItem.js";
 
 export default class UniversityScreen extends React.Component {
   state = {
@@ -25,6 +25,10 @@ export default class UniversityScreen extends React.Component {
     this.setState({
       modalVisible: !this.state.modalVisible
     });
+  };
+
+  renderItem = ({ item }) => {
+    return <ShowPointsItem item={item} />;
   };
 
   render() {
@@ -103,30 +107,7 @@ export default class UniversityScreen extends React.Component {
               extraData={this.state.modalVisible}
               keyExtractor={(_, index) => index}
               numColumns={1}
-              renderItem={({ item }) => {
-                console.log(item);
-                return (
-                  <View style={{ flex: 1 }}>
-                    <Text> {item.majorName}</Text>
-                    <Icon
-                      name="ios-arrow-forward-outline"
-                      type="ionicon"
-                      size={26}
-                      color="black"
-                      onPress={() => this.showPoints()}
-                    />
-
-                    {this.state.modalVisible && (
-                      <React.Fragment>
-                        <Text> kazPoint: {item.kazPoint}</Text>
-                        <Text> kazSelPoint :{item.kazSelPoint} </Text>
-                        <Text> rusPoint: {item.rusPoint}</Text>
-                        <Text> rusSelPoint: {item.rusSelPoint}</Text>
-                      </React.Fragment>
-                    )}
-                  </View>
-                );
-              }}
+              renderItem={this.renderItem}
             />
           </ScrollView>
 
@@ -156,14 +137,8 @@ export default class UniversityScreen extends React.Component {
             </View>
 
             <View>
-              <TouchableOpacity
-                style={{
-                  marginTop: 20,
-                  marginRight: 20,
-                  alignItems: "flex-end"
-                }}
-              >
-                <Icon name="ios-call-outline" size={50} color={"green"} />
+              <TouchableOpacity style={{ marginTop: "20%", marginLeft: "70%" }}>
+                <Icon name="ios-call-outline" size={60} color={"green"} />
               </TouchableOpacity>
             </View>
           </ScrollView>

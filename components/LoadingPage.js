@@ -1,74 +1,16 @@
 import React, { Component } from "react";
 import {
-  AppRegistry,
   StyleSheet,
-  Text,
   View,
   Animated,
   Image,
-  Easing,
-  AsyncStorage,
   TouchableOpacity,
-  ActivityIndicator,
-  Platform,
   Dimensions
 } from "react-native";
 import { Container } from "native-base";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
-import ModeProvider from "./ModeProvider";
+import Mode from "./ModeProvider";
 
 const { height } = Dimensions.get("window");
-
-const GET_BY_SUBJECT = gql`
-  {
-    allMajors {
-      id
-      name
-      index
-      description
-      subject
-    }
-
-    allUniversities {
-      id
-      name
-      address
-      city
-      description
-      email
-      phone
-      webSite
-      majorPoints {
-        id
-        kazPoint
-        kazSelPoint
-        rusPoint
-        rusSelPoint
-        majorName
-        major {
-          id
-          subject
-        }
-      }
-    }
-    allMajorPoints {
-      id
-      kazPoint
-      kazSelPoint
-      major {
-        id
-        subject
-      }
-      majorIndex
-      rusPoint
-      rusSelPoint
-      university {
-        id
-      }
-    }
-  }
-`;
 
 export default class Colors extends Component {
   render() {
@@ -99,19 +41,7 @@ export default class Colors extends Component {
             />
           </View>
         </Container>
-        <Query query={GET_BY_SUBJECT}>
-          {({ loading, data, error }) =>
-            loading ? (
-              <ActivityIndicator />
-            ) : (
-              <ModeProvider
-                data={data}
-                setUniversity={this.props.setUniversity}
-                setTimer={this.props.setTimer}
-              />
-            )
-          }
-        </Query>
+        <Mode setTimer={() => this.props.setTimer()} />
       </React.Fragment>
     );
   }

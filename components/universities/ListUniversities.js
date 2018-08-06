@@ -10,6 +10,8 @@ import {
 } from "react-native";
 
 import Icon from "react-native-vector-icons/Ionicons";
+import ItemUniversity from "./ItemUniversity";
+import FavouriteProvider, { ModeContext } from "../favourites/FavouriteList";
 
 export default class UniversityScreen extends React.Component {
   static navigationOptions = {
@@ -24,9 +26,10 @@ export default class UniversityScreen extends React.Component {
   renderSeparator = () => {
     return <View style={{ width: "100%", marginLeft: "27%" }} />;
   };
-  setAsyncUniver = async currentUniversity => {
+
+  setAsyncUniver = async (currentUniversity, retrieveData) => {
     const { favouriteUnivers } = this.state;
-    console.log(favouriteUnivers);
+
     const newFavouriteUniversIds = favouriteUnivers.includes(
       currentUniversity.id
     )
@@ -34,7 +37,7 @@ export default class UniversityScreen extends React.Component {
       : [...favouriteUnivers, currentUniversity.id];
 
     try {
-      //
+      retrieveData();
       this.setState({ favouriteUnivers: newFavouriteUniversIds }, () => {
         AsyncStorage.setItem(
           "favouriteUnivers",
@@ -44,8 +47,6 @@ export default class UniversityScreen extends React.Component {
     } catch (error) {
       console.log("error", error);
     }
-
-    console.log(newFavouriteUniversIds);
   };
 
   retrieveData = async () => {
@@ -62,70 +63,36 @@ export default class UniversityScreen extends React.Component {
         );
       }
     } catch (error) {
-      // Error retrieving data
+      console.log("Error retrieving data", error);
     }
+    this.props.setTimer();
   };
-
   componentDidMount() {
     this.retrieveData();
   }
-
-  renderItem = ({ item }) => {
-    return (
-      <TouchableOpacity
-        style={styles.touch}
-        onPress={() => this.props.navigateDetailUnversity(item)}
-      >
-        <View style={styles.container}>
-          <View style={styles.background} />
-          <Image
-            style={styles.image}
-            source={{
-              uri:
-                "https://www.wikicity.kz/fotos_ms/Company_616_WiaqoAQuBEf6woApawKzl9yl.jpeg"
-            }}
-          />
-          <View style={styles.textContainer}>
-            <View style={styles.titleContainer}>
-              <View style={{ flex: 1, flexDirection: "row" }}>
-                <View style={{ flex: 5 }}>
-                  <Text numberOfLines={2} style={styles.text1}>
-                    <Icon name="ios-pin-outline" size={25} color={"white"} />
-                    {item.city}
-                  </Text>
-                </View>
-                <TouchableOpacity
-                  style={{ flex: 5, alignItems: "flex-end" }}
-                  onPress={() => this.setAsyncUniver(item)}
-                >
-                  {this.state.favouriteUnivers.includes(item.id) ? (
-                    <Icon name="md-heart" size={33} color={"red"} />
-                  ) : (
-                    <Icon name="md-heart-outline" size={33} color={"white"} />
-                  )}
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={styles.synopsisContainer}>
-              <Text numberOfLines={2} style={styles.text2}>
-                {item.name}
-              </Text>
-            </View>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  };
-
   render() {
     const { universityData } = this.props;
+
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <FlatList
           data={universityData}
+          extraData={[this.state.favouriteUnivers]}
           keyExtractor={(_, index) => index}
           ItemSeparatorComponent={this.renderSeparator}
-          renderItem={this.renderItem}
+          renderItem={({ item }) => {
+            return (
+              <ItemUniversity
+                item={item}
+                setAsyncUniver={item =>
+                  this.setAsyncUniver(item, this.props.retrieveData)
+                }
+                favouriteUnivers={this.state.favouriteUnivers}
+                navigateDetailUnversity={this.props.navigateDetailUnversity}
+              />
+            );
+          }}
+        />
         />
       </View>
     );

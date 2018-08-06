@@ -10,29 +10,34 @@ import {
   ImageBackground
 } from "react-native";
 import { Constants } from "expo";
-import ListUniversities from '../universities/ListUniversities';
+import ListUniversities from "../universities/ListUniversities";
 
 class DetailSpecialists extends Component {
   static navigationOptions = {
     title: "Специальность"
   };
-  	name = this.props.navigation.getParam('specialist').name;
+  name = this.props.navigation.getParam("specialist").name;
 
-  	state = {
-		universityData: global.data.allUniversities
-			.map(univer => univer.majorPoints.map(major => major.majorName === this.name).includes(true) && univer)
-			.filter(univer => univer !== false),
-	};
+  state = {
+    universityData: global.data.allUniversities
+      .map(
+        univer =>
+          univer.majorPoints
+            .map(major => major.majorName === this.name)
+            .includes(true) && univer
+      )
+      .filter(univer => univer !== false)
+  };
 
-	navigateDetailUnversity = item => {
-		this.props.navigation.navigate('DetailUniversities', {
-			item: item,
-		});
-	};
+  navigateDetailUnversity = item => {
+    this.props.navigation.navigate("DetailUniversities", {
+      item: item
+    });
+  };
   render() {
     const specialist = this.props.navigation.getParam("specialist");
     const logo = this.props.navigation.getParam("logo");
-  
+
     return (
       <ScrollView style={{ backgroundColor: "white" }}>
         <View
@@ -80,9 +85,10 @@ class DetailSpecialists extends Component {
         </View>
 
         <ListUniversities
-					universityData={this.state.universityData}
-					navigateDetailUnversity={item => this.navigateDetailUnversity(item)}
-				/>
+          universityData={this.state.universityData}
+          navigateDetailUnversity={item => this.navigateDetailUnversity(item)}
+          retrieveData={() => console.log("ok")}
+        />
       </ScrollView>
     );
   }

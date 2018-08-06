@@ -13,6 +13,7 @@ import {
 import { Constants } from "expo";
 import Icon from "react-native-vector-icons/Ionicons";
 import ListUniversities from "./ListUniversities";
+import { ModeProvider, ModeContext } from "../DataSave";
 
 export default class MainUniversities extends React.Component {
   state = {
@@ -61,6 +62,7 @@ export default class MainUniversities extends React.Component {
               item: item
             })
           }
+          retrieveData={() => console.log("ok")}
         />
       </View>
     );
