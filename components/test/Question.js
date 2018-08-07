@@ -8,9 +8,14 @@ import {
 	FlatList,
 	ProgressBarAndroid,
 	ProgressViewIOS,
+	Dimensions,
+	ScrollView,
 } from 'react-native';
 import { Constants } from 'expo';
 import * as Progress from 'react-native-progress';
+
+const { width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 export default class App extends Component {
 	renderSeparator = () => {
@@ -20,7 +25,7 @@ export default class App extends Component {
 	renderItem = ({ item }) => {
 		return (
 			<TouchableOpacity style={styles.button} onPress={() => this.props.onSelect(item.point)}>
-				<Text style={{ fontSize: 14, color: 'black', marginHorizontal: 15 }}>{item.text}</Text>
+				<Text style={styles.textQuestion}>{item.text}</Text>
 			</TouchableOpacity>
 		);
 	};
@@ -29,8 +34,8 @@ export default class App extends Component {
 		const { question } = this.props;
 
 		return (
-			<View style={styles.container}>
-				<View style={{ flex: 0.6, alignItems: 'center' }}>
+			<ScrollView style={styles.container}>
+				<View style={{ alignItems: 'center' }}>
 					<View style={styles.progress}>
 						<Progress.Bar progress={this.props.progress} width={250} height={30} color={'#FFF'} />
 					</View>
@@ -41,9 +46,17 @@ export default class App extends Component {
 							paddingHorizontal: 20,
 							width: '100%',
 							alignItems: 'center',
+							margin: 5,
 						}}
 					>
-						<Text style={{ color: 'white', fontSize: 18 }}>{question.question}</Text>
+						<Text
+							style={{
+								color: 'white',
+								fontSize: Platform.OS === 'ios' ? (height === 812 ? 18 : 16) : 16,
+							}}
+						>
+							{question.question}
+						</Text>
 					</View>
 				</View>
 				<FlatList
@@ -53,7 +66,7 @@ export default class App extends Component {
 					ItemSeparatorComponent={this.renderSeparator}
 					keyExtractor={(item, index) => index}
 				/>
-			</View>
+			</ScrollView>
 		);
 	}
 }
@@ -72,15 +85,20 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
+	textQuestion: {
+		fontSize: Platform.OS === 'ios' ? (height === 812 ? 14 : 12) : 12,
+		color: 'black',
+		marginHorizontal: 5,
+	},
 	button: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: 'white',
-		width: '90%',
-		height: '20%',
+		width: width / 1.05,
+		height: width / 4,
 		borderWidth: 1,
 		borderColor: 'white',
-		borderRadius: 15,
+		borderRadius: 10,
 	},
 });

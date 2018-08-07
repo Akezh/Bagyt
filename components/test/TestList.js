@@ -148,19 +148,19 @@ export default class App extends Component {
             </Animated.View>
           ))}
         </View>
-        <View style={styles.questView}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() =>
-              this.props.navigation.navigate("TestData", {
-                testiD: testArr[this.state.currentIndex].id,
-                questionNum: testArr[this.state.currentIndex].questionNum
-              })
-            }
-          >
-            <Text>Начать</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() =>
+            this.props.navigation.navigate("TestData", {
+              testiD: testArr[this.state.currentIndex].id,
+              questionNum: testArr[this.state.currentIndex].questionNum
+            })
+          }
+        >
+          <Text style={{ fontWeight: "bold", color: "white", fontSize: "24" }}>
+            Начать
+          </Text>
+        </TouchableOpacity>
       </React.Fragment>
     );
   }
@@ -176,10 +176,10 @@ const styles = StyleSheet.create({
     padding: 50
   },
   button: {
-    borderColor: "grey",
-    borderWidth: 1,
-    marginVertical: 20,
-    zIndex: 100
+    backgroundColor: "#e5a204",
+    paddingVertical: 20,
+    alignItems: "center",
+    justifyContent: "center"
   },
   starView: {
     flex: 1,

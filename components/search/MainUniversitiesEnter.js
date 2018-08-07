@@ -82,7 +82,7 @@ export default class MainUniversitiesEnter extends React.Component {
 	render() {
 		const universityData = this.state.universityData;
 		const filteredEmails = universityData.filter(createFilter(this.state.searchTerm, 'name'));
-
+		const constData = this.props.navigation.getParam('universityData');
 		return (
 			<ScrollView style={{ flex: 1, backgroundColor: 'white' }}>
 				<View style={styles.header}>
@@ -99,6 +99,7 @@ export default class MainUniversitiesEnter extends React.Component {
 					<TouchableOpacity
 						onPress={() =>
 							this.props.navigation.navigate('FilterScreen', {
+								constData,
 								universityData,
 								saveFilteredUniversityData: university => this.saveFilteredUniversityData(university),
 								nameButton: 'Сохранить',
