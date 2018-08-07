@@ -1,7 +1,16 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  Platform,
+  Dimensions
+} from "react-native";
 import { Constants } from "expo";
 import { Button } from "react-native-elements";
+
+const { height } = Dimensions.get("window");
 
 export default class App extends Component {
   state = {
