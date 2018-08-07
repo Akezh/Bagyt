@@ -61,11 +61,11 @@ export default class SearchScreen extends React.Component {
               univer =>
                 this.state.checked
                   ? this.state.kazChecked
-                    ? univer.kazSelPoint === inputValue
-                    : univer.rusSelPoint === inputValue
+                    ? univer.kazSelPoint >= inputValue
+                    : univer.kazSelPoint >= inputValue
                   : this.state.kazChecked
-                    ? univer.kazPoint === inputValue
-                    : univer.rusPoint === inputValue
+                    ? univer.kazPoint >= inputValue
+                    : univer.kazPoint >= inputValue
             )
             .includes(true) && univer1
       )
