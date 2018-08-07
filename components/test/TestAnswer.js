@@ -107,7 +107,12 @@ export default class App extends Component {
             paddingHorizontal: "3%"
           }}
         >
-          <Text style={{ fontSize: 14, color: "black" }}>
+          <Text
+            style={{
+              fontSize: Platform.OS === "ios" ? (height === 812 ? 14 : 12) : 12,
+              color: "black"
+            }}
+          >
             {this.state.result}
           </Text>
         </View>

@@ -7,10 +7,14 @@ import {
   TouchableOpacity,
   FlatList,
   ProgressBarAndroid,
-  ProgressViewIOS
+  ProgressViewIOS,
+  Dimensions
 } from "react-native";
 import { Constants } from "expo";
 import * as Progress from "react-native-progress";
+
+const { width } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 export default class App extends Component {
   renderSeparator = () => {
@@ -23,7 +27,13 @@ export default class App extends Component {
         style={styles.button}
         onPress={() => this.props.onSelect(item.point)}
       >
-        <Text style={{ fontSize: 14, color: "black", marginHorizontal: 15 }}>
+        <Text
+          style={{
+            fontSize: Platform.OS === "ios" ? (height === 812 ? 14 : 12) : 12,
+            color: "black",
+            marginHorizontal: 15
+          }}
+        >
           {item.text}
         </Text>
       </TouchableOpacity>
@@ -53,7 +63,13 @@ export default class App extends Component {
               alignItems: "center"
             }}
           >
-            <Text style={{ color: "white", fontSize: 18 }}>
+            <Text
+              style={{
+                color: "white",
+                fontSize:
+                  Platform.OS === "ios" ? (height === 812 ? 18 : 16) : 16
+              }}
+            >
               {question.question}
             </Text>
           </View>
@@ -89,10 +105,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
-    width: 350,
-    height: 100,
+    width: width / 1.1,
+    height: width / 4,
     borderWidth: 1,
     borderColor: "white",
-    borderRadius: 15
+    borderRadius: 10
   }
 });
