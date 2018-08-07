@@ -20,9 +20,9 @@ const DismissKeyBoard = ({ children }) => (
 );
 
 export default class SearchScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
+  // static navigationOptions = {
+  //   header: null
+  // };
 
   state = {
     inputValue: "",

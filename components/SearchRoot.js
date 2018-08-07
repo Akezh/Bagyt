@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation';
 import MainUniversitiesEnter from './search/MainUniversitiesEnter';
 import SearchScreen from './search/SearchScreen';
 import DetailUniversities from './universities/DetailUniversities';
+import FilterScreen from './universities/FilterScreen';
 
 export default createStackNavigator(
 	{
@@ -28,6 +29,9 @@ export default createStackNavigator(
 		},
 		DetailUniversities: {
 			screen: DetailUniversities,
+		},
+		FilterScreen: {
+			screen: FilterScreen,
 		},
 	},
 	{
