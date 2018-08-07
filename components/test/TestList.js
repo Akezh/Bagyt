@@ -23,8 +23,6 @@ export default class App extends Component {
     header: null
   };
   cardsPanResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onStartShouldSetPanResponderCapture: () => true,
     onMoveShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
     onPanResponderMove: (event, gestureState) => {
@@ -66,12 +64,15 @@ export default class App extends Component {
               {...this.cardsPanResponder.panHandlers}
               style={{
                 flex: 1,
-                width: 250,
-                height: 350 + testArr.indexOf(item) * 10,
+                width: '100%',
+                height:430 + testArr.indexOf(item) * 10,
                 marginHorizontal: 20,
+                marginTop: '7%',
+                marginBottom:'5%',
                 position: "absolute",
-                backgroundColor: "#FFFF",
+                backgroundColor: "#F94040",
                 zIndex: testArr.indexOf(item),
+                
                 right: this.state.cardsStackedAnim.interpolate({
                   inputRange: [0, 1],
                   outputRange: [
@@ -94,8 +95,12 @@ export default class App extends Component {
                 ]
               }}
             >
+            <View style={styles.main} >
               <View style={styles.imageView}>
-                <Image style={styles.image} source={require("./4.jpg")} />
+                <Image style={styles.image} source={{	uri: testArr[this.state.currentIndex].photo
+								? testArr[this.state.currentIndex].photo
+								: 'https://moeobrazovanie.ru/data/ckfinder/images/K%20chemu%20lezhit%20vasha%20dusha.jpg'}} />
+                
               </View>
               <View style={styles.textView}>
                 <Text style={styles.text}>
@@ -143,24 +148,33 @@ export default class App extends Component {
                   type="entypo"
                   size={15}
                   color="#e5e853"
-                />
+                /> </View>
               </View>
+             
+              <View
+          style={{
+            alignItems: "center",
+            paddingBottom: "5%"
+          }}
+        >
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() =>
+              this.props.navigation.navigate("TestData", {
+                testiD: testArr[this.state.currentIndex].id,
+                questionNum: testArr[this.state.currentIndex].questionNum
+              })
+            }
+          >
+            <Text style={{ color: "white", fontSize: "24" }}>Начать</Text>
+          </TouchableOpacity>
+        </View>
             </Animated.View>
           ))}
+
+          
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            this.props.navigation.navigate("TestData", {
-              testiD: testArr[this.state.currentIndex].id,
-              questionNum: testArr[this.state.currentIndex].questionNum
-            })
-          }
-        >
-          <Text style={{ fontWeight: "bold", color: "white", fontSize: "24" }}>
-            Начать
-          </Text>
-        </TouchableOpacity>
+        
       </React.Fragment>
     );
   }
@@ -172,14 +186,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: "#F94040",
-    padding: 50
+    backgroundColor: "#eae3e3",
+    padding: 30
+  },
+  main:{
+    flex:1
   },
   button: {
     backgroundColor: "#e5a204",
-    paddingVertical: 20,
+    width: "70%",
+    height: 50,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    borderRadius: 15
   },
   starView: {
     flex: 1,
@@ -190,15 +209,16 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   imageView: {
-    flex: 8,
-    margin: 5,
-    height: "50%",
+    flex:3,
+    margin:5,
+    height: "60%",
     width: "90%"
   },
   quest: {
     fontSize: 10,
-    color: "#F94040",
-    marginVertical: 20
+    color: "#FFF",
+    marginVertical: 5,
+    textAlign: 'center'
   },
   questView: {
     alignItems: "center",
@@ -209,19 +229,26 @@ const styles = StyleSheet.create({
   image: {
     alignItems: "center",
     justifyContent: "center",
-    height: "100%",
+    height: "80%",
     width: "100%",
     margin: 5
   },
   textView: {
-    flex: 2,
+  
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+   
+    
+    marginHorizontal: 5,
+    
   },
   text: {
     fontSize: 17,
-    color: "#F94040",
+    color: "#FFF",
     marginVertical: 10,
-    fontWeight: "bold"
+    fontWeight: "bold",
+   
+    textAlign: "center",
+    justifyContent: "center",
   }
 });

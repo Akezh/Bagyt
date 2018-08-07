@@ -40,13 +40,17 @@ export default class Questions extends React.Component {
 				<Query query={GET_QUESTIONS} variables={{ id }}>
 					{({ loading, data, error }) =>
 						error ? (
-							console.log(error)
+							<Text>Плохой Интернеет</Text>
 						) : loading ? (
 							<View style={styles.container}>
 								<ActivityIndicator />
 							</View>
 						) : (
-							<TestMain data={data.Test} questionNum={questionNum} />
+							<TestMain
+								data={data.Test}
+								questionNum={questionNum}
+								navigateToList={() => this.props.navigation.navigate('TestList')}
+							/>
 						)
 					}
 				</Query>
@@ -59,6 +63,9 @@ const styles = StyleSheet.create({
 	container: {
 		display: 'flex',
 		height: '100%',
+		backgroundColor: '#eae3e3',
+		alignItems: 'center',
+		justifyContent: 'center',
 	},
 
 	loadingQuestions: {

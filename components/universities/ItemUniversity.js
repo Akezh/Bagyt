@@ -29,7 +29,7 @@ export default class UniversityScreen extends React.Component {
 									</Text>
 								</View>
 								<TouchableOpacity
-									style={{ flex: 5, alignItems: 'flex-end' }}
+									style={styles.favButton}
 									onPress={() => this.props.setAsyncUniver(item)}
 								>
 									{favouriteUnivers.includes(item.id) ? (
@@ -52,11 +52,21 @@ export default class UniversityScreen extends React.Component {
 	}
 }
 const styles = StyleSheet.create({
+	favButton: {
+		flex: 5,
+		alignItems: 'flex-end',
+		height: 40,
+		width: 40,
+	},
 	touch: {
 		width: '100%',
 		flexDirection: 'row',
 		alignItems: 'center',
 		marginTop: '2%',
+		overflow: 'visible',
+		shadowColor: 'grey',
+		shadowOpacity: 5,
+		shadowRadius: 5,
 	},
 	opacity: {
 		height: '10%',

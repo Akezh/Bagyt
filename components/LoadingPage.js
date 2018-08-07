@@ -77,7 +77,7 @@ export default class Colors extends Component {
 						/>
 						<Animated.Image
 							style={{
-								bottom: 40,
+								bottom: 5,
 								right: 80,
 								width: 128,
 								height: 146,
@@ -85,12 +85,6 @@ export default class Colors extends Component {
 							}}
 							source={require('../assets/logoT.png')}
 						/>
-						{/* <Animated.View>
-              <Image
-                style={animatedStyle}
-                source={require("../assets/mulTriangle.png")}
-              />>
-            </Animated.View> */}
 					</View>
 				</Container>
 				<View

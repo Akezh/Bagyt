@@ -29,18 +29,17 @@ export default class ListSpecialists extends React.Component {
 						left: 14,
 						right: 0,
 						height: 44,
+						width: '400%',
 						alignItems: 'flex-start',
 						zIndex: 100,
 					}}
 				>
-					<Icon
-						style={styles.backIcon}
-						name="ios-arrow-back-outline"
-						type="ionicon"
-						size={40}
-						color="#FFFF"
+					<TouchableOpacity
+						style={{ height: 40, width: 40 }}
 						onPress={() => this.props.navigation.navigate('Specialists')}
-					/>
+					>
+						<Icon style={styles.backIcon} name="ios-arrow-down" type="ionicon" size={40} color="#FFFF" />
+					</TouchableOpacity>
 				</View>
 				<ImageBackground style={styles.backImage} source={subject.backImage} blur={10}>
 					<Image source={subject.logo} style={styles.logo} />
@@ -70,6 +69,7 @@ export default class ListSpecialists extends React.Component {
 											flexDirection: 'row',
 											justifyContent: 'space-between',
 											alignItems: 'center',
+											flex: 8,
 										}}
 									>
 										<Text style={styles.listText}>{item.name}</Text>
@@ -79,6 +79,7 @@ export default class ListSpecialists extends React.Component {
 										type="ionicon"
 										size={26}
 										color="grey"
+										style={{ right: 3, flex: 1 }}
 										onPress={() => this.props.navigation.navigate('Specialists')}
 									/>
 								</View>
@@ -94,11 +95,11 @@ export default class ListSpecialists extends React.Component {
 const styles = StyleSheet.create({
 	content: {
 		flex: 1,
-		backgroundColor: 'white',
+		backgroundColor: '#eff0f2',
 	},
 	listButton: {
 		borderBottomWidth: 0.5,
-		borderBottomColor: 'grey',
+		borderBottomColor: '#565759',
 		height: '15%',
 		flex: 1,
 		flexDirection: 'row',
@@ -106,9 +107,10 @@ const styles = StyleSheet.create({
 		paddingBottom: '3%',
 		alignItems: 'center',
 		justifyContent: 'center',
+		marginHorizontal: 8,
 	},
 	listText: {
-		color: 'grey',
+		color: '#565759',
 		fontSize: 16,
 		marginHorizontal: '2%',
 		marginVertical: '1%',
@@ -118,13 +120,14 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		color: 'white',
 		fontWeight: 'bold',
-		marginTop: 5,
+		marginVertical: 5,
 	},
 	backImage: {
-		flex: 0.6,
+		flex: 0.65,
 		paddingTop: 44,
 		alignItems: 'center',
 		justifyContent: 'center',
+		marginBottom: 10,
 	},
 	backIcon: {
 		position: 'absolute',

@@ -45,7 +45,7 @@ export default class MainUniversitiesEnter extends React.Component {
 				<View style={{ flex: 1, justifyContent: 'center' }}>
 					<Text
 						style={{
-							fontSize: 18,
+							fontSize: 15,
 							color: 'black',
 							marginRight: 10,
 							marginLeft: 20,
@@ -57,10 +57,11 @@ export default class MainUniversitiesEnter extends React.Component {
 					<Text style={{ color: 'grey', marginLeft: 20, fontSize: 12 }}>
 						<Icon name="ios-pin-outline" size={12} color={'grey'} /> {item.city}
 					</Text>
-
-					<Text style={{ color: 'grey', marginLeft: 20, fontSize: 12 }}>
-						<Icon name="ios-call-outline" size={12} color={'grey'} /> {item.phone}
-					</Text>
+					{item.phone && (
+						<Text style={{ color: 'grey', marginLeft: 20, fontSize: 12 }}>
+							<Icon name="ios-call-outline" size={12} color={'grey'} /> {item.phone}
+						</Text>
+					)}
 				</View>
 			</TouchableOpacity>
 		);

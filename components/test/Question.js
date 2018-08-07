@@ -1,16 +1,5 @@
 import React, { Component } from 'react';
-import {
-	Platform,
-	Text,
-	View,
-	StyleSheet,
-	TouchableOpacity,
-	FlatList,
-	ProgressBarAndroid,
-	ProgressViewIOS,
-	Dimensions,
-	ScrollView,
-} from 'react-native';
+import { Platform, Text, View, StyleSheet, TouchableOpacity, FlatList, Dimensions } from 'react-native';
 import { Constants } from 'expo';
 import * as Progress from 'react-native-progress';
 
@@ -19,7 +8,7 @@ const { height } = Dimensions.get('window');
 
 export default class App extends Component {
 	renderSeparator = () => {
-		return <View style={{ paddingTop: 10 }} />;
+		return <View style={{ paddingTop: 5 }} />;
 	};
 
 	renderItem = ({ item }) => {
@@ -34,39 +23,38 @@ export default class App extends Component {
 		const { question } = this.props;
 
 		return (
-			<ScrollView style={styles.container}>
-				<View style={{ alignItems: 'center' }}>
-					<View style={styles.progress}>
-						<Progress.Bar progress={this.props.progress} width={250} height={30} color={'#FFF'} />
-					</View>
+			<View style={styles.container}>
+				<View style={styles.progress}>
+					<Progress.Bar
+						progress={this.props.progress}
+						width={250}
+						height={25}
+						color={'#FFF'}
+						useNativeDriver={true}
+						animationType={'timing'}
+					/>
+				</View>
 
-					<View
+				<View style={styles.question}>
+					<Text
 						style={{
-							marginTop: '5%',
-							paddingHorizontal: 20,
-							width: '100%',
-							alignItems: 'center',
-							margin: 5,
+							color: 'white',
+							fontSize: Platform.OS === 'ios' ? (height === 812 ? 18 : 16) : 16,
+							textAlign: 'center',
 						}}
 					>
-						<Text
-							style={{
-								color: 'white',
-								fontSize: Platform.OS === 'ios' ? (height === 812 ? 18 : 16) : 16,
-							}}
-						>
-							{question.question}
-						</Text>
-					</View>
+						{question.question}
+					</Text>
 				</View>
+
 				<FlatList
-					style={{ flex: 1 }}
+					alwaysBounceVertical={true}
 					data={question.answerSheetses}
 					renderItem={this.renderItem}
 					ItemSeparatorComponent={this.renderSeparator}
 					keyExtractor={(item, index) => index}
 				/>
-			</ScrollView>
+			</View>
 		);
 	}
 }
@@ -74,10 +62,16 @@ export default class App extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'space-between',
 		alignItems: 'center',
+		justifyContent: 'center',
 		paddingTop: Constants.statusBarHeight,
 		backgroundColor: '#F94040',
+	},
+	question: {
+		marginTop: '10%',
+		alignItems: 'center',
+		marginHorizontal: 5,
+		height: '25%',
 	},
 	progress: {
 		marginTop: '5%',
@@ -91,6 +85,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 5,
 	},
 	button: {
+		margin: 5,
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',

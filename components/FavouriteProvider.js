@@ -11,14 +11,9 @@ export default class FavouriteProvider extends React.Component {
 		try {
 			const favouriteUnivers = await AsyncStorage.getItem('favouriteUnivers');
 			if (favouriteUnivers !== null) {
-				this.setState(
-					{
-						favouriteUnivers: JSON.parse(favouriteUnivers),
-					},
-					() => {
-						console.log(favouriteUnivers);
-					}
-				);
+				this.setState({
+					favouriteUnivers: JSON.parse(favouriteUnivers),
+				});
 			}
 		} catch (error) {
 			console.log('Error retrieving data', error);

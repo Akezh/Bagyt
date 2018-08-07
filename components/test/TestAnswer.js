@@ -4,6 +4,7 @@ import { Constants } from 'expo';
 import { Button } from 'react-native-elements';
 
 const { height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default class TestAnswer extends Component {
 	state = {
@@ -19,7 +20,7 @@ export default class TestAnswer extends Component {
 		return (
 			<View style={styles.viewItem}>
 				<View style={{}}>
-					<Text style={{ fontSize: 18, color: 'black', marginRight: 10 }}>{item.answer}</Text>
+					<Text style={styles.answerText}>{item.answer}</Text>
 				</View>
 			</View>
 		);
@@ -28,8 +29,6 @@ export default class TestAnswer extends Component {
 	componentDidMount() {
 		const score = this.props.score;
 		const answer = this.props.answer;
-		console.log(answer[0].scoreMax, 'scoreMax');
-		console.log(score);
 		answer.forEach(ans => {
 			ans.scoreMax >= score && ans.scoreMin <= score
 				? this.setState({
@@ -43,13 +42,18 @@ export default class TestAnswer extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<ScrollView>
-					<View>
-						<Text style={{ color: '#F94040', fontSize: 24 }}>Результаты теста</Text>
+				<ScrollView
+					alwaysBounceVertical={true}
+					contentContainerStyle={{
+						width: width,
+					}}
+				>
+					<View style={styles.resultView}>
+						<Text style={styles.resultText}>Результаты теста</Text>
 					</View>
 
 					<View style={styles.answerView}>
-						<View style={styles.answerView}>
+						<View style={styles.imageView}>
 							<Image
 								style={{ width: 80, height: 65 }}
 								source={{
@@ -62,24 +66,29 @@ export default class TestAnswer extends Component {
 						<View
 							style={{
 								alignItems: 'flex-end',
+								marginRight: 3,
 								justifyContent: 'center',
+								width: '50%',
+								flex: 2,
 							}}
 						>
-							<Text style={{ fontSize: 20, color: '#F94040' }}>{this.state.resultDes}</Text>
+							<Text style={{ fontSize: 18, color: '#F94040' }}>{this.state.resultDes}</Text>
 						</View>
 					</View>
 
 					<View
 						style={{
 							flexDirection: 'row',
-							width: '100%',
+							justifyContent: 'center',
+							alignItems: 'center',
+							width: '98%',
 							paddingHorizontal: '3%',
 						}}
 					>
 						<Text
 							style={{
-								fontSize: Platform.OS === 'ios' ? (height === 812 ? 14 : 12) : 12,
-								color: 'black',
+								fontSize: Platform.OS === 'ios' ? (height === 812 ? 18 : 16) : 16,
+								color: '#8b9099',
 							}}
 						>
 							{this.state.result}
@@ -92,6 +101,7 @@ export default class TestAnswer extends Component {
 							titleStyle={{ color: 'white' }}
 							buttonStyle={styles.buttonStyle}
 							containerStyle={{ marginTop: 20 }}
+							onPress={() => this.props.navigateToList()}
 						/>
 					</View>
 				</ScrollView>
@@ -107,12 +117,30 @@ const styles = StyleSheet.create({
 		paddingTop: Constants.statusBarHeight,
 		backgroundColor: 'white',
 	},
+	answerText: {
+		fontSize: 20,
+		color: 'black',
+		marginRight: 10,
+		fontWeight: 'bold',
+	},
+	resultText: { color: '#F94040', fontSize: 22, fontWeight: 'bold' },
+	resultView: {
+		margin: 5,
+		marginTop: 20,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 	answerView: {
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'center',
 		alignItems: 'center',
 		marginHorizontal: '5%',
 		height: 100,
+	},
+	imageView: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'flex-start',
 	},
 	viewItem: {
 		flex: 1,
@@ -126,6 +154,7 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 	},
 	buttonStyle: {
+		marginBottom: 20,
 		backgroundColor: '#F94040',
 		width: 200,
 		height: 55,

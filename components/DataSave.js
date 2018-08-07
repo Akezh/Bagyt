@@ -62,7 +62,7 @@ export default class DataSave extends React.Component {
 				<Query query={GET_BY_SUBJECT}>
 					{({ loading, data, error }) =>
 						error ? (
-							console.log(error)
+							<Text>Плохой Интернет</Text>
 						) : loading ? (
 							<ActivityIndicator />
 						) : (

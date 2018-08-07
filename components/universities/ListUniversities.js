@@ -56,9 +56,6 @@ export default class UniversityScreen extends React.Component {
         this.setState(
           {
             favouriteUnivers: JSON.parse(favouriteUnivers)
-          },
-          () => {
-            console.log(favouriteUnivers);
           }
         );
       }

@@ -57,7 +57,13 @@ export default class Questions extends React.Component {
 							progress={this.state.Progress_Value}
 						/>
 					)}
-				{this.state.completed && <TestAnswer answer={this.props.data.testResult} score={this.state.score} />}
+				{this.state.completed && (
+					<TestAnswer
+						answer={this.props.data.testResult}
+						score={this.state.score}
+						navigateToList={() => this.props.navigateToList()}
+					/>
+				)}}
 			</View>
 		);
 	}

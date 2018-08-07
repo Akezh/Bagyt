@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { createStackNavigator } from 'react-navigation';
 import MainUniversitiesEnter from './search/MainUniversitiesEnter';
 import SearchScreen from './search/SearchScreen';
@@ -29,9 +28,21 @@ export default createStackNavigator(
 		},
 		DetailUniversities: {
 			screen: DetailUniversities,
+			headerTintColor: 'white',
+			navigationOptions: {
+				headerStyle: {
+					backgroundColor: '#F94040',
+				},
+			},
 		},
 		FilterScreen: {
 			screen: FilterScreen,
+			navigationOptions: {
+				headerTintColor: 'white',
+				headerStyle: {
+					backgroundColor: '#F94040',
+				},
+			},
 		},
 	},
 	{

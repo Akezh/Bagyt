@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: 'white',
+		backgroundColor: '#eff0f2',
 	},
 	button: {
 		alignItems: 'center',
@@ -125,6 +125,12 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		marginHorizontal: 6,
 		marginVertical: 10,
+		overflow: 'visible',
+		shadowColor: 'grey',
+		shadowOpacity: 1,
+		shadowRadius: 5,
+		borderWidth: 0.5,
+		borderColor: '#dcdee2',
 	},
 
 	logo: {
