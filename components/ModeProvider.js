@@ -28,8 +28,6 @@ const GET_BY_SUBJECT = gql`
         id
         kazPoint
         kazSelPoint
-        rusPoint
-        rusSelPoint
         majorName
         major {
           id
@@ -46,8 +44,6 @@ const GET_BY_SUBJECT = gql`
         subject
       }
       majorIndex
-      rusPoint
-      rusSelPoint
       university {
         id
       }
