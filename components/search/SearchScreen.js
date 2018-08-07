@@ -152,27 +152,17 @@ export default class SearchScreen extends React.Component {
 								/>
 							</View>
 						</View>
-						<View style={{ marginTop: '3%', height: '50%', justifyContent: 'center' }}>
-							<View style={{ marginTop: '3%', alignItems: 'center', height: '20%' }}>
-								<Button
-									title="Найти"
-									titleStyle={{
-										fontSize: 15,
-										color: this.state.buttonBack,
-									}}
-									onPress={() => this.saveFilteredUniversityData(navigation)}
-									disabled={this.state.disabled}
-									buttonStyle={{
-										backgroundColor: '#F94040',
-										borderWidth: 1,
-										borderColor: '#FFF',
-										borderRadius: 18,
-										margin: 5,
-										height: '80%',
-										width: '100%',
-									}}
-								/>
-							</View>
+						<View style={{ alignItems: 'center', marginTop: '3%' }}>
+							<Button
+								title="Найти"
+								titleStyle={{
+									fontSize: 15,
+									color: this.state.buttonBack,
+								}}
+								onPress={() => this.saveFilteredUniversityData(navigation)}
+								disabled={this.state.disabled}
+								buttonStyle={styles.button}
+							/>
 						</View>
 					</View>
 				</ScrollView>
@@ -191,6 +181,15 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		paddingLeft: 20,
 	},
+	button: {
+		backgroundColor: '#F94040',
+		borderWidth: 1,
+		borderColor: '#FFF',
+		borderRadius: 18,
+		margin: 5,
+		height: '55%',
+		width: '100%',
+	},
 	opacity1: {
 		marginTop: '2%',
 		height: '14%',
@@ -200,6 +199,7 @@ const styles = StyleSheet.create({
 		borderTopWidth: 0.5,
 		borderTopColor: 'grey',
 	},
+
 	opacity: {
 		height: '14%',
 		justifyContent: 'center',
