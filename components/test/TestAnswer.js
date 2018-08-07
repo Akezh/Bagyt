@@ -12,7 +12,7 @@ import { Button } from "react-native-elements";
 
 const { height } = Dimensions.get("window");
 
-export default class App extends Component {
+export default class TestAnswer extends Component {
   state = {
     result: "",
     resultDes: ""

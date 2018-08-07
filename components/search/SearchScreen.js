@@ -20,10 +20,6 @@ const DismissKeyBoard = ({ children }) => (
 );
 
 export default class SearchScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
-
   state = {
     inputValue: "",
     universityData: global.data.allUniversities,
@@ -92,9 +88,17 @@ export default class SearchScreen extends React.Component {
         <ScrollView style={{ backgroundColor: "white" }}>
           <View style={{ flex: 1 }}>
             <View style={{ marginTop: "10%", alignItems: "center" }}>
+              <View style={{ width: "90%", alignItems: "center" }}>
+                <Text style={{ color: "grey", fontSize: 14 }}>
+                  Данная страница предназначена для приблизительного поиска
+                  грантов в университетах. Данные о минимальных баллах ЕНТ для
+                  приобретения гранта взяты с прошлых годов.
+                </Text>
+              </View>
+
               <View
                 style={{
-                  marginTop: "30%",
+                  marginTop: "5%",
                   marginBottom: 50,
                   flexDirection: "row",
                   alignItems: "center",
@@ -106,8 +110,8 @@ export default class SearchScreen extends React.Component {
                   value={this.state.inputValue}
                   onChangeText={inputValue => this.onChange(inputValue)}
                   style={styles.inp}
+                  placeholder="Введите балл ЕНТ"
                   keyboardType="numeric"
-                  title={"Балл ЕНТ"}
                 />
               </View>
 
@@ -129,7 +133,7 @@ export default class SearchScreen extends React.Component {
                 />
                 <CheckBox
                   center
-                  title="Руская Школа"
+                  title="Русская Школа"
                   textStyle={{ color: "white" }}
                   checked={this.state.rusChecked}
                   onPress={() => this.onPressCheckboxes()}

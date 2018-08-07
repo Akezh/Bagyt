@@ -42,7 +42,7 @@ export default class MainUniversitiesEnter extends React.Component {
         <View style={{ flex: 1, justifyContent: "center" }}>
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 15,
               color: "black",
               marginRight: 10,
               marginLeft: 20

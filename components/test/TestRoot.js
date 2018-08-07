@@ -22,7 +22,6 @@ export default createStackNavigator(
   },
   {
     headerBackTitleVisible: true,
-    //mode: 'modal',
     headerMode: "screen"
   }
 );

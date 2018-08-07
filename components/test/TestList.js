@@ -148,19 +148,25 @@ export default class App extends Component {
             </Animated.View>
           ))}
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            this.props.navigation.navigate("TestData", {
-              testiD: testArr[this.state.currentIndex].id,
-              questionNum: testArr[this.state.currentIndex].questionNum
-            })
-          }
+        <View
+          style={{
+            alignItems: "center",
+            backgroundColor: "#F94040",
+            paddingBottom: "10%"
+          }}
         >
-          <Text style={{ fontWeight: "bold", color: "white", fontSize: "24" }}>
-            Начать
-          </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() =>
+              this.props.navigation.navigate("TestData", {
+                testiD: testArr[this.state.currentIndex].id,
+                questionNum: testArr[this.state.currentIndex].questionNum
+              })
+            }
+          >
+            <Text style={{ color: "white", fontSize: "24" }}>Начать</Text>
+          </TouchableOpacity>
+        </View>
       </React.Fragment>
     );
   }
@@ -177,9 +183,11 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#e5a204",
-    paddingVertical: 20,
+    width: "70%",
+    height: 50,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    borderRadius: 15
   },
   starView: {
     flex: 1,

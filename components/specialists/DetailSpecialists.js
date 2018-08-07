@@ -68,16 +68,16 @@ class DetailSpecialists extends Component {
 
         <View
           style={{
-            backgroundColor: "#848587",
-            height: 25,
-            justifyContent: "center"
+            justifyContent: "center",
+            alignItems: "center"
           }}
         >
           <Text
             style={{
-              marginLeft: "5%",
-              fontSize: 18,
-              color: "white"
+              fontSize: 22,
+              fontWeight: "bold",
+              alignItems: "center",
+              color: "black"
             }}
           >
             Университеты

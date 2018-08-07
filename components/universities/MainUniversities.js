@@ -37,7 +37,7 @@ export default class MainUniversities extends React.Component {
               name="ios-search"
               style={{ margin: 5 }}
               size={15}
-              color={"grey"}
+              color={"#b13638"}
             />
             <SearchInput
               onChangeText={term => {
@@ -99,9 +99,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 5,
     alignItems: "center",
-
     borderBottomWidth: 0.5,
-    borderBottomColor: "grey"
+    borderBottomColor: "#b13638"
   },
   filterText: {
     fontSize: 24,
