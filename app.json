@@ -6,7 +6,11 @@
 		"slug": "finalapp",
 		"icon": "./logo.png",
 		"orientation": "portrait",
-		
+		"splash": {
+      "backgroundColor": "#F94040",
+      "image": "./Untitled (2).png",
+      "resizeMode": "cover"
+    },
 		"android": {
 			"package": "com.assem.Bagyt",
 			"permissions": []

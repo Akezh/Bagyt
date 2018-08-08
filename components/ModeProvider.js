@@ -102,6 +102,6 @@ class ModeProvider extends React.Component {
 	render() {
 		this.saveGlobal(this.props.data);
 
-		return <Text />;
+		return <View />;
 	}
 }
