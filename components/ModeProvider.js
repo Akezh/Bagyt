@@ -95,7 +95,6 @@ class ModeProvider extends React.Component {
 				isFav: false,
 			})),
 		};
-		console.log('saved');
 
 		this.props.setTimer();
 	};
