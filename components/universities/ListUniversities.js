@@ -8,34 +8,45 @@ export default class UniversityScreen extends React.Component {
 	static navigationOptions = {
 		title: 'Университет',
 	};
+	state = {
+		refreshing: false,
+	};
 
 	render() {
 		const { universityData } = this.props;
 
 		return (
 			<View style={{ flex: 1, backgroundColor: 'white' }}>
-				<ModeProvider>
-					<ModeContext.Consumer>
-						{context => (
-							<FlatList
-								data={universityData}
-								extraData={context.favouriteUniversID}
-								keyExtractor={(_, index) => index}
-								ItemSeparatorComponent={this.renderSeparator}
-								renderItem={({ item }) => {
-									return (
-										<ItemUniversity
-											item={item}
-											changeFavourites={item => this.props.changeFavourites(item)}
-											favouriteUniversID={context.favouriteUniversID}
-											navigateDetailUnversity={this.props.navigateDetailUnversity}
-										/>
-									);
-								}}
+				<FlatList
+					data={universityData}
+					extraData={this.props.favouriteUniversID}
+					keyExtractor={(_, index) => index}
+					ItemSeparatorComponent={this.renderSeparator}
+					refreshing={this.state.refreshing}
+					onRefresh={() =>
+						this.setState(
+							{
+								refreshing: true,
+							},
+							() => {
+								this.props.retrieveData();
+								this.setState({
+									refreshing: false,
+								});
+							}
+						)
+					}
+					renderItem={({ item }) => {
+						return (
+							<ItemUniversity
+								item={item}
+								changeFavourites={item => this.props.changeFavourites(item)}
+								favouriteUniversID={this.props.favouriteUniversID}
+								navigateDetailUnversity={this.props.navigateDetailUnversity}
 							/>
-						)}
-					</ModeContext.Consumer>
-				</ModeProvider>
+						);
+					}}
+				/>
 				/>
 			</View>
 		);

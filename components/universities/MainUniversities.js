@@ -56,7 +56,14 @@ export default class MainUniversities extends React.Component {
 					</TouchableOpacity>
 				</View>
 
-				<FavouriteList universityData={filteredEmails} />
+				<FavouriteList
+					universityData={filteredEmails}
+					navigateDetailUnversity={item =>
+						navigation.navigate('DetailUniversities', {
+							item: item,
+						})
+					}
+				/>
 			</View>
 		);
 	}
