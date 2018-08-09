@@ -9,6 +9,11 @@ export default class UniversityScreen extends React.Component {
 		title: 'Университет',
 	};
 
+	state = {
+		favouriteUnivers: [],
+		isTrue: true,
+	};
+
 	render() {
 		const { universityData } = this.props;
 
@@ -26,7 +31,7 @@ export default class UniversityScreen extends React.Component {
 									return (
 										<ItemUniversity
 											item={item}
-											changeFavourites={item => this.props.changeFavourites(item)}
+											changeFavourites={item => this.changeFavourites(item)}
 											favouriteUniversID={context.favouriteUniversID}
 											navigateDetailUnversity={this.props.navigateDetailUnversity}
 										/>

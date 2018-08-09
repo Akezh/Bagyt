@@ -35,6 +35,8 @@ export default class Colors extends Component {
 			toValue: 530,
 			duration: 3000,
 		}).start();
+
+		console.log('Mounted');
 	}
 
 	StartImageRotateFunction() {

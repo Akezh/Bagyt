@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, AsyncStorage } from 'react-native';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -69,24 +69,6 @@ export default class Mode extends React.Component {
 	static navigationOptions = {
 		header: null,
 	};
-	render() {
-		return (
-			<Query query={GET_BY_SUBJECT}>
-				{({ loading, data, error }) =>
-					error ? (
-						console.log(error)
-					) : loading ? (
-						<ActivityIndicator />
-					) : (
-						<ModeProvider data={data} setTimer={() => this.props.setTimer()} />
-					)
-				}
-			</Query>
-		);
-	}
-}
-
-class ModeProvider extends React.Component {
 	saveGlobal = data => {
 		global.data = {
 			...data,
@@ -97,11 +79,72 @@ class ModeProvider extends React.Component {
 		};
 
 		this.props.setTimer();
+
+		return <View />;
 	};
 
 	render() {
-		this.saveGlobal(this.props.data);
+		return (
+			<Query query={GET_BY_SUBJECT}>
+				{({ loading, data, error }) =>
+					error ? console.log(error) : loading ? <ActivityIndicator /> : this.saveGlobal(data)
+				}
+			</Query>
+		);
+	}
+}
 
-		return <Text />;
+export class ModeProvider extends React.Component {
+	state = {
+		favouriteUniversID: [],
+	};
+
+	retrieveData = async () => {
+		try {
+			const favouriteUniversID = await AsyncStorage.getItem('favouriteUnivers');
+			if (favouriteUniversID !== null) {
+				this.setState({
+					favouriteUniversID: JSON.parse(favouriteUniversID),
+				});
+			}
+		} catch (error) {
+			console.log('Error retrieving data', error);
+		}
+
+		console('In retrieve d');
+	};
+	componentDidMount() {
+		this.retrieveData();
+	}
+
+	changeFavourites = currentUniversity => {
+		const { favouriteUniversID } = this.state;
+
+		const newFavouriteUniversIds = favouriteUniversID.includes(currentUniversity.id)
+			? favouriteUniversID.filter(univer => univer !== currentUniversity.id)
+			: [...favouriteUniversID, currentUniversity.id];
+
+		try {
+			this.setState({ favouriteUniversID: newFavouriteUniversIds }, () => {
+				AsyncStorage.setItem('favouriteUnivers', JSON.stringify(newFavouriteUniversIds));
+			});
+		} catch (error) {
+			console.log('error', error);
+		}
+		console.log('im g');
+	};
+
+	render() {
+		return (
+			<ModeContext.Provider
+				value={{
+					favouriteUniversID: this.state.favouriteUniversID,
+					changeFavourites: currentUniversity => this.changeFavourites(currentUniversity),
+					retrieveData: () => this.retrieveData(),
+				}}
+			>
+				{this.props.children}
+			</ModeContext.Provider>
+		);
 	}
 }
