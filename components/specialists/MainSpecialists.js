@@ -48,16 +48,10 @@ export default class SpecialistsMain extends React.Component {
 				colorLogo: require('./files/logo55.png'),
 			},
 			{
-				name: 'Языки',
+				name: 'Иностр.язык',
 				backImage: require('./files/6.jpg'),
 				logo: require('./files/6logo.png'),
 				colorLogo: require('./files/logo66.png'),
-			},
-			{
-				name: 'Информат.',
-				backImage: require('./files/7.jpg'),
-				logo: require('./files/7logo.png'),
-				colorLogo: require('./files/logo77.png'),
 			},
 			{
 				name: 'Творч.экз',

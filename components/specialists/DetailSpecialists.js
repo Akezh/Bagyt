@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, ScrollView, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { Constants } from 'expo';
-import ListUniversities from '../universities/ListUniversities';
+import FavouriteList from '../favourites/FavouriteList';
 
 class DetailSpecialists extends Component {
 	static navigationOptions = {
@@ -53,10 +53,9 @@ class DetailSpecialists extends Component {
 					<Text style={styles.univerText}>Университеты</Text>
 				</View>
 
-				<ListUniversities
+				<FavouriteList
 					universityData={this.state.universityData}
 					navigateDetailUnversity={item => this.navigateDetailUnversity(item)}
-					retrieveData={() => console.log('ok')}
 				/>
 			</ScrollView>
 		);

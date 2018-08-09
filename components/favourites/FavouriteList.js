@@ -33,12 +33,17 @@ export default class FavouriteList extends React.Component {
 									universityData={
 										this.props.universityData ? this.props.universityData : favouriteUnivers
 									}
-									navigateDetailUnversity={item =>
-										this.props.navigation.navigate('DetailUniversities', {
-											item: item,
-										})
+									navigateDetailUnversity={
+										this.props.navigateDetailUnversity
+											? item => this.props.navigateDetailUnversity(item)
+											: item =>
+													this.props.navigation.navigate('DetailUniversities', {
+														item: item,
+													})
 									}
+									favouriteUniversID={context.favouriteUniversID}
 									changeFavourites={context.changeFavourites}
+									retrieveData={context.retrieveData}
 								/>
 							);
 						}}
