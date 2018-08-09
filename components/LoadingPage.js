@@ -47,8 +47,6 @@ export default class Colors extends Component {
 			duration: 3000,
 			easing: Easing.linear,
 		}).start();
-
-		this.props.setTimer();
 	}
 
 	render() {

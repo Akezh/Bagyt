@@ -4,7 +4,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Constants } from 'expo';
 import SearchInput, { createFilter } from 'react-native-search-filter';
 import Icon from 'react-native-vector-icons/Ionicons';
-import ListUniversities from './ListUniversities';
+import FavouriteList from '../favourites/FavouriteList';
 
 export default class MainUniversities extends React.Component {
 	state = {
@@ -56,15 +56,7 @@ export default class MainUniversities extends React.Component {
 					</TouchableOpacity>
 				</View>
 
-				<ListUniversities
-					universityData={filteredEmails}
-					navigateDetailUnversity={item =>
-						navigation.navigate('DetailUniversities', {
-							item: item,
-						})
-					}
-					retrieveData={() => console.log('ok')}
-				/>
+				<FavouriteList universityData={filteredEmails} />
 			</View>
 		);
 	}

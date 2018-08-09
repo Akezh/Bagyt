@@ -78,6 +78,8 @@ export default class Mode extends React.Component {
 			})),
 		};
 
+		this.props.setTimer();
+
 		return <View />;
 	};
 
@@ -108,6 +110,8 @@ export class ModeProvider extends React.Component {
 		} catch (error) {
 			console.log('Error retrieving data', error);
 		}
+
+		console('In retrieve d');
 	};
 	componentDidMount() {
 		this.retrieveData();
@@ -127,6 +131,7 @@ export class ModeProvider extends React.Component {
 		} catch (error) {
 			console.log('error', error);
 		}
+		console.log('im g');
 	};
 
 	render() {

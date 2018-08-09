@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { StyleSheet, ScrollView, Alert, FlatList, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import { StyleSheet, TextInput, Alert, FlatList, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 
 import _ from 'lodash';
 
@@ -18,44 +18,32 @@ export default class FavouriteList extends React.Component {
 		});
 	};
 
-	_refreshListView() {
-		return (
-			<ModeProvider>
-				<ModeContext.Consumer>
-					{context => {
-						let favouriteUnivers = global.data.allUniversities.map(univer =>
-							context.favouriteUniversID.map(storageId => storageId === univer.id && univer)
-						);
-						favouriteUnivers = _.flatten(favouriteUnivers).filter(univer => univer !== false);
-						return (
-							<ListUniversities
-								universityData={favouriteUnivers}
-								navigateDetailUnversity={item =>
-									this.props.navigation.navigate('DetailUniversities', {
-										item: item,
-									})
-								}
-								retrieveData={context.retrieveData}
-							/>
-						);
-					}}
-				</ModeContext.Consumer>
-			</ModeProvider>
-		);
-	}
-
-	_refreshControl() {
-		return <RefreshControl refreshing={this.state.refreshing} onRefresh={() => this._refreshListView()} />;
-	}
-
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
-				<ScrollView
-					refreshControl={this._refreshControl()}
-					dataSource={this.state.dataSource}
-					renderRow={car => this._renderListView(car)}
-				/>
+				<ModeProvider>
+					<ModeContext.Consumer>
+						{context => {
+							let favouriteUnivers = global.data.allUniversities.map(univer =>
+								context.favouriteUniversID.map(storageId => storageId === univer.id && univer)
+							);
+							favouriteUnivers = _.flatten(favouriteUnivers).filter(univer => univer !== false);
+							return (
+								<ListUniversities
+									universityData={
+										this.props.universityData ? this.props.universityData : favouriteUnivers
+									}
+									navigateDetailUnversity={item =>
+										this.props.navigation.navigate('DetailUniversities', {
+											item: item,
+										})
+									}
+									changeFavourites={context.changeFavourites}
+								/>
+							);
+						}}
+					</ModeContext.Consumer>
+				</ModeProvider>
 			</View>
 		);
 	}

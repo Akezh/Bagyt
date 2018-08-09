@@ -9,18 +9,6 @@ export default class UniversityScreen extends React.Component {
 		title: 'Университет',
 	};
 
-	onRefresh = () => {
-		this.setState(
-			{
-				refreshing: true,
-			},
-			() => this.props.retrieveData,
-			() =>
-				this.setState({
-					refreshing: false,
-				})
-		);
-	};
 	render() {
 		const { universityData } = this.props;
 
@@ -38,7 +26,7 @@ export default class UniversityScreen extends React.Component {
 									return (
 										<ItemUniversity
 											item={item}
-											changeFavourites={item => context.changeFavourites(item)}
+											changeFavourites={item => this.props.changeFavourites(item)}
 											favouriteUniversID={context.favouriteUniversID}
 											navigateDetailUnversity={this.props.navigateDetailUnversity}
 										/>
