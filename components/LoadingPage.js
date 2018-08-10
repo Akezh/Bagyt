@@ -17,7 +17,7 @@ import { Actions } from 'react-native-router-flux';
 import { Container, Header, Title, Button, Icon } from 'native-base';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import ModeProvider from './ModeProvider';
+import GetData from './GetData';
 
 const { height } = Dimensions.get('window');
 
@@ -148,7 +148,7 @@ export default class Colors extends Component {
 				</Container>
 				<Query query={GET_BY_SUBJECT}>
 					{({ loading, data, error }) =>
-						loading ? <ActivityIndicator /> : <ModeProvider data={data} setTimer={this.props.setTimer} />
+						loading ? <ActivityIndicator /> : <GetData data={data} setTimer={this.props.setTimer} />
 					}
 				</Query>
 			</React.Fragment>
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#148EFE',
+		backgroundColor: '#F94040',
 		flexDirection: 'row',
 	},
 	box: {
