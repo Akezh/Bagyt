@@ -40,20 +40,21 @@ export class ModeProvider extends React.Component {
 		} catch (error) {
 			console.log('error', error);
 		}
-		console.log('im g');
 	};
 
 	render() {
 		return (
-			<ModeContext.Provider
-				value={{
-					favouriteUniversID: this.state.favouriteUniversID,
-					changeFavourites: currentUniversity => this.changeFavourites(currentUniversity),
-					retrieveData: () => this.retrieveData(),
-				}}
-			>
-				{this.props.children}
-			</ModeContext.Provider>
+			<View>
+				<ModeContext.Provider
+					value={{
+						favouriteUniversID: this.state.favouriteUniversID,
+						changeFavourites: currentUniversity => this.changeFavourites(currentUniversity),
+						retrieveData: () => this.retrieveData(),
+					}}
+				>
+					{this.props.children}
+				</ModeContext.Provider>
+			</View>
 		);
 	}
 }

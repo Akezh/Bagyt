@@ -119,7 +119,7 @@ export default class Colors extends Component {
 		};
 
 		return (
-			<React.Fragment>
+			<View style={styles.container}>
 				<Container>
 					<View style={styles.container}>
 						<TouchableOpacity style={styles.button} onPress={() => this.onPress(data)} />
@@ -146,12 +146,8 @@ export default class Colors extends Component {
 						</Animated.View>
 					</View>
 				</Container>
-				<Query query={GET_BY_SUBJECT}>
-					{({ loading, data, error }) =>
-						loading ? <ActivityIndicator /> : <GetData data={data} setTimer={this.props.setTimer} />
-					}
-				</Query>
-			</React.Fragment>
+				<GetData setTimer={this.props.setTimer} />
+			</View>
 		);
 	}
 }

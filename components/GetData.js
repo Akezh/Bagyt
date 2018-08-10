@@ -80,7 +80,7 @@ export default class Mode extends React.Component {
 		this.props.setTimer();
 
 		return (
-			<View>
+			<View style={{ backgroundColor: '#F94040' }}>
 				<Text style={{ color: '#F94040' }}>Данные загружены</Text>
 			</View>
 		);
@@ -88,13 +88,19 @@ export default class Mode extends React.Component {
 
 	render() {
 		return (
-			<View style={{ backgroundColor: '#F94040' }}>
-				<Query query={GET_BY_SUBJECT}>
-					{({ loading, data, error }) =>
-						error ? console.log(error) : loading ? <ActivityIndicator /> : this.saveGlobal(data)
-					}
-				</Query>
-			</View>
+			<Query query={GET_BY_SUBJECT}>
+				{({ loading, data, error }) =>
+					error ? (
+						console.log(error)
+					) : loading ? (
+						<View style={{ backgroundColor: '#F94040' }}>
+							<ActivityIndicator />
+						</View>
+					) : (
+						this.saveGlobal(data)
+					)
+				}
+			</Query>
 		);
 	}
 }

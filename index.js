@@ -1,10 +1,8 @@
-import { createStackNavigator, TabNavigator } from 'react-navigation';
 import React from 'react';
 import { View, AsyncStorage } from 'react-native';
 
 import LoadingPage from './components/LoadingPage';
 import IntroScreen from './components/IntroScreen';
-import ModeProvider from './components/ModeProvider';
 import MainTab from './components/MainTab';
 
 export default class NavigatorClass extends React.Component {
@@ -24,8 +22,6 @@ export default class NavigatorClass extends React.Component {
 				screen: AsyncStorage.getItem('IntroOpened') ? 'MainTab' : 'IntroScreen',
 			});
 		}, 5000);
-
-		console.log('Mounted');
 	};
 
 	changeScreen = screen => {
@@ -36,11 +32,11 @@ export default class NavigatorClass extends React.Component {
 	render() {
 		return (
 			<View style={{ flex: 1 }}>
-				{this.state.screen === 'LoadingPage' && <LoadingPage setTimer={() => this.setTimer()} />}
-				{this.state.screen === 'IntroScreen' && (
+				{!!(this.state.screen === 'LoadingPage') && <LoadingPage setTimer={() => this.setTimer()} />}
+				{!!(this.state.screen === 'IntroScreen') && (
 					<IntroScreen changeScreen={screen => this.changeScreen(screen)} />
 				)}
-				{this.state.screen === 'MainTab' && <MainTab />}
+				{!!(this.state.screen === 'MainTab') && <MainTab />}
 			</View>
 		);
 	}

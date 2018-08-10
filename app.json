@@ -5,6 +5,22 @@
 		"name": "bagyt",
 		"slug": "finalapp",
 		"icon": "./logo.png",
-		"orientation": "portrait"
+		"orientation": "portrait",
+
+		"splash": {
+			"backgroundColor": "#F94040",
+
+			"resizeMode": "cover"
+		},
+		"android": {
+			"package": "com.assem.Bagyt",
+			"permissions": []
+		},
+		"ios": {
+			"bundleIdentifier": "com.assem2.Bagyt2"
+		},
+		"packagerOpts": {
+			"nonPersistent": "--nonPersistent"
+		}
 	}
 }
