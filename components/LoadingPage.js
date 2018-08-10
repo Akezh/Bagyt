@@ -7,17 +7,72 @@ import {
 	Animated,
 	Image,
 	Easing,
-	AsyncStorage,
+	TouchableHighlight,
 	TouchableOpacity,
 	ActivityIndicator,
 	Platform,
 	Dimensions,
-	ImageBackground,
 } from 'react-native';
-import { Container } from 'native-base';
-import GetData from './GetData';
+import { Actions } from 'react-native-router-flux';
+import { Container, Header, Title, Button, Icon } from 'native-base';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import ModeProvider from './ModeProvider';
 
 const { height } = Dimensions.get('window');
+
+const GET_BY_SUBJECT = gql`
+	{
+		allMajors {
+			id
+			name
+			index
+			description
+			subject
+		}
+
+		allUniversities {
+			id
+			name
+			address
+			city
+			description
+			email
+			phone
+			webSite
+			majorPoints {
+				id
+				kazPoint
+				kazSelPoint
+				major {
+					id
+					name
+					index
+					description
+					subject
+				}
+				majorIndex
+				rusPoint
+				rusSelPoint
+			}
+		}
+		allMajorPoints {
+			id
+			kazPoint
+			kazSelPoint
+			major {
+				id
+				subject
+			}
+			majorIndex
+			rusPoint
+			rusSelPoint
+			university {
+				id
+			}
+		}
+	}
+`;
 
 export default class Colors extends Component {
 	constructor() {
@@ -35,8 +90,6 @@ export default class Colors extends Component {
 			toValue: 530,
 			duration: 3000,
 		}).start();
-
-		console.log('Mounted');
 	}
 
 	StartImageRotateFunction() {
@@ -62,16 +115,25 @@ export default class Colors extends Component {
 
 		const animatedStyle = {
 			backgroundColor: 'white',
-			// transform: [{ translateY: this.animatedValue }]
+			transform: [{ translateY: this.animatedValue }],
 		};
 
 		return (
 			<React.Fragment>
 				<Container>
 					<View style={styles.container}>
+						<TouchableOpacity style={styles.button} onPress={() => this.onPress(data)} />
+						<Image
+							style={{
+								width: 297,
+								height: 139,
+								left: 40,
+							}}
+							source={require('../assets/logoBagy.png')}
+						/>
 						<Animated.Image
 							style={{
-								bottom: 5,
+								bottom: 40,
 								right: 80,
 								width: 128,
 								height: 146,
@@ -79,15 +141,16 @@ export default class Colors extends Component {
 							}}
 							source={require('../assets/logoT.png')}
 						/>
+						<Animated.View style={[styles.box, animatedStyle]}>
+							<Image source={require('../assets/mulTriangle.png')} />
+						</Animated.View>
 					</View>
 				</Container>
-				<View
-					style={{
-						backgroundColor: '#F94040',
-					}}
-				>
-					<GetData setTimer={() => this.props.setTimer()} />
-				</View>
+				<Query query={GET_BY_SUBJECT}>
+					{({ loading, data, error }) =>
+						loading ? <ActivityIndicator /> : <ModeProvider data={data} setTimer={this.props.setTimer} />
+					}
+				</Query>
 			</React.Fragment>
 		);
 	}
@@ -97,12 +160,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#F94040',
+		backgroundColor: '#148EFE',
 		flexDirection: 'row',
 	},
 	box: {
 		width: '100%',
-		height: '100%',
+		height: Platform.OS === 'ios' ? (height === 812 ? '40%' : '100%') : 580,
 		position: 'absolute',
 	},
 	button: {
