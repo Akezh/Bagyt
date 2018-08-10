@@ -23,7 +23,7 @@ export default class NavigatorClass extends React.Component {
 			this.setState({
 				screen: AsyncStorage.getItem('IntroOpened') ? 'MainTab' : 'IntroScreen',
 			});
-		}, 1000);
+		}, 5000);
 
 		console.log('Mounted');
 	};
