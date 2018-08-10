@@ -15,7 +15,7 @@ import {
 	ImageBackground,
 } from 'react-native';
 import { Container } from 'native-base';
-import Mode from './ModeProvider';
+import GetData from './GetData';
 
 const { height } = Dimensions.get('window');
 
@@ -69,14 +69,6 @@ export default class Colors extends Component {
 			<React.Fragment>
 				<Container>
 					<View style={styles.container}>
-						<Image
-							style={{
-								width: 297,
-								height: 139,
-								left: 40,
-							}}
-							source={require('../assets/logoBagy.png')}
-						/>
 						<Animated.Image
 							style={{
 								bottom: 5,
@@ -94,7 +86,7 @@ export default class Colors extends Component {
 						backgroundColor: '#F94040',
 					}}
 				>
-					<Mode setTimer={() => this.props.setTimer()} />
+					<GetData setTimer={() => this.props.setTimer()} />
 				</View>
 			</React.Fragment>
 		);
