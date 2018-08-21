@@ -7,17 +7,72 @@ import {
   Animated,
   Image,
   Easing,
-  AsyncStorage,
+  TouchableHighlight,
   TouchableOpacity,
   ActivityIndicator,
   Platform,
-  Dimensions,
-  ImageBackground
+  Dimensions
 } from "react-native";
-import { Container } from "native-base";
-import DataSave from "./DataSave";
+import { Actions } from "react-native-router-flux";
+import { Container, Header, Title, Button, Icon } from "native-base";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+import GetData from "./GetData";
 
 const { height } = Dimensions.get("window");
+
+const GET_BY_SUBJECT = gql`
+  {
+    allMajors {
+      id
+      name
+      index
+      description
+      subject
+    }
+
+    allUniversities {
+      id
+      name
+      address
+      city
+      description
+      email
+      phone
+      webSite
+      majorPoints {
+        id
+        kazPoint
+        kazSelPoint
+        major {
+          id
+          name
+          index
+          description
+          subject
+        }
+        majorIndex
+        rusPoint
+        rusSelPoint
+      }
+    }
+    allMajorPoints {
+      id
+      kazPoint
+      kazSelPoint
+      major {
+        id
+        subject
+      }
+      majorIndex
+      rusPoint
+      rusSelPoint
+      university {
+        id
+      }
+    }
+  }
+`;
 
 export default class Colors extends Component {
   constructor() {
@@ -35,8 +90,6 @@ export default class Colors extends Component {
       toValue: 530,
       duration: 3000
     }).start();
-
-    console.log("Mounted");
   }
 
   StartImageRotateFunction() {
@@ -61,14 +114,18 @@ export default class Colors extends Component {
     });
 
     const animatedStyle = {
-      backgroundColor: "white"
-      // transform: [{ translateY: this.animatedValue }]
+      backgroundColor: "white",
+      transform: [{ translateY: this.animatedValue }]
     };
 
     return (
-      <React.Fragment>
+      <View style={styles.container}>
         <Container>
           <View style={styles.container}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => this.onPress(data)}
+            />
             <Image
               style={{
                 width: 297,
@@ -79,7 +136,7 @@ export default class Colors extends Component {
             />
             <Animated.Image
               style={{
-                bottom: 5,
+                bottom: 40,
                 right: 80,
                 width: 128,
                 height: 146,
@@ -87,16 +144,13 @@ export default class Colors extends Component {
               }}
               source={require("../assets/logoT.png")}
             />
+            <Animated.View style={[styles.box, animatedStyle]}>
+              <Image source={require("../assets/mulTriangle.png")} />
+            </Animated.View>
           </View>
         </Container>
-        <View
-          style={{
-            backgroundColor: "#F94040"
-          }}
-        >
-          <DataSave setTimer={() => this.props.setTimer()} />
-        </View>
-      </React.Fragment>
+        <GetData setTimer={this.props.setTimer} />
+      </View>
     );
   }
 }
@@ -110,7 +164,7 @@ const styles = StyleSheet.create({
   },
   box: {
     width: "100%",
-    height: "100%",
+    height: Platform.OS === "ios" ? (height === 812 ? "40%" : "100%") : 580,
     position: "absolute"
   },
   button: {

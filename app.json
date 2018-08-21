@@ -6,9 +6,10 @@
     "slug": "finalapp",
     "icon": "./logo.png",
     "orientation": "portrait",
+
     "splash": {
       "backgroundColor": "#F94040",
-      "image": "./Back.png",
+
       "resizeMode": "cover"
     },
     "android": {

@@ -6,7 +6,7 @@ import Swiper from 'react-native-swiper';
 export default class IntroScreen extends React.Component {
 	componentDidMount() {
 		try {
-			AsyncStorage.setItem('IntroOpened', true);
+			AsyncStorage.setItem('IntroOpened', 1);
 		} catch (error) {
 			console.log('Error retrieving data', error);
 		}
