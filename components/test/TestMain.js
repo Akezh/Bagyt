@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet, Picker, Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Question from './Question';
 import TestAnswer from './TestAnswer';
 
@@ -34,36 +34,32 @@ export default class Questions extends React.Component {
 		} else {
 			score += answer;
 		}
-		this.setState({
-			current: this.state.current + 1,
-			score: score,
-			completed: this.state.current === this.state.questionNum ? true : false,
-			ansArr: [...this.state.ansArr, answer],
-			Progress_Value: this.state.Progress_Value + 1 / this.state.questionNum,
-		});
+		this.setState(
+			{
+				current: this.state.current + 1,
+				score: score,
+				completed: this.state.current === this.state.questionNum - 1 ? true : false,
+				ansArr: [...this.state.ansArr, answer],
+				Progress_Value: this.state.Progress_Value + 1 / this.state.questionNum,
+			},
+			() => {
+				console.log(this.state.completed);
+				this.state.completed && this.props.navigateToAnswer(this.state.score);
+			}
+		);
 	};
 
 	render() {
 		return (
 			<View style={styles.container}>
-				{!!this.state.questions.length > 0 &&
-					this.state.completed === false && (
-						<Question
-							onSelect={answer => {
-								this.submitAnswer(answer);
-							}}
-							question={this.state.questions[this.state.current]}
-							current={this.state.current}
-							progress={this.state.Progress_Value}
-						/>
-					)}
-				{this.state.completed && (
-					<TestAnswer
-						answer={this.props.data.testResult}
-						score={this.state.score}
-						navigateToList={() => this.props.navigateToList()}
-					/>
-				)}}
+				<Question
+					onSelect={answer => {
+						this.submitAnswer(answer);
+					}}
+					question={this.state.questions[this.state.current]}
+					current={this.state.current}
+					progress={this.state.Progress_Value}
+				/>
 			</View>
 		);
 	}
