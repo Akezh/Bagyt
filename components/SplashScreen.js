@@ -3,14 +3,19 @@ import { AppRegistry, Text, View, StyleSheet, Image, TouchableOpacity, AsyncStor
 import { Constants } from 'expo';
 import Swiper from 'react-native-swiper';
 
-export default class IntroScreen extends React.Component {
-	componentDidMount() {
+export default class SplashScreen extends React.Component {
+	static navigationOptions = {
+		header: null,
+	};
+
+	goToMainScren = () => {
 		try {
-			AsyncStorage.setItem('IntroOpened', true);
+			AsyncStorage.setItem('Screen', JSON.stringify('MainTabRoot'));
 		} catch (error) {
-			console.log('Error retrieving data', error);
+			console.log('error', error);
 		}
-	}
+		this.props.navigation.navigate('MainTabRoot');
+	};
 
 	render() {
 		return (
@@ -32,8 +37,8 @@ export default class IntroScreen extends React.Component {
 						<Image style={styles.circleImage} source={require('../assets/swiper3.png')} />
 					</View>
 					<Text style={styles.paragraph}>Психологические тесты для выбора специальности</Text>
-					<TouchableOpacity style={styles.nextButton} onPress={() => this.props.changeScreen('MainTab')}>
-						<Text style={styles.nextText}>Дальше</Text>
+					<TouchableOpacity style={styles.nextButton} onPress={() => this.goToMainScren()}>
+						<Text style={styles.nextText}>Начать</Text>
 					</TouchableOpacity>
 				</View>
 			</Swiper>

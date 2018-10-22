@@ -19,7 +19,6 @@ export default createStackNavigator(
 		MainUniversitiesEnter: {
 			screen: MainUniversitiesEnter,
 			navigationOptions: {
-				title: 'Результаты',
 				headerTintColor: 'white',
 				headerStyle: {
 					backgroundColor: '#F94040',

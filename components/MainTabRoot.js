@@ -1,7 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 import { Ionicons } from '@expo/vector-icons';
-import Constants from 'expo';
 
 import HomeRoot from './HomeRoot';
 import SearchRoot from './SearchRoot';

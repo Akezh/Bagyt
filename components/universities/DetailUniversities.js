@@ -21,6 +21,24 @@ export default class UniversityScreen extends React.Component {
 		return <ShowPointsItem item={item} />;
 	};
 
+	studentNumber = numberOfStudents => {
+		if (numberOfStudents === null) {
+			return <Text style={styles.text}>(нету инф) </Text>;
+		} else {
+			return <Text style={styles.text}>{numberOfStudents}</Text>;
+		}
+	};
+
+	detail = (det, iconName) => {
+		if (det !== '') {
+			return (
+				<View style={styles.searchView1}>
+					<Icon name={iconName} size={30} color={'black'} />
+					<Text style={styles.text2}>{det}</Text>
+				</View>
+			);
+		}
+	};
 	render() {
 		const { navigation } = this.props;
 		const item = navigation.getParam('item');
@@ -68,11 +86,7 @@ export default class UniversityScreen extends React.Component {
 									Количество студентов
 								</Text>
 							</View>
-							{item.numberOfStudents === null ? (
-								<Text style={styles.text}>(нету инф) </Text>
-							) : (
-								<Text style={styles.text}>{item.numberOfStudents}</Text>
-							)}
+							{this.studentNumber(item.numberOfStudents)}
 						</View>
 
 						{/* <View style={styles.searchView0}>
@@ -111,32 +125,10 @@ export default class UniversityScreen extends React.Component {
 					</ScrollView>
 
 					<ScrollView tabLabel="Контакты">
-						{item.webSite && (
-							<View style={styles.searchView1}>
-								<Icon name="ios-information-circle-outline" size={30} color={'black'} />
-								<Text style={styles.text2}>{item.webSite}</Text>
-							</View>
-						)}
-
-						{item.phone && (
-							<View style={styles.searchView0}>
-								<Icon name="ios-call-outline" size={30} color={'black'} />
-								<Text style={styles.text2}> {item.phone}</Text>
-							</View>
-						)}
-
-						{item.email && (
-							<View style={styles.searchView1}>
-								<Icon name="ios-mail-open-outline" size={30} color={'black'} />
-								<Text style={styles.text2}> {item.email}</Text>
-							</View>
-						)}
-						{item.address && (
-							<View style={styles.searchView0}>
-								<Icon name="ios-home-outline" size={30} color={'black'} />
-								<Text style={styles.text2}>{item.address}</Text>
-							</View>
-						)}
+						{this.detail(item.webSite, 'ios-information-circle-outline')}
+						{this.detail(item.phone, 'ios-call-outline')}
+						{this.detail(item.email, 'ios-mail-open-outline')}
+						{this.detail(item.address, 'ios-home-outline')}
 
 						{/*<View>
 							<TouchableOpacity style={{ marginTop: '20%', marginLeft: '70%' }}>
@@ -144,7 +136,7 @@ export default class UniversityScreen extends React.Component {
 							</TouchableOpacity>
 						</View>*/}
 					</ScrollView>
-				</ScrollableTabView>;
+				</ScrollableTabView>
 			</View>
 		);
 	}

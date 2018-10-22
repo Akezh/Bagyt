@@ -1,5 +1,14 @@
 import React from 'react';
-import { StyleSheet, TextInput, TouchableWithoutFeedback, Keyboard, View, Text, ScrollView } from 'react-native';
+import {
+	StyleSheet,
+	TextInput,
+	TouchableWithoutFeedback,
+	Keyboard,
+	View,
+	Text,
+	ScrollView,
+	TouchableOpacity,
+} from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { CheckBox, Button } from 'react-native-elements';
@@ -15,7 +24,7 @@ export default class SearchScreen extends React.Component {
 		checked: false,
 		rusChecked: false,
 		kazChecked: true,
-		buttonBack: '#EF8B8B',
+		buttonBack: '#e5e5e5',
 		disabled: true,
 	};
 
@@ -27,6 +36,7 @@ export default class SearchScreen extends React.Component {
 		if (parseInt(this.state.inputValue) > 0 && parseInt(this.state.inputValue) < 141) {
 			this.setState({
 				disabled: false,
+				buttonBack: '#F94040',
 			});
 		}
 	};
@@ -65,8 +75,6 @@ export default class SearchScreen extends React.Component {
 		});
 	};
 	render() {
-		const { navigation } = this.props;
-
 		return (
 			<DismissKeyBoard>
 				<ScrollView style={{ backgroundColor: 'white' }}>
@@ -95,7 +103,7 @@ export default class SearchScreen extends React.Component {
 									value={this.state.inputValue}
 									onChangeText={inputValue => this.onChange(inputValue)}
 									style={styles.inp}
-									placeholder="Введите балл ЕНТ"
+									placeholder="Введите здесь балл ЕНТ"
 									keyboardType="numeric"
 									placeholderTextColor={'#595a5b'}
 								/>
@@ -107,8 +115,7 @@ export default class SearchScreen extends React.Component {
 									width: '100%',
 									paddingRight: 5,
 									borderRadius: 5,
-									marginTop: '20%',
-									height: '30%',
+									marginTop: '10%',
 								}}
 							>
 								<CheckBox
@@ -153,16 +160,13 @@ export default class SearchScreen extends React.Component {
 							</View>
 						</View>
 						<View style={{ alignItems: 'center', marginTop: '3%' }}>
-							<Button
-								title="Найти"
-								titleStyle={{
-									fontSize: 15,
-									color: this.state.buttonBack,
-								}}
-								onPress={() => this.saveFilteredUniversityData(navigation)}
+							<TouchableOpacity
+								onPress={() => this.saveFilteredUniversityData()}
 								disabled={this.state.disabled}
-								buttonStyle={styles.button}
-							/>
+								style={[styles.button, { backgroundColor: this.state.buttonBack }]}
+							>
+								<Text style={[styles.findText]}>Найти</Text>
+							</TouchableOpacity>
 						</View>
 					</View>
 				</ScrollView>
@@ -172,8 +176,12 @@ export default class SearchScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	findText: {
+		fontSize: 15,
+		color: 'white',
+	},
 	inp: {
-		width: 200,
+		width: 250,
 		height: 50,
 		borderBottomWidth: 1.5,
 		fontSize: 18,
@@ -182,13 +190,14 @@ const styles = StyleSheet.create({
 		paddingLeft: 20,
 	},
 	button: {
-		backgroundColor: '#F94040',
 		borderWidth: 1,
 		borderColor: '#FFF',
 		borderRadius: 18,
 		margin: 5,
-		height: '55%',
-		width: '100%',
+		width: '60%',
+		height: 50,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	opacity1: {
 		marginTop: '2%',
