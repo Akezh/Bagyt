@@ -11,7 +11,7 @@ export default class TestAnswer extends Component {
 		result: '',
 		resultDes: '',
 	};
-
+	/////////////////////////////////////
 	renderSeparator = () => {
 		return <View style={{ paddingTop: 10 }} />;
 	};
@@ -19,13 +19,13 @@ export default class TestAnswer extends Component {
 	renderItem = ({ item }) => {
 		return (
 			<View style={styles.viewItem}>
-				<View style={{}}>
+				<View>
 					<Text style={styles.answerText}>{item.answer}</Text>
 				</View>
 			</View>
 		);
 	};
-
+	///////////////////////////////////
 	componentDidMount() {
 		const score = this.props.navigation.getParam('score');
 		const answer = this.props.navigation.getParam('answer');

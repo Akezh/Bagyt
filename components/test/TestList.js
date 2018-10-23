@@ -116,12 +116,7 @@ export default class App extends Component {
 								</View>
 							</View>
 
-							<View
-								style={{
-									alignItems: 'center',
-									paddingBottom: '5%',
-								}}
-							>
+							<View style={styles.buttonView}>
 								<TouchableOpacity
 									style={styles.button}
 									title="Начать"
@@ -162,6 +157,10 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		borderRadius: 15,
+	},
+	buttonView: {
+		alignItems: 'center',
+		paddingBottom: '5%',
 	},
 	starView: {
 		flex: 1,

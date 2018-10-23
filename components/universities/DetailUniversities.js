@@ -45,22 +45,14 @@ export default class UniversityScreen extends React.Component {
 		const specialList = item.majorPoints;
 
 		return (
-			<View
-				style={{
-					flex: 1,
-					backgroundColor: 'white',
-				}}
-			>
+			<View style={styles.container}>
 				<Image
-					style={{
-						width: '100%',
-						flex: 0.75,
-					}}
+					style={styles.imagePoint}
 					source={{
 						uri: item.photo ? item.photo : 'http://www.turan-edu.kz/wp-content/uploads/2017/06/94191.jpg',
 					}}
 				/>
-				<Text style={{ fontSize: 19, marginTop: '2%', marginHorizontal: '2%' }}>{item.name}</Text>
+				<Text style={styles.textName}>{item.name}</Text>
 				<ScrollableTabView
 					tabBarActiveTextColor="#F94040"
 					tabBarUnderlineStyle={{ backgroundColor: '#F94040' }}
@@ -89,28 +81,8 @@ export default class UniversityScreen extends React.Component {
 							{this.studentNumber(item.numberOfStudents)}
 						</View>
 
-						{/* <View style={styles.searchView0}>
-							<View style={styles.searchView2}>
-								<Text style={styles.text}>Характеристика</Text>
-							</View>
-							<Text style={styles.text}>959</Text>
-						</View>
-
-						<View style={styles.searchView1}>
-							<View style={styles.searchView2}>
-								<Text style={styles.text}>Характеристика</Text>
-							</View>
-							<Text style={styles.text}>830</Text>
-						</View> */}
-
-						<View
-							style={{
-								marginTop: '5%',
-								marginLeft: '5%',
-								marginRight: '5%',
-							}}
-						>
-							<Text style={{ fontSize: 14, color: 'grey' }}>{item.description}</Text>
+						<View style={styles.descriptionView}>
+							<Text style={styles.decription}>{item.description}</Text>
 						</View>
 					</ScrollView>
 
@@ -129,12 +101,6 @@ export default class UniversityScreen extends React.Component {
 						{this.detail(item.phone, 'ios-call-outline')}
 						{this.detail(item.email, 'ios-mail-open-outline')}
 						{this.detail(item.address, 'ios-home-outline')}
-
-						{/*<View>
-							<TouchableOpacity style={{ marginTop: '20%', marginLeft: '70%' }}>
-								<Icon name="ios-call-outline" size={60} color={'green'} />
-							</TouchableOpacity>
-						</View>*/}
 					</ScrollView>
 				</ScrollableTabView>
 			</View>
@@ -143,6 +109,19 @@ export default class UniversityScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: 'white',
+	},
+	imagePoint: {
+		width: '100%',
+		flex: 0.75,
+	},
+	textName: {
+		fontSize: 19,
+		marginTop: '2%',
+		marginHorizontal: '2%',
+	},
 	searchView1: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
@@ -150,6 +129,15 @@ const styles = StyleSheet.create({
 		paddingHorizontal: '5%',
 		borderBottomWidth: 0.5,
 		height: 50,
+	},
+	decription: {
+		fontSize: 14,
+		color: 'grey',
+	},
+	descriptionView: {
+		marginTop: '5%',
+		marginLeft: '5%',
+		marginRight: '5%',
 	},
 	searchView0: {
 		flexDirection: 'row',
