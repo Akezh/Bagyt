@@ -25,7 +25,7 @@ export default class ItemSearched extends React.Component {
 		const item = this.props.item;
 
 		return (
-			<TouchableOpacity style={styles.itemButton} onPress={item => this.navigateToDetail(item)}>
+			<TouchableOpacity style={styles.itemButton} onPress={() => this.navigateToDetail(item)}>
 				<Image
 					style={styles.image}
 					source={{
