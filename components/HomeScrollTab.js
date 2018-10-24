@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Platform, Dimensions, Text } from 'react-native';
+import { View, Platform, Dimensions } from 'react-native';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import Constants from 'expo';
 
@@ -18,7 +18,7 @@ export default class HomeScrollTab extends Component {
 			<View
 				style={{
 					flex: 1,
-					marginTop: Platform.OS === 'ios' ? (height === 812 ? 44 : 20) : 0,
+					marginTop: Platform.OS === 'ios' ? (height === 812 ? 44 : 20) : 20,
 				}}
 			>
 				<ScrollableTabView
@@ -37,10 +37,7 @@ export default class HomeScrollTab extends Component {
 						/>
 					</View>
 					<View style={{ flex: 1, backgroundColor: 'white' }} tabLabel="Университеты">
-						<MainUniversities
-							universityData={global.data.allUniversities}
-							navigation={this.props.navigation}
-						/>
+						<MainUniversities navigation={this.props.navigation} />
 					</View>
 				</ScrollableTabView>
 			</View>

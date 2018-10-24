@@ -49,7 +49,12 @@ export default class Questions extends React.Component {
 							<TestMain
 								data={data.Test}
 								questionNum={questionNum}
-								navigateToList={() => this.props.navigation.navigate('TestList')}
+								navigateToAnswer={score =>
+									this.props.navigation.navigate('TestAnswer', {
+										score: score,
+										answer: data.Test.testResult,
+									})
+								}
 							/>
 						)
 					}

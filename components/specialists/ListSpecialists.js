@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   backIcon: {
-    position: "absolute"
+    position: "absolute",
   },
   logo: {
     zIndex: 105

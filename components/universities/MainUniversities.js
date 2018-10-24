@@ -2,13 +2,13 @@ import React from 'react';
 import { View } from 'react-native';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Constants } from 'expo';
-import SearchInput, { createFilter } from 'react-native-search-filter';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { createFilter } from 'react-native-search-filter';
+import Filter from '../Filter';
 import FavouriteList from '../favourites/FavouriteList';
 
 export default class MainUniversities extends React.Component {
 	state = {
-		universityData: this.props.universityData,
+		universityData: global.data.allUniversities,
 		searchTerm: '',
 	};
 
@@ -22,40 +22,25 @@ export default class MainUniversities extends React.Component {
 		this.props.navigation.navigate('Specialists');
 	};
 
+	navigateToFilter = () => {
+		this.props.navigation.navigate('FilterScreen', {
+			constData: global.data.allUniversities,
+			universityData: this.state.universityData,
+			saveFilteredUniversityData: university => this.saveFilteredUniversityData(university),
+			nameButton: 'Сохранить',
+		});
+	};
+
 	render() {
 		const { universityData } = this.state;
 		const filteredEmails = universityData.filter(createFilter(this.state.searchTerm, 'name'));
 		const { navigation } = this.props;
-		const constData = this.props.universityData;
-
 		return (
 			<View style={styles.container}>
-				<View style={styles.header}>
-					<View style={styles.searchView}>
-						<Icon name="ios-search" style={{ margin: 5 }} size={18} color={'#b13638'} />
-						<SearchInput
-							onChangeText={term => {
-								this.searchUpdated(term);
-							}}
-							inputViewStyles={styles.searchItem}
-							placeholder="Найти"
-						/>
-					</View>
-					<TouchableOpacity
-						onPress={() =>
-							navigation.navigate('FilterScreen', {
-								constData,
-								universityData,
-								saveFilteredUniversityData: university => this.saveFilteredUniversityData(university),
-								nameButton: 'Сохранить',
-							})
-						}
-						style={{ justifyContent: 'flex-end' }}
-					>
-						<Icon name="ios-funnel" size={26} color={'#b13638'} />
-					</TouchableOpacity>
-				</View>
-
+				<Filter
+					searchUpdated={term => this.searchUpdated(term)}
+					navigateToFilter={() => this.navigateToFilter()}
+				/>
 				<FavouriteList
 					universityData={filteredEmails}
 					navigateDetailUnversity={item =>
@@ -73,61 +58,5 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: 'white',
-	},
-	searchItem: {
-		width: '85%',
-		height: 35,
-		paddingTop: '3%',
-	},
-	text: {
-		marginLeft: 18,
-		fontSize: 18,
-		color: '#b13638',
-	},
-	header: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		paddingHorizontal: 5,
-		width: '100%',
-	},
-	searchView: {
-		flexDirection: 'row',
-		padding: 5,
-		alignItems: 'center',
-		borderBottomWidth: 0.5,
-		borderBottomColor: '#b13638',
-	},
-
-	image: {
-		width: '100%',
-		borderRadius: 10,
-		height: '100%',
-		opacity: 0.5,
-	},
-	background: {
-		width: '100%',
-		borderRadius: 10,
-		height: '100%',
-		backgroundColor: 'black',
-		position: 'absolute',
-	},
-	titleContainer: {
-		flex: 3,
-		padding: 15,
-		paddingBottom: 0,
-	},
-	synopsisContainer: {
-		flex: 7,
-		justifyContent: 'flex-end',
-		padding: 15,
-		paddingBottom: 10,
-		alignItems: 'center',
-	},
-	textContainer: {
-		width: '100%',
-		borderRadius: 10,
-		height: '100%',
-		position: 'absolute',
-		padding: 0,
 	},
 });

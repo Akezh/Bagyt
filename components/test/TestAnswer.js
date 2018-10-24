@@ -27,8 +27,8 @@ export default class TestAnswer extends Component {
 	};
 
 	componentDidMount() {
-		const score = this.props.score;
-		const answer = this.props.answer;
+		const score = this.props.navigation.getParam('score');
+		const answer = this.props.navigation.getParam('answer');
 		answer.forEach(ans => {
 			ans.scoreMax >= score && ans.scoreMin <= score
 				? this.setState({
@@ -101,7 +101,7 @@ export default class TestAnswer extends Component {
 							titleStyle={{ color: 'white' }}
 							buttonStyle={styles.buttonStyle}
 							containerStyle={{ marginTop: 20 }}
-							onPress={() => this.props.navigateToList()}
+							onPress={() => this.props.navigation.navigate('TestList')}
 						/>
 					</View>
 				</ScrollView>
