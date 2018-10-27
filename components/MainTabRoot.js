@@ -1,54 +1,68 @@
-import React from 'react';
-import { createBottomTabNavigator } from 'react-navigation';
-import { Ionicons } from '@expo/vector-icons';
+import React from "react";
+import { createBottomTabNavigator } from "react-navigation";
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
-import HomeRoot from './HomeRoot';
-import SearchRoot from './SearchRoot';
-import FavouriteRoot from './favourites/FavouriteRoot';
-import TestRoot from './test/TestRoot';
+import UniversityRoot from "./UniversityRoot";
+import SpecialistRoot from "./SpecialistRoot";
+import SearchRoot from "./SearchRoot";
+import FavouriteRoot from "./FavouriteRoot";
 
 export default createBottomTabNavigator(
 	{
 		Универы: {
-			screen: HomeRoot,
+			screen: UniversityRoot,
 			navigationOptions: {
-				tabBarIcon: ({ tintColor }) => <Ionicons name="ios-list-box-outline" size={32} color={tintColor} />,
-			},
+				tabBarIcon: ({ tintColor }) => (
+					<FontAwesome name="university" size={28} color={tintColor} />
+				)
+			}
+		},
+		Специальности: {
+			screen: SpecialistRoot,
+			navigationOptions: {
+				tabBarIcon: ({ tintColor }) => (
+					<MaterialCommunityIcons
+						name="account-multiple-outline"
+						size={32}
+						color={tintColor}
+					/>
+				)
+			}
 		},
 		Поиск: {
 			screen: SearchRoot,
 			navigationOptions: {
-				tabBarIcon: ({ tintColor }) => <Ionicons name="ios-search-outline" size={32} color={tintColor} />,
-			},
+				tabBarIcon: ({ tintColor }) => (
+					<Ionicons name="ios-search-outline" size={32} color={tintColor} />
+				)
+			}
 		},
 		Избранное: {
 			screen: FavouriteRoot,
 			navigationOptions: {
-				tabBarIcon: ({ tintColor }) => <Ionicons name="ios-star-outline" size={32} color={tintColor} />,
-			},
-		},
-		Тесты: {
-			screen: TestRoot,
-			navigationOptions: {
-				tabBarIcon: ({ tintColor }) => <Ionicons name="ios-paper-outline" size={32} color={tintColor} />,
-			},
-		},
+				tabBarIcon: ({ tintColor }) => (
+					<Ionicons name="ios-star-outline" size={32} color={tintColor} />
+				)
+			}
+		}
 	},
 	{
-		tabBarPosition: 'bottom',
+		tabBarPosition: "bottom",
 		tabBarOptions: {
 			style: {
 				paddingTop: 2,
 				height: 50,
-				backgroundColor: '#F94040',
+				backgroundColor: "#F94040"
 			},
-			activeTintColor: 'white',
-			inactiveTintColor: '#3d3a3a',
+			activeTintColor: "white",
+			inactiveTintColor: "#3d3a3a",
 			labelStyle: {
 				fontSize: 12,
-				backgroundColor: 'transparent',
-			},
+				backgroundColor: "transparent"
+			}
 		},
-		animationEnabled: true,
+		animationEnabled: true
 	}
 );

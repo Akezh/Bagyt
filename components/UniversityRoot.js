@@ -1,24 +1,15 @@
 import { createStackNavigator } from "react-navigation";
-import MainUniversitiesEnter from "./search/MainUniversitiesEnter";
-import SearchScreen from "./search/SearchScreen";
 import DetailUniversities from "./universities/DetailUniversities";
+import ListUniversities from "./universities/ListUniversities";
 import FilterScreen from "./universities/FilterScreen";
+import University from "./universities/index";
 
 export default createStackNavigator(
 	{
-		SearchScreen: {
-			screen: SearchScreen,
+		University: {
+			screen: University,
 			navigationOptions: {
-				title: "Поиск по баллам ЕНТ",
-				headerTintColor: "white",
-				headerStyle: {
-					backgroundColor: "#F94040"
-				}
-			}
-		},
-		MainUniversitiesEnter: {
-			screen: MainUniversitiesEnter,
-			navigationOptions: {
+				title: "Университеты",
 				headerTintColor: "white",
 				headerStyle: {
 					backgroundColor: "#F94040"
@@ -27,7 +18,15 @@ export default createStackNavigator(
 		},
 		DetailUniversities: {
 			screen: DetailUniversities,
-			headerTintColor: "white",
+			navigationOptions: {
+				headerTintColor: "white",
+				headerStyle: {
+					backgroundColor: "#F94040"
+				}
+			}
+		},
+		ListUniversities: {
+			screen: ListUniversities,
 			navigationOptions: {
 				headerStyle: {
 					backgroundColor: "#F94040"
@@ -46,7 +45,7 @@ export default createStackNavigator(
 	},
 	{
 		headerBackTitleVisible: true,
-		mode: "modal",
-		headerMode: "screen"
+		headerMode: "screen",
+		mode: "modal"
 	}
 );

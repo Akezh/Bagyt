@@ -1,15 +1,14 @@
-import React from 'react';
-import { View } from 'react-native';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { Constants } from 'expo';
-import { createFilter } from 'react-native-search-filter';
-import Filter from '../Filter';
-import FavouriteList from '../favourites/FavouriteList';
+import React from "react";
+import { View } from "react-native";
+import { StyleSheet } from "react-native";
+import { createFilter } from "react-native-search-filter";
+import Filter from "../Filter";
+import FavouriteList from "../favourites/FavouriteList";
 
 export default class MainUniversities extends React.Component {
 	state = {
 		universityData: global.data.allUniversities,
-		searchTerm: '',
+		searchTerm: ""
 	};
 
 	searchUpdated(term) {
@@ -17,23 +16,26 @@ export default class MainUniversities extends React.Component {
 	}
 	saveFilteredUniversityData = university => {
 		this.setState({
-			universityData: university,
+			universityData: university
 		});
-		this.props.navigation.navigate('Specialists');
+		this.props.navigation.navigate("Specialists");
 	};
 
 	navigateToFilter = () => {
-		this.props.navigation.navigate('FilterScreen', {
+		this.props.navigation.navigate("FilterScreen", {
 			constData: global.data.allUniversities,
 			universityData: this.state.universityData,
-			saveFilteredUniversityData: university => this.saveFilteredUniversityData(university),
-			nameButton: 'Сохранить',
+			saveFilteredUniversityData: university =>
+				this.saveFilteredUniversityData(university),
+			nameButton: "Сохранить"
 		});
 	};
 
 	render() {
 		const { universityData } = this.state;
-		const filteredEmails = universityData.filter(createFilter(this.state.searchTerm, 'name'));
+		const filteredEmails = universityData.filter(
+			createFilter(this.state.searchTerm, "name")
+		);
 		const { navigation } = this.props;
 		return (
 			<View style={styles.container}>
@@ -44,8 +46,8 @@ export default class MainUniversities extends React.Component {
 				<FavouriteList
 					universityData={filteredEmails}
 					navigateDetailUnversity={item =>
-						navigation.navigate('DetailUniversities', {
-							item: item,
+						navigation.navigate("DetailUniversities", {
+							item: item
 						})
 					}
 				/>
@@ -57,6 +59,6 @@ export default class MainUniversities extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: 'white',
-	},
+		backgroundColor: "white"
+	}
 });

@@ -1,21 +1,9 @@
 import React, { Component } from "react";
-import {
-	View,
-	Text,
-	StyleSheet,
-	FlatList,
-	ScrollView,
-	TouchableOpacity,
-	Image,
-	ImageBackground
-} from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Constants } from "expo";
 import FavouriteList from "../favourites/FavouriteList";
 
 class DetailSpecialists extends Component {
-	static navigationOptions = {
-		title: "Специальность"
-	};
 	name = this.props.navigation.getParam("specialist").name;
 
 	state = {
@@ -48,21 +36,20 @@ class DetailSpecialists extends Component {
 						marginTop: 25
 					}}
 				>
-					<Text style={styles.nameSpec}>{specialist.name}</Text>
+					<Text style={styles.heading}>{specialist.name}</Text>
 				</View>
 
 				<ScrollView
 					style={{
-						marginTop: "5%",
 						width: "90%",
 						marginHorizontal: "5%",
 						marginBottom: "5%"
 					}}
 				>
-					<Text style={styles.object}>Где вы будете работать?</Text>
+					<Text style={styles.subHeading}>Где вы будете работать</Text>
 					<Text style={styles.desSpec}>{specialist.object} </Text>
 
-					<Text style={styles.subject}>Что вы будете изучать?</Text>
+					<Text style={styles.subHeading}>Чем будете заниматься</Text>
 					<Text style={styles.desSpec}>{specialist.description} </Text>
 				</ScrollView>
 
@@ -88,38 +75,36 @@ const styles = StyleSheet.create({
 		marginTop: Constants.statusBarHeight
 	},
 	desSpec: {
-		color: "#616366",
-		marginLeft: 5
+		color: "#232931",
+		fontSize: 14,
+		marginTop: 5
 	},
-	object: {
-		fontSize: 16,
-		fontWeight: "bold",
-		marginBottom: 5
-	},
-	subject: {
-		fontSize: 16,
-		fontWeight: "bold",
-		marginTop: 15,
-		marginBottom: 5
-	},
-	nameSpec: {
-		fontSize: 20,
+	heading: {
+		fontSize: 22,
 		fontWeight: "bold",
 		textAlign: "center",
-		color: "#303133"
+		color: "#232931"
+	},
+	subHeading: {
+		color: "#232931",
+		fontWeight: "bold",
+		fontSize: 18,
+		marginTop: 20,
+		marginBottom: 5
 	},
 	univerListView: {
-		justifyContent: "flex-end",
-		borderBottomColor: "black",
-		borderTopColor: "black",
+		justifyContent: "center",
+		alignItems: "center",
+		borderBottomColor: "#232931",
+		borderTopColor: "#232931",
 		borderBottomWidth: 0.5,
 		margin: 5,
 		padding: 5
 	},
 	univerText: {
 		fontSize: 22,
-		fontWeight: "bold",
-		color: "#4e5056",
+		fontWeight: "500",
+		color: "#232931",
 		marginLeft: 10
 	}
 });

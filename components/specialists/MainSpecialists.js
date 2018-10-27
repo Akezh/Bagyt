@@ -1,64 +1,72 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, ImageBackground, Dimensions } from 'react-native';
-import { Constants } from 'expo';
+import React from "react";
+import {
+	View,
+	Text,
+	StyleSheet,
+	FlatList,
+	TouchableOpacity,
+	Image,
+	ImageBackground,
+	Dimensions
+} from "react-native";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 
 export default class SpecialistsMain extends React.Component {
 	static navigationOptions = {
-		header: null,
+		header: null
 	};
 
 	render() {
 		const arr = [
 			{
-				name: 'Биология',
-				backImage: require('./files/1.jpg'),
-				logo: require('./files/1logo.png'),
-				colorLogo: require('./files/logo11.png'),
+				name: "Биология",
+				backImage: require("./files/1.jpg"),
+				logo: require("./files/1logo.png"),
+				colorLogo: require("./files/logo11.png")
 			},
 			{
-				name: 'Физика',
-				backImage: require('./files/9.jpg'),
-				logo: require('./files/9logo.png'),
-				colorLogo: require('./files/logo99.png'),
+				name: "Физика",
+				backImage: require("./files/9.jpg"),
+				logo: require("./files/9logo.png"),
+				colorLogo: require("./files/logo99.png")
 			},
 			{
-				name: 'Химия',
-				backImage: require('./files/2.jpg'),
-				logo: require('./files/2logo.png'),
-				colorLogo: require('./files/logo22.png'),
+				name: "Химия",
+				backImage: require("./files/2.jpg"),
+				logo: require("./files/2logo.png"),
+				colorLogo: require("./files/logo22.png")
 			},
 			{
-				name: 'География',
-				backImage: require('./files/3.jpg'),
-				logo: require('./files/3logo.png'),
-				colorLogo: require('./files/logo33.png'),
+				name: "География",
+				backImage: require("./files/3.jpg"),
+				logo: require("./files/3logo.png"),
+				colorLogo: require("./files/logo33.png")
 			},
 			{
-				name: 'История',
-				backImage: require('./files/4.jpg'),
-				logo: require('./files/4logo.png'),
-				colorLogo: require('./files/logo44.png'),
+				name: "История",
+				backImage: require("./files/4.jpg"),
+				logo: require("./files/4logo.png"),
+				colorLogo: require("./files/logo44.png")
 			},
 			{
-				name: 'Литература',
-				backImage: require('./files/5.jpg'),
-				logo: require('./files/5logo.png'),
-				colorLogo: require('./files/logo55.png'),
+				name: "Литература",
+				backImage: require("./files/5.jpg"),
+				logo: require("./files/5logo.png"),
+				colorLogo: require("./files/logo55.png")
 			},
 			{
-				name: 'Иностр.язык',
-				backImage: require('./files/6.jpg'),
-				logo: require('./files/6logo.png'),
-				colorLogo: require('./files/logo66.png'),
+				name: "Иностр.язык",
+				backImage: require("./files/6.jpg"),
+				logo: require("./files/6logo.png"),
+				colorLogo: require("./files/logo66.png")
 			},
 			{
-				name: 'Творч.экз',
-				backImage: require('./files/8.jpg'),
-				logo: require('./files/8logo.png'),
-				colorLogo: require('./files/logo88.png'),
-			},
+				name: "Творч.экз",
+				backImage: require("./files/8.jpg"),
+				logo: require("./files/8logo.png"),
+				colorLogo: require("./files/logo88.png")
+			}
 		];
 
 		return (
@@ -96,39 +104,39 @@ export default class SpecialistsMain extends React.Component {
 const styles = StyleSheet.create({
 	content: {
 		flex: 1,
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#eff0f2',
+		alignItems: "center",
+		justifyContent: "center",
+		backgroundColor: "#eff0f2"
 	},
 	button: {
-		alignItems: 'center',
-		justifyContent: 'center',
-		borderRadius: 10,
+		alignItems: "center",
+		justifyContent: "center",
+		borderRadius: 10
 	},
 	text: {
 		fontSize: 22,
-		color: 'white',
-		fontWeight: 'bold',
-		marginTop: 5,
+		color: "white",
+		fontWeight: "bold",
+		marginTop: 5
 	},
 	backImage: {
-		alignItems: 'center',
-		justifyContent: 'center',
+		alignItems: "center",
+		justifyContent: "center",
 		width: width / 2 - 15,
 		height: width / 2 - 15,
 		borderRadius: 20,
 		marginHorizontal: 6,
 		marginVertical: 10,
-		overflow: 'visible',
-		shadowColor: 'grey',
+		overflow: "visible",
+		shadowColor: "grey",
 		shadowOpacity: 1,
 		shadowRadius: 5,
 		borderWidth: 0.5,
-		borderColor: '#dcdee2',
+		borderColor: "#dcdee2"
 	},
 
 	logo: {
 		width: 81,
-		height: 81,
-	},
+		height: 81
+	}
 });

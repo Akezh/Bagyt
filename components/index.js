@@ -1,24 +1,24 @@
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator } from "react-navigation";
 
-import WelcomeScreen from './firstScreen/WelcomeScreen';
-import SplashScreen from './SplashScreen';
-import MainTabRoot from './MainTabRoot';
+import WelcomeScreen from "./firstScreen/WelcomeScreen";
+import SplashScreen from "./SplashScreen";
+import MainTabRoot from "./MainTabRoot";
 
 export default createStackNavigator(
 	{
 		WelcomeScreen: {
-			screen: WelcomeScreen,
+			screen: WelcomeScreen
 		},
 		SplashScreen: {
-			screen: SplashScreen,
+			screen: SplashScreen
 		},
 		MainTabRoot: {
-			screen: MainTabRoot,
-		},
+			screen: MainTabRoot
+		}
 	},
 	{
 		headerBackTitleVisible: false,
-		headerMode: 'none',
-		mode: 'card ',
+		headerMode: "none",
+		mode: "card "
 	}
 );

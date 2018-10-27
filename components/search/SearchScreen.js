@@ -110,9 +110,10 @@ export default class SearchScreen extends React.Component {
 									value={this.state.inputValue}
 									onChangeText={inputValue => this.onChange(inputValue)}
 									style={styles.inp}
-									placeholder="Введите здесь балл ЕНТ"
+									placeholder="Введите балл ЕНТ"
 									keyboardType="numeric"
 									placeholderTextColor={"#595a5b"}
+									underlineColorAndroid={"white"}
 								/>
 							</View>
 							<View
