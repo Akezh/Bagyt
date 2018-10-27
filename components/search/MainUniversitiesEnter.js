@@ -49,7 +49,7 @@ export default class MainUniversitiesEnter extends React.Component {
 				/>
 				<FlatList
 					renderItem={({ item }) => (
-						<ItemSearched item={item} navigateToDetail={item => this.navigateToDetail(item)} />
+						<ItemSearched item={item} navigateToDetail={() => this.navigateToDetail(item)} />
 					)}
 					keyExtractor={(_, index) => index}
 					data={filteredEmails}

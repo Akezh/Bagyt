@@ -1,26 +1,26 @@
 {
-  "expo": {
-    "sdkVersion": "27.0.0",
-    "version": "1.0.0",
-    "name": "bagyt",
-    "slug": "finalapp",
-    "icon": "./logo.png",
-    "orientation": "portrait",
+	"expo": {
+		"sdkVersion": "27.0.0",
+		"name": "bagyt",
+		"version": "1.0.1",
+		"slug": "finalapp",
+		"icon": "./logo.png",
+		"orientation": "portrait",
 
-    "splash": {
-      "backgroundColor": "#F94040",
+		"splash": {
+			"backgroundColor": "#F94040",
 
-      "resizeMode": "cover"
-    },
-    "android": {
-      "package": "com.assem.Bagyt",
-      "permissions": []
-    },
-    "ios": {
-      "bundleIdentifier": "com.assem2.Bagyt2"
-    },
-    "packagerOpts": {
-      "nonPersistent": "--nonPersistent"
-    }
-  }
+			"resizeMode": "cover"
+		},
+		"android": {
+			"package": "com.assem.Bagyt",
+			"permissions": []
+		},
+		"ios": {
+			"bundleIdentifier": "com.assem2.Bagyt2"
+		},
+		"packagerOpts": {
+			"nonPersistent": "--nonPersistent"
+		}
+	}
 }
