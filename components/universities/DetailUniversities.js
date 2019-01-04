@@ -1,20 +1,18 @@
-import React from "react";
-import { View, Text, ScrollView } from "react-native";
-import { StyleSheet, FlatList, Image } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
-import ScrollableTabView, {
-	DefaultTabBar
-} from "react-native-scrollable-tab-view";
-import ShowPointsItem from "./ShowPointsItem.js";
+import React from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import { StyleSheet, FlatList, Image } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import ShowPointsItem from './ShowPointsItem.js';
 
 export default class UniversityScreen extends React.Component {
 	state = {
-		modalVisible: false
+		modalVisible: false,
 	};
 
 	showPoints = () => {
 		this.setState({
-			modalVisible: !this.state.modalVisible
+			modalVisible: !this.state.modalVisible,
 		});
 	};
 
@@ -31,10 +29,10 @@ export default class UniversityScreen extends React.Component {
 	};
 
 	detail = (det, iconName) => {
-		if (det !== "") {
+		if (det !== '') {
 			return (
 				<View style={styles.searchView1}>
-					<Icon name={iconName} size={30} color={"black"} />
+					<Icon name={iconName} size={30} color={'black'} />
 					<Text style={styles.text2}>{det}</Text>
 				</View>
 			);
@@ -42,7 +40,7 @@ export default class UniversityScreen extends React.Component {
 	};
 	render() {
 		const { navigation } = this.props;
-		const item = navigation.getParam("item");
+		const item = navigation.getParam('item');
 		const specialList = item.majorPoints;
 
 		return (
@@ -51,16 +49,14 @@ export default class UniversityScreen extends React.Component {
 				<Image
 					style={styles.image}
 					source={{
-						uri: item.photo
-							? item.photo
-							: "http://www.turan-edu.kz/wp-content/uploads/2017/06/94191.jpg"
+						uri: item.photo ? item.photo : 'http://www.turan-edu.kz/wp-content/uploads/2017/06/94191.jpg',
 					}}
 				/>
 
 				<ScrollableTabView
 					tabBarActiveTextColor="#F94040"
-					tabBarUnderlineStyle={{ backgroundColor: "#F94040" }}
-					tabBarBackgroundColor={"white"}
+					tabBarUnderlineStyle={{ backgroundColor: '#F94040' }}
+					tabBarBackgroundColor={'white'}
 					tabBarTextStyle={{ fontSize: 13 }}
 					initialPage={1}
 					renderTabBar={() => <DefaultTabBar />}
@@ -78,10 +74,7 @@ export default class UniversityScreen extends React.Component {
 						</View>
 					</ScrollView>
 
-					<ScrollView
-						tabLabel="Специальности"
-						style={styles.scrollViewSpecialist}
-					>
+					<ScrollView tabLabel="Специальности" style={styles.scrollViewSpecialist}>
 						<FlatList
 							data={specialList}
 							extraData={this.state.modalVisible}
@@ -92,10 +85,10 @@ export default class UniversityScreen extends React.Component {
 					</ScrollView>
 
 					<ScrollView tabLabel="Контакты">
-						{this.detail(item.webSite, "ios-information-circle-outline")}
-						{this.detail(item.phone, "ios-call-outline")}
-						{this.detail(item.email, "ios-mail-open-outline")}
-						{this.detail(item.address, "ios-home-outline")}
+						{this.detail(item.webSite, 'ios-information-circle-outline')}
+						{this.detail(item.phone, 'ios-call-outline')}
+						{this.detail(item.email, 'ios-mail-open-outline')}
+						{this.detail(item.address, 'ios-home-outline')}
 
 						{/*<View>
 							<TouchableOpacity style={{ marginTop: '20%', marginLeft: '70%' }}>
@@ -112,63 +105,63 @@ export default class UniversityScreen extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "white"
+		backgroundColor: 'white',
 	},
 	heading: {
 		fontSize: 17,
-		marginVertical: "3%",
-		marginHorizontal: "3%",
-		color: "#232931",
-		fontWeight: "bold"
+		marginVertical: '3%',
+		marginHorizontal: '3%',
+		color: '#232931',
+		fontWeight: 'bold',
 	},
 	image: {
-		width: "100%",
-		flex: 0.75
+		width: '100%',
+		flex: 0.75,
 	},
 	scrollViewDescription: {
-		marginBottom: 10
+		marginBottom: 10,
 	},
 	wrapperDescription: {
-		marginTop: "5%",
-		marginLeft: "5%",
-		marginRight: "5%"
+		marginTop: '5%',
+		marginLeft: '5%',
+		marginRight: '5%',
 	},
 	scrollViewSpecialist: {
-		fontSize: 30
+		fontSize: 30,
 	},
 	searchView1: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "center",
-		paddingHorizontal: "5%",
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		paddingHorizontal: '5%',
 		borderBottomWidth: 0.5,
-		height: 50
+		height: 50,
 	},
 	searchView0: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "center",
-		paddingHorizontal: "5%",
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		paddingHorizontal: '5%',
 		borderBottomWidth: 0.5,
-		height: 50
+		height: 50,
 	},
 	searchView2: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "center",
-		marginVertical: "2%"
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		marginVertical: '2%',
 	},
 	textDesciption: {
 		fontSize: 14,
-		color: "#232931"
+		color: '#232931',
 	},
 	text: {
 		fontSize: 16,
-		color: "#232931"
+		color: '#232931',
 	},
 	text2: {
 		fontSize: 16,
-		color: "#232931",
-		marginLeft: 30
-	}
+		color: '#232931',
+		marginLeft: 30,
+	},
 });

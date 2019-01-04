@@ -1,9 +1,9 @@
 {
 	"expo": {
 		"sdkVersion": "27.0.0",
-		"name": "bagyt",
-		"version": "1.0.1",
-		"slug": "finalapp",
+		"name": "Bagyt",
+		"version": "2.0.1",
+		"slug": "Bagyt",
 		"icon": "./logo.png",
 		"orientation": "portrait",
 
@@ -13,7 +13,7 @@
 			"resizeMode": "cover"
 		},
 		"android": {
-			"package": "com.assem.Bagyt",
+			"package": "com.assem2.Bagyt2",
 			"permissions": []
 		},
 		"ios": {
@@ -24,3 +24,5 @@
 		}
 	}
 }
+/*		"name": "Bagyt"
+ */

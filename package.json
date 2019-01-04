@@ -1,6 +1,6 @@
 {
-	"name": "FinalApp",
-	"version": "0.1.0",
+	"name": "Bagyt",
+	"version": "2.2.0",
 	"private": true,
 	"devDependencies": {
 		"jest-expo": "~27.0.0",

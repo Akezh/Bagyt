@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ActivityIndicator } from 'react-native';
+import { ActivityIndicator, AsyncStorage, Text } from 'react-native';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -68,7 +68,13 @@ export default class GetData extends React.Component {
 	static navigationOptions = {
 		header: null,
 	};
-	saveGlobal = data => {
+	state = {
+		dataStored: false,
+		data: [],
+	};
+	saveGlobal = () => {
+		const { data } = this.state;
+
 		global.data = {
 			...data,
 			allUniversities: data.allUniversities.map(university => ({
@@ -78,23 +84,60 @@ export default class GetData extends React.Component {
 		};
 
 		this.props.setTimer();
+	};
+
+	saveData = data => {
+		try {
+			this.setState(
+				{ data: data },
+				() => {
+					AsyncStorage.setItem('data', JSON.stringify(data));
+				},
+				() => {
+					this.saveGlobal();
+				}
+			);
+		} catch (error) {
+			console.log('error', error);
+		}
 
 		return <Text />;
 	};
+	retrieveData = async () => {
+		try {
+			const data = await AsyncStorage.getItem('data');
+			if (data !== null) {
+				this.setState(
+					{
+						dataStored: true,
+						data: JSON.parse(data),
+					},
+					() => {
+						this.saveGlobal();
+					}
+				);
+			}
+		} catch (error) {
+			console.log('Error retrieving data', error);
+		}
+	};
+	componentDidMount() {
+		this.retrieveData();
+	}
 
 	render() {
 		return (
-			<Query query={GET_BY_SUBJECT}>
-				{({ loading, data, error }) =>
-					error ? (
-						<Text>Плохой Интернет соединение </Text>
-					) : loading ? (
-						<ActivityIndicator />
-					) : (
-						this.saveGlobal(data)
-					)
-				}
-			</Query>
+			<React.Fragment>
+				{this.state.dataStored ? (
+					<Text />
+				) : (
+					<Query query={GET_BY_SUBJECT}>
+						{({ loading, data, error }) =>
+							error ? <Text>Плохой Интернет</Text> : loading ? <ActivityIndicator /> : this.saveData(data)
+						}
+					</Query>
+				)}
+			</React.Fragment>
 		);
 	}
 }

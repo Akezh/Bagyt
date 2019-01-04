@@ -1,39 +1,35 @@
-import React from "react";
-import { View, Text, LayoutAnimation, Platform, UIManager } from "react-native";
-import { StyleSheet, Image, TouchableOpacity } from "react-native";
-import {
-	Table,
-	TableWrapper,
-	Row,
-	Rows,
-	Col
-} from "react-native-table-component";
+import React from 'react';
+import { View, Text, LayoutAnimation, Platform, UIManager } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { Table, TableWrapper, Row, Rows, Col } from 'react-native-table-component';
 
-import Icon from "react-native-vector-icons/Ionicons";
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class ShowPointsItem extends React.Component {
 	state = {
 		modalVisible: false,
-		degree: "0deg"
+		degree: '0deg',
 	};
 
 	showPoints = () => {
-		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-		if (this.state.degree == "90deg") {
-			this.setState({
-				modalVisible: !this.state.modalVisible,
-				degree: "0deg"
-			});
-		} else {
-			this.setState({
-				modalVisible: !this.state.modalVisible,
-				degree: "90deg"
-			});
+		if (this.props.item.kazPoint !== 0) {
+			LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+			if (this.state.degree == '90deg') {
+				this.setState({
+					modalVisible: !this.state.modalVisible,
+					degree: '0deg',
+				});
+			} else {
+				this.setState({
+					modalVisible: !this.state.modalVisible,
+					degree: '90deg',
+				});
+			}
 		}
 	};
 
 	componentDidMount() {
-		if (Platform.OS === "android") {
+		if (Platform.OS === 'android') {
 			UIManager.setLayoutAnimationEnabledExperimental(true);
 		}
 	}
@@ -45,37 +41,25 @@ export default class ShowPointsItem extends React.Component {
 				<TouchableOpacity
 					style={{
 						flex: 1,
-						flexDirection: "row",
-						justifyContent: "space-between"
+						flexDirection: 'row',
+						justifyContent: 'space-between',
 					}}
 					onPress={() => this.showPoints()}
 				>
 					<Text style={styles.majorName}> {item.majorName}</Text>
-					<Icon
-						type="ionicon"
-						name="ios-arrow-forward-outline"
-						size={26}
-						color="black"
-						style={[
-							styles.forwardIcon,
-							{
-								transform: [{ rotate: this.state.degree }]
-							}
-						]}
-					/>
 				</TouchableOpacity>
 
 				{this.state.modalVisible && (
 					<Table
-						style={{ flex: 1, flexDirection: "column" }}
+						style={{ flex: 1, flexDirection: 'column' }}
 						borderStyle={{
 							borderWidth: 0.5,
-							borderColor: "#bdbfc1"
+							borderColor: '#bdbfc1',
 						}}
 					>
-						<Table borderStyle={{ borderColor: "#C1C0B9" }}>
+						<Table borderStyle={{ borderColor: '#C1C0B9' }}>
 							<Row
-								data={["Проходные баллы на грант(по результатам 2018)"]}
+								data={['Проходные баллы на грант(по результатам 2018)']}
 								widthArr={250}
 								heightArr={20}
 								textStyle={styles.textTitle}
@@ -83,13 +67,25 @@ export default class ShowPointsItem extends React.Component {
 						</Table>
 						<TableWrapper style={styles.wrapper}>
 							<Col
-								data={["По общему конкурсу", "По сельской квоте"]}
+								data={['По общему конкурсу', 'По сельской квоте']}
 								style={styles.title}
 								heightArr={[28, 28, 28, 28]}
 								textStyle={styles.text}
 							/>
 							<Col
-								data={[item.kazPoint, item.kazSelPoint]}
+								data={[
+									item.kazPoint !== 0 ? item.kazPoint : 'Данных нет',
+									item.kazSelPoint !== 0 ? item.kazSelPoint : 'Данных нет',
+								]}
+								style={styles.title}
+								heightArr={[28, 28, 28, 28]}
+								textStyle={styles.text}
+							/>
+							<Col
+								data={[
+									item.rusPoint !== 0 ? item.rusPoint : 'Данных нет',
+									item.rusSelPoint !== 0 ? item.rusSelPoint : 'Данных нет',
+								]}
 								style={styles.title}
 								heightArr={[28, 28, 28, 28]}
 								textStyle={styles.text}
@@ -104,29 +100,29 @@ export default class ShowPointsItem extends React.Component {
 
 const styles = StyleSheet.create({
 	majorName: {
-		color: "#4e5056",
+		color: '#4e5056',
 		fontSize: 13,
 		marginBottom: 5,
 
-		fontWeight: "bold"
+		fontWeight: 'bold',
 	},
 	pointView: {
 		margin: 5,
-		padding: 2
+		padding: 2,
 	},
-	wrapper: { flexDirection: "row" },
+	wrapper: { flexDirection: 'row' },
 	title: {
 		flex: 2,
-		backgroundColor: "#f6f8fa",
+		backgroundColor: '#f6f8fa',
 		marginHorizontal: 2,
 		marginVertical: 3,
-		justifyContent: "flex-start"
+		justifyContent: 'flex-start',
 	},
 	textTitle: {
-		textAlign: "center",
-		color: "#4e5056",
-		fontSize: 13
+		textAlign: 'center',
+		color: '#4e5056',
+		fontSize: 13,
 	},
-	row: { flex: 0.5, height: 28, alignItems: "flex-start" },
-	text: { textAlign: "center", color: "#4e5056", fontSize: 12 }
+	row: { flex: 0.5, height: 28, alignItems: 'flex-start' },
+	text: { textAlign: 'center', color: '#4e5056', fontSize: 12 },
 });

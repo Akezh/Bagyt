@@ -40,7 +40,7 @@ export default class Questions extends React.Component {
 				<Query query={GET_QUESTIONS} variables={{ id }}>
 					{({ loading, data, error }) =>
 						error ? (
-							<Text>Плохой Интернеет</Text>
+							<Text>{error}</Text>
 						) : loading ? (
 							<View style={styles.container}>
 								<ActivityIndicator />
