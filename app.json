@@ -13,7 +13,7 @@
 			"resizeMode": "cover"
 		},
 		"android": {
-			"package": "com.assem2.BagytApp,
+			"package": "com.assem2.BagytApp",
 			"permissions": []
 		},
 		"ios": {
