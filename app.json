@@ -13,11 +13,11 @@
 			"resizeMode": "cover"
 		},
 		"android": {
-			"package": "com.assem2.Bagyt2",
+			"package": "com.assem2.Bagyt",
 			"permissions": []
 		},
 		"ios": {
-			"bundleIdentifier": "com.assem2.Bagyt2"
+			"bundleIdentifier": "com.assem2.Bagyt"
 		},
 		"packagerOpts": {
 			"nonPersistent": "--nonPersistent"
